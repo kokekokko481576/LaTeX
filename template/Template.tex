@@ -1,0 +1,170 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+% !TEX ts-program = platex
+
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt, dvipdfmx]{jsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc} %【警告対策①】欧文フォントエンコーディングを指定
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage[detect-all]{siunitx} % フォントを自動検出させて警告を消す！
+
+%----- 図表・画像関連 -----
+% [demo]オプションで画像ファイルが無くてもコンパイルOKにしてるよ
+\usepackage[demo]{graphicx} 
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+% \usepackage{lmodern}
+
+%----- その他便利機能 -----
+\usepackage[dvipdfmx, unicode]{hyperref}
+\usepackage{pxjahyper} % ブックマークの日本語文字化け対策
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{ここにレポートのタイトルを記入}
+\author{地球総合工学科 \quad B3 \quad XXXXXXXX(学籍番号) \quad 古賀 光一朗}
+\date{\today}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\section{画像の挿入例}
+
+画像を挿入するには、\verb|figure|環境と\verb|\includegraphics|コマンドを使います。
+\verb|width=\linewidth|は、画像の横幅を本文の幅に合わせるオプションです。
+\verb|\cref{fig:sample-image}|のように書くと、自動で「図1」のように表示してくれます。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\linewidth]{example-image-a}
+    \caption{サンプル画像のキャプション}
+    \label{fig:sample-image}
+\end{figure}
+
+\cref{fig:sample-image}は、`graphicx`パッケージを使って挿入した画像の例です。
+
+\section{グラフの作成例}
+
+`PGFPlots`を使えば綺麗なグラフが作れます。
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=0.8\linewidth,
+            height=6cm,
+            title={三角関数のグラフ},
+            xlabel={$x$},
+            ylabel={$y$},
+            xmin=-pi, xmax=pi,
+            ymin=-1.2, ymax=1.2,
+            grid=major,
+            legend pos=outer north east,
+        ]
+        \addplot[blue, thick, domain=-pi:pi, samples=100] {sin(deg(x))};
+        \addlegendentry{$\sin(x)$}
+        
+        \addplot[red, thick, domain=-pi:pi, samples=100] {cos(deg(x))};
+        \addlegendentry{$\cos(x)$}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{PGFPlotsで作成したグラフ}
+    \label{fig:sample-graph}
+\end{figure}
+
+\cref{fig:sample-graph}は、サインカーブとコサインカーブを描画した例です。
+
+\section{【追加機能】綺麗な表の作り方}
+
+`booktabs`パッケージを使うと、論文で見るようなプロっぽい表が作れます。
+【警告対策】ポイントは、縦の罫線を使わず、横の罫線も\verb|\toprule|, \verb|\midrule|, \verb|\bottomrule|で使い分けること！
+
+\begin{table}[H]
+    \centering
+    \caption{`booktabs`を使った綺麗な表の例}
+    \label{tab:sample-table}
+    \begin{tabular}{lcr}
+        \toprule
+        物質 & 密度 (\si{\kilogram\per\cubic\metre}) & 備考 \\
+        \midrule
+        水 & \num{1000} & 標準状態 \\
+        鉄 & \num{7874} & 常温 \\
+        空気 & \num{1.293} & 0℃, 1気圧 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\cref{tab:sample-table}の密度は`siunitx`パッケージで書いています。
+
+\section{【追加機能】ソースコードの貼り付け}
+
+`listings`パッケージを使えば、PythonやC言語のコードもこの通り！
+
+\begin{lstlisting}[language=Python, caption={Pythonのサンプルコード}, label={lst:py-sample}]
+# This is a sample Python code.
+def greet(name):
+    """This function greets to the person passed in as a parameter"""
+    print(f"Hello, {name}!")
+
+if __name__ == '__main__':
+    greet('World')
+\end{lstlisting}
+
+\cref{lst:py-sample}のように、プログラムの引用も簡単です。
+
+\end{document}
