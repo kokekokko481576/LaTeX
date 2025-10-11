@@ -1,0 +1,250 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+% !TEX ts-program = platex
+
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt, dvipdfmx]{jsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc} %【警告対策①】欧文フォントエンコーディングを指定
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage{siunitx}
+\usepackage[detect-all]{siunitx} % フォントを自動検出させて警告を消す！
+
+%----- 図表・画像関連 -----
+% [demo]オプションで画像ファイルが無くてもコンパイルOKにしてるよ
+\usepackage[demo]{graphicx} 
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+% \usepackage{lmodern}
+
+%----- その他便利機能 -----
+\usepackage[dvipdfmx, unicode]{hyperref}
+\usepackage{pxjahyper} % ブックマークの日本語文字化け対策
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{船体運動力学 課題2-1}
+\author{地球総合工学科 \quad B3 \quad 08C23031(学籍番号) \quad 古賀 光一朗}
+\date{\today}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\section{問題1}
+資料「船体運動力学2 2024.pdf」のp58（資料右下付記のページ数）に示す$\zeta$平面において、自由表面のない流体中を運動する周辺の流場のラプラスの式を満足する速度ポテンシャルが次式で表される。
+\begin{equation}
+    \phi = B_0 \log r + \sum_{n=1}^\infty \frac{1}{r^n}(B_{cn}\cos n\theta + B_{sn}\sin n\theta)
+\end{equation}
+物体が速度$v(t)$で上下揺れするときの$B_0, B_{cn}, B_{sn}$を求め、$\phi$を決定しなさい。また、資料p58のz平面において、物体に作用する圧力変動を求めて、付加質量を求めなさい。
+\vspace{1cm}
+
+
+上下揺れであるのでその運動は以下のように記述できる。
+$$
+v=
+\begin{pmatrix}
+    0\\ v
+\end{pmatrix}
+= 0 \boldsymbol{e}_1 + v \boldsymbol{e}_2
+$$
+
+$z=ze_1+ye_2$より
+$$v \cdot z = 0+ vy = vy$$
+よって、境界条件は
+\begin{equation}
+    v\frac{\partial y}{\partial r} = \frac{\partial \phi}{\partial r}\hspace{5mm}\text{on}\hspace{5mm}(r=r_0)
+    \label{eq:kyokai}
+\end{equation}
+
+z平面の複素数平面の定義$z=z+iy$, $\zeta$平面の複素数平面の定義$\zeta = \xi + i\eta = re^{i\theta}$をルイスフォーム変換$z= M(\zeta+\frac{a_1}{\zeta}+\frac{a_3}{\zeta^3})$に代入して整理すれば
+$$
+x=M \{ ( r+\frac{a_1}{r})\cos \theta +\frac{a_3}{r^3}\cos3\theta \}
+$$
+$$
+y=M \{ ( r-\frac{a_1}{r})\sin \theta -\frac{a_3}{r^3}\sin 3\theta \}
+$$
+よって
+$$
+\frac{\partial y}{\partial r} = M \{ (1+\frac{a_1}{r^2})\sin \theta +\frac{3a_3}{r^4}\sin 3\theta \}
+$$
+また、$\phi$を$r$で微分すれば
+\begin{equation}
+    \frac{\partial \phi}{\partial r} = \frac{B_0}{r} + \sum_{n=1}^\infty -\frac{n}{r^{n+1}}(B_{cn}\cos n\theta + B_{sn}\sin n\theta)
+    \label{eq:phi1}
+\end{equation}
+また、(\ref{eq:kyokai})式より
+\begin{equation}
+    \frac{\partial \phi}{\partial r} = v\frac{\partial y}{\partial r} = vM \{ (1+\frac{a_1}{r^2})\sin \theta +\frac{3a_3}{r^4}\sin 3\theta \}
+    \label{eq:phi2} 
+\end{equation}
+
+(\ref{eq:phi1})式を展開して表記すれば
+\begin{equation}
+\frac{\partial \phi}{\partial r} = \frac{B_0}{r} -\frac{1}{r^2}(B_{c1}\cos \theta + B_{s1}\sin \theta) -\frac{2}{r^3}(B_{c2}\cos 2\theta + B_{s2}\sin 2\theta) -\frac{3}{r^4}(B_{c3}\cos 3\theta + B_{s3}\sin 3\theta) + \cdots
+\label{eq:phi3}
+\end{equation}
+よって、(\ref{eq:phi3})式と(\ref{eq:phi2})式の係数を比較すれば
+\begin{align*}
+    B_{s1} &= -vM(1+a_1) \\
+    B_{s3} &= -vMa_3
+\end{align*}
+on $r=r_0=1$.
+また、$B_0, \text{と、残りの}B_{cn}, B_{sn}は0$である。
+
+よって、速度ポテンシャル$\phi$は
+$$
+\phi = -vM\{\frac{1+a_1}{r}\sin \theta + \frac{a_3}{r^3}\sin 3\theta \}
+$$
+変動圧力は
+$$
+p = -\rho \frac{\partial \phi}{\partial t} = \rho \frac{\partial v}{\partial t} M\{\frac{1+a_1}{r}\sin \theta + \frac{a_3}{r^3}\sin 3\theta \}
+$$
+浮体に作用する力は\\
+$$
+\begin{aligned}
+    \Delta f_y &= - \iint_S e_2\cdot p n dS\\
+    &= -\int_0^\pi p \frac{\partial y}{\partial r}d\theta\\
+    &= -\int_0^\pi \rho \frac{\partial v}{\partial t} M\{(1+a_1)\sin \theta + a_3\sin 3\theta \} M\{(1+a_1)\sin \theta + 3a_3\sin 3\theta \}d\theta \hspace{5mm}\text{on}\hspace{5mm}r=r_0=1\\
+\end{aligned}
+$$
+ここで、物体は左右対称なので、流体から受ける力はy軸に対して対称になる。したがって、全体の力を求めるには$0$から$\pi$までの積分を2倍すればよい。
+$$
+F_y = -2\int_0^\pi \rho \frac{\partial v}{\partial t} M^2 \left[ \left\{ (1+a_1)\sin \theta + a_3\sin 3\theta \right\} \left\{ (1+a_1)\sin \theta + 3a_3\sin 3\theta \right\} \right] d\theta
+$$
+積分の外に定数を出して、中身を展開すると、
+$$
+F_y = -2 \rho M^2 \frac{\partial v}{\partial t} \int_0^\pi \left[ (1+a_1)^2\sin^2\theta + 4a_3(1+a_1)\sin\theta \sin3\theta + 3a_3^2\sin^2 3\theta \right] d\theta
+$$
+となる。
+ここで、三角関数の直交性より、異なる周波数の正弦関数の積分は$0$になる。つまり、
+$$
+\int_0^\pi \sin m\theta \sin n\theta d\theta = 
+\begin{cases}
+    \frac{\pi}{2} & (m=n) \\
+    0 & (m \neq n)
+\end{cases}
+$$
+よって$\sin\theta\sin3\theta$の項は積分すると$0$となり消える。
+残るのは$\sin^2\theta$と$\sin^2 3\theta$の項だけなので、
+\begin{align*}
+    \int_0^\pi \left[ \cdots \right] d\theta &= (1+a_1)^2 \int_0^\pi \sin^2\theta d\theta + 3a_3^2 \int_0^\pi \sin^2 3\theta d\theta \\
+    &= (1+a_1)^2 \frac{\pi}{2} + 3a_3^2 \frac{\pi}{2} \\
+    &= \frac{\pi}{2} \left\{ (1+a_1)^2 + 3a_3^2 \right\}
+\end{align*}
+これを先ほどの式に代入すると、
+$$
+F_y = -2 \rho M^2 \frac{\partial v}{\partial t} \cdot \frac{\pi}{2} \left\{ (1+a_1)^2 + 3a_3^2 \right\}
+$$
+$$
+= -\rho \pi M^2 \left\{ (1+a_1)^2 + 3a_3^2 \right\} \frac{\partial v}{\partial t}
+$$
+
+
+最後に、付加質量$m_a$を求める。
+付加質量による力は$F_y = -m_a \frac{dv}{dt}$で表されるので、これと先ほどの$F_y$の式を比較すれば、
+$$
+m_a = \rho \pi M^2 \left\{ (1+a_1)^2 + 3a_3^2 \right\}
+$$
+
+\section{問題2}
+2次元浮体の運動エネルギーは、浮体から遠方に伝播する進行波のエネルギーに変換される。このことを利用して、造波減衰係数を進行波振幅比（進行波の振幅と浮体運動の振幅の比）で表しなさい。その導出過程も示しなさい。
+
+\vspace{1cm}
+
+浮体の上下揺れに関する運動方程式は、付加質量を$a$、造波減衰係数を$b$、復原力係数を$c$とすると、次式で表される。
+$$
+(m+a)\ddot{y} + b\dot{y} + cy = f(t)
+$$
+この式の両辺に運動速度$\dot{y}$を乗じ、1周期$T$で時間積分して平均化すると、
+$$
+\frac{1}{T}\int_0^T f(t)\dot{y}dt = \frac{1}{T}\int_0^T (m+a)\ddot{y}\dot{y}dt + \frac{1}{T}\int_0^T b\dot{y}^2dt + \frac{1}{T}\int_0^T cy\dot{y}dt
+$$
+となる。定常的な単振動では、運動エネルギーとポテンシャルエネルギーに関する項の周期積分はゼロとなるため、
+$$
+\frac{1}{T}\int_0^T (m+a)\ddot{y}\dot{y}dt = 0, \quad \frac{1}{T}\int_0^T cy\dot{y}dt = 0
+$$
+したがって、外力がなす平均仕事率（左辺）は、造波減衰による仕事率（右辺第二項）に等しくなる。
+$$
+\frac{1}{T}\int_0^T f(t)\dot{y}dt = \frac{1}{T}\int_0^T b\dot{y}^2dt
+$$
+この「外力が浮体になす平均仕事」は、失われることなく、すべてが波のエネルギーに変換される。
+
+
+浮体の運動を$y=y_0\cos(\omega t - \epsilon)$とすると、速度は$\dot{y} = -y_0\omega\sin(\omega t - \epsilon)$となる。
+これより、造波減衰によって消費される平均仕事率$\bar{P}_d$は、
+$$
+\bar{P}_d = \frac{1}{T}\int_0^T b\dot{y}^2dt = \frac{b}{T}\int_0^T (-y_0\omega\sin(\omega t - \epsilon))^2 dt = \frac{1}{2}b\omega^2 y_0^2
+$$
+となる。
+一方、浮体の両側から放射される波が運び去る平均仕事率$\bar{P}_w$は、波の振幅を$\zeta_a$、深水波における群速度を$c_g=g/(2\omega)$とすると、
+$$
+\bar{P}_w = 2 \times \left(\frac{1}{2}\rho g \zeta_a^2\right) \times c_g = \rho g \zeta_a^2 \left(\frac{g}{2\omega}\right) = \frac{\rho g^2}{2\omega}\zeta_a^2
+$$
+と表される。
+外力がなす平均仕事はすべて波のエネルギーになるため、$\bar{P}_d = \bar{P}_w$の関係が成立する。
+$$
+\frac{1}{2}b\omega^2 y_0^2 = \frac{\rho g^2}{2\omega}\zeta_a^2
+$$
+この式を造波減衰係数$b$について整理する。
+$$
+b = \frac{\rho g^2}{\omega^3}\frac{\zeta_a^2}{y_0^2}
+$$
+ここで、進行波振幅比を$A(\omega) = \zeta_a / y_0$（進行波の振幅と浮体運動の振幅の比）と定義すると、造波減衰係数$b$は次式で表される。
+$$
+b = \frac{\rho g^2}{\omega^3}A(\omega)^2
+$$
+
+\end{document}
