@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\begin{document}
+
+
+\begin{center}
+    {\huge 溶接施工法 課題２ \par}
+    \vspace{1.5em}
+    % ↓ ここにご自身の学籍番号と氏名を入れてください
+    {\large 大阪大学 工学部 地球総合工学科 \\ 船舶海洋工学科目 船舶海洋工学コース \\ 08C23031 古賀 光一朗 \par}
+    \vspace{1em}
+    {\large 2025年7月23日\par}
+\end{center}
+\vspace{2em}
+
+
+\section*{冷却速度 (CR) の導出（薄板の場合）}
+
+\begin{equation}
+\label{eq:T}
+    T(y,t)|_{y=0} = \frac{1}{\sqrt{4\pi kt}} \frac{Q/h}{c\rho}
+\end{equation}
+\begin{itemize}
+    \item $T$: 温度
+    \item $t$: 熱源が通過してからの時間
+    \item $k$: 熱拡散率
+    \item $Q$: 単位長さあたりの溶接入熱
+    \item $h$: 板厚
+    \item $c$: 比熱
+    \item $\rho$: 密度
+\end{itemize}
+
+\vspace{5mm}
+辺々偏微分して
+\begin{equation}
+\label{eq:delta T}
+    \frac{\partial T}{\partial t}|_{y=0} = \frac{Q/h}{c\rho\sqrt{4\pi k}} \cdot \left(-\frac{1}{2} t^{-3/2}\right) = -\frac{Q/h}{2c\rho\sqrt{4\pi k}} t^{-3/2}
+\end{equation}
+
+\subsection*{時間 $t$ の消去}
+時間 $t$ を消去し、温度 $T$ を使った式に変形したい。\\
+(\ref{eq:T})式を $t^{-1/2}$ について解く
+\begin{equation}
+\label{eq:t-12}
+    t^{-1/2} = \frac{c\rho h \sqrt{4\pi k}}{Q} T(y,t)|_{y=0}
+\end{equation}
+
+(\ref{eq:t-12})式を(\ref{eq:delta T})式に代入する
+\begin{align*}
+\frac{\partial T}{\partial t}|_{y=0} &= -\frac{Q/h}{2c\rho\sqrt{4\pi k}} (t^{-1/2})^3 \\
+&= -\frac{Q/h}{2c\rho\sqrt{4\pi k}} \left( \frac{c\rho h \sqrt{4\pi k}}{Q} T(y,t)|_{y=0} \right)^3 \\
+&= -\frac{Q/h}{2c\rho\sqrt{4\pi k}} \cdot \frac{(c\rho h)^3 (4\pi k)\sqrt{4\pi k}}{Q^3} (T(y,t)|_{y=0})^3 \\
+&= - \frac{Q}{h} \frac{1}{2c\rho} \cdot (4\pi k) \frac{(c\rho h)^3}{Q^3} (T(y,t)|_{y=0})^3 \\
+&= -2\pi k \cdot \frac{Q}{h c\rho} \cdot \frac{(c\rho h)^3}{Q^3} (T(y,t)|_{y=0})^3 \\
+&= -2\pi k \frac{(c\rho h)^2}{Q^2} (T(y,t)|_{y=0})^3 \\
+&= -2\pi k \left( \frac{c\rho h}{Q} \right)^2 (T(y,t)|_{y=0})^3 \quad \text{}
+\end{align*}
+
+
+ここでの温度 $T$ は初期温度 $\theta_0$ からの温度上昇分と考えるため、$T(y,t)|_{y=0} = \theta - \theta_0$ と置き換えられる
+
+よって
+
+\begin{equation}
+    CR = \left| \frac{\partial T}{\partial t}|_{y=0} \right| = 2\pi k \left( \frac{c\rho h}{Q} \right)^2 (\theta - \theta_0)^3
+\end{equation}
+\end{document}

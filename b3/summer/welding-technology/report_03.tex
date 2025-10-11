@@ -1,0 +1,32 @@
+\documentclass[12pt]{jarticle}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{geometry}
+\geometry{a4paper, margin=25mm}
+
+\begin{document}
+\begin{center}
+    {\huge 溶接施工法 課題3 \par}
+    \vspace{1.5em}
+    % ↓ ここにご自身の学籍番号と氏名を入れてください
+    {\large 大阪大学 工学部 地球総合工学科 \\ 船舶海洋工学科目 船舶海洋工学コース \\ 08C23031 古賀 光一朗 \par}
+    \vspace{1em}
+    {\large 2025年7月27日\par}
+\end{center}
+
+\section*{図の点線は，周辺自由突合せ継手の，板幅方向（溶接
+線に直交する方向）応力成分$\sigma_x$の溶接線上分布である．図では溶接線の始終端で$\sigma_x$が圧縮に，溶接線の中央部分で$\sigma_x$が引張りになっている．この理由を説明せよ．}
+
+※図省略\\
+\vspace{5mm}
+
+溶接残留応力 $\sigma_x$ が中央で引張り、端部で圧縮となるのは、熱収縮の拘束と応力の自己平衡によるものである。
+
+\paragraph{中央部（引張）}
+溶接線が冷却収縮する際、長手方向（y方向）に強い引張応力 $\sigma_y$ が生じる。この $\sigma_y$ のポアソン効果により、板は幅方向（x方向）にも収縮しようとする。しかし、剛性の高い中央部ではこの収縮が拘束されるため、結果としてx方向に引張応力 $\sigma_x$ が発生する。
+
+\paragraph{始終端部（圧縮）}
+部材内の残留応力は、全体で力が釣り合うように分布する（自己平衡）。中央部に存在する引張応力を相殺するため、拘束が弱く変形しやすい自由端（始終端部）には、バランスをとる形で圧縮応力 $\sigma_x$ が生じる。
+
+\end{document}

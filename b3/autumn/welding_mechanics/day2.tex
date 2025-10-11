@@ -1,0 +1,58 @@
+\documentclass[10.5pt, a4paper]{article}
+
+% --- パッケージ設定 ---
+\usepackage[margin=20mm]{geometry} % マージンを上下左右20mmに設定
+\usepackage{newtxtext, newtxmath}     % フォントをTimes New Roman系に設定
+\usepackage{amsmath}               % 数式用パッケージ
+\usepackage{graphicx}              % 図の挿入用パッケージ
+\usepackage{setspace}              % 行間設定用
+\usepackage{url}                   % URLをきれいに改行するためのパッケージを追加
+\usepackage{hyperref}              % URLをクリッカブルにするパッケージ
+\linespread{1.1}                   % 適度な行間を設定
+
+% --- ヘッダー・フッターを消去 ---
+\pagestyle{empty}
+
+\begin{document}
+
+% --- タイトルと氏名、学籍番号 ---
+\begin{center}
+    \Large{\textbf{溶接力学 第２回宿題}}
+\end{center}
+
+\vspace{1cm} % 1cmの垂直方向の空白
+
+
+\noindent 氏名: 古賀光一朗 \\ 
+学籍番号: 08C23031 \\
+提出日: 2025/10/10
+\vspace{1.5cm} % 1.5cmの垂直方向の空白
+\section{下記、軟鋼の材料特性を用いて拘束棒の降伏応力$T_Y$を計算してください。}
+\begin{itemize}
+    \item ヤング率: $E = 2\times10^{5}$[MPa]
+    \item 熱膨張係数: $\alpha = 1\times10^{-5}$[1/℃]
+    \item 降伏応力$\sigma_Y = 200$[MPa]
+\end{itemize}
+$$T_Y = \frac{200 \times10^6}{2 \times 10^5 \times 10^6 \times 10^{-5}}=100\text{℃}$$
+\section{下記、高張力鋼の材料特性を用いて拘束棒の降伏応力$T_Y$を計算してください。}
+\begin{itemize}
+    \item ヤング率: $E = 2\times10^{5}$[MPa]
+    \item 熱膨張係数: $\alpha = 1.2 \times10^{-5}$[1/℃]
+    \item 降伏応力$\sigma_Y = 480$[MPa]
+\end{itemize}
+$$T_Y = \frac{480 \times10^6}{2 \times 10^5 \times 10^6 \times 1.2\times 10^{-5}}=200\text{℃}$$
+\section{下記、ステンレスの材料特性を用いて拘束棒の降伏応力$T_Y$を計算してください。}
+\begin{itemize}
+    \item ヤング率: $E = 2\times10^{5}$[MPa]
+    \item 熱膨張係数: $\alpha = 1.8\times10^{-5}$[1/℃]
+    \item 降伏応力$\sigma_Y = 360$[MPa]
+\end{itemize}
+$$T_Y = \frac{360 \times10^6}{2 \times 10^5 \times 10^6 \times 1.8 \times 10^{-5}}=100\text{℃}$$
+\section{下記、アルミ合金の材料特性を用いて拘束棒の降伏応力$T_Y$を計算してください。}
+\begin{itemize}
+    \item ヤング率: $E = 7\times10^{4}$[MPa]
+    \item 熱膨張係数: $\alpha = 2\times10^{-5}$[1/℃]
+    \item 降伏応力$\sigma_Y = 140$[MPa]
+\end{itemize}
+$$T_Y = \frac{140 \times10^6}{7 \times 10^4 \times 10^6 \times 2 \times 10^{-5}}=100\text{℃}$$
+\end{document}

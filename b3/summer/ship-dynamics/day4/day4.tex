@@ -1,0 +1,182 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+
+\section*{船体運動力学 課題4}
+08C23031
+古賀光一朗
+
+\subsection*{横運動(sway, roll, yaw) の連成運動方程式の導出}
+
+船体固定座標系における縦運動 (surge, heave, pitch) の連成運動方程式は次式で与えられている。
+
+$$
+\begin{array}{c}
+\left[\begin{array}{ccc}
+m & 0 & 0 \\
+0 & m & 0 \\
+0 & 0 & I_{2}
+\end{array}\right]\left\{\begin{array}{c}
+\ddot{X}_{1} \\
+\ddot{X}_{3} \\
+\ddot{\theta}_{2}
+\end{array}\right]+\left[\begin{array}{ccc}
+A_{11} & A_{13} & A_{12}^{\prime} \\
+A_{31} & A_{33} & A_{32}^{\prime} \\
+\bar{A}_{21} & \bar{A}_{23} & \bar{A}_{22}^{\prime}
+\end{array}\right]\left\{\begin{array}{c}
+\ddot{X}_{1} \\
+\ddot{X}_{3} \\
+\ddot{\theta}_{2}
+\end{array}\right]+\left[\begin{array}{ccc}
+b_{11} & b_{13} & b_{12}^{\prime} \\
+b_{31} & b_{33} & b_{32}^{\prime} \\
+\bar{b}_{21} & \bar{b}_{23} & \bar{b}_{22}^{\prime}
+\end{array}\right]\left\{\begin{array}{c}
+\dot{X}_{1} \\
+\dot{X}_{3} \\
+\dot{\theta}_{2}
+\end{array}\right\} \\
++\left[\begin{array}{ccc}
+0 & 0 & b_{13} U_{c} \\
+0 & c_{33} & b_{33} U_{c}+c_{32}^{\prime} \\
+0 & \bar{c}_{23} & \bar{b}_{23} U_{c}+\bar{c}_{22}^{\prime}
+\end{array}\right]\left\{\begin{array}{c}
+X_{1} \\
+X_{3} \\
+\theta_{2}
+\end{array}\right\}=\left\{\begin{array}{c}
+f_{e 1}(t) \\
+f_{e 3}(t) \\
+q_{e 2}(t)
+\end{array}\right\}
+\end{array}
+$$
+
+これを参考に、横運動 (sway, roll, yaw) の連成運動方程式を導出する。座標系は講義資料に従う。
+
+横運動は、左右揺 (sway: $X_2$)、横揺 (roll: $\theta_1$)、船首揺 (yaw: $\theta_3$) である。これらは講義資料P.16の図 およびP.28の変量の成分定義から、以下のように表される変位成分に対応する。
+
+\begin{itemize}
+    \item 並進動揺変位: $X_2$ (左右揺)
+    \item 回転動揺変位: $\theta_1$ (横揺), $\theta_3$ (船首揺)
+\end{itemize}
+
+船体固定座標系における運動方程式は、以下の形式で記述される。
+$$M\dot{u}_{G}=f(\dot{u}_{G},u_{G},x_{G},\dot{\omega},\omega,\theta,t)$$
+$$I\dot{\omega}=q(\dot{u}_{G},u_{G},x_{G},\dot{\omega},\omega,\theta,t)$$
+これらを線形化し、各自由度に対応する項を整理する。
+
+\subsubsection*{1. 質量・慣性モーメント項}
+船体固定座標系における質量行列は、各運動方向の慣性要素で構成される。横運動に対応する質量および慣性モーメントは以下の通りである。
+\begin{itemize}
+    \item Sway方向: 質量 $m$
+    \item Roll方向: 慣性モーメント $I_1$
+    \item Yaw方向: 慣性モーメント $I_3$
+\end{itemize}
+これらの要素により、質量・慣性モーメント行列 $M_L$ は対角行列となる。
+$$ M_L = \begin{bmatrix}
+m & 0 & 0 \\
+0 & I_1 & 0 \\
+0 & 0 & I_3
+\end{bmatrix} $$
+運動変位ベクトルを $\mathbf{x}_L = \begin{Bmatrix} X_2 \\ \theta_1 \\ \theta_3 \end{Bmatrix}$ とすると、この項は $M_L \ddot{\mathbf{x}}_L$ となる。
+
+\subsubsection*{2. 付加質量・付加慣性モーメント項}
+流体中で船体が運動する際に生じる反力のうち、加速度に比例する成分を付加質量または付加慣性モーメントと呼ぶ。講義資料P.23の変量の成分の定義およびP.24の連成の原理より、左右対称船型の場合、横運動に関連する付加質量・付加慣性モーメント行列 $A_L$ は以下のように構成される。
+
+並進動揺に対する付加質量行列 $A$ は、sway ($X_2$) 方向の $a_{22}$ が主要な成分となる。
+回転動揺と並進動揺の連成付加質量行列 $A'$ は、Roll ($\theta_1$) はSway ($X_2$) やHeave ($X_3$) と連成し、Yaw ($\theta_3$) はSway ($X_2$) と連成する。左右対称性から、$a'_{12}=0$, $a'_{21} \neq 0$, $a'_{23} \neq 0$, $a'_{32}=0$ となる。
+
+回転運動に対する付加慣性モーメント行列 $\bar{A}'$ は、Roll ($\theta_1$) 方向の $\bar{a}'_{11}$ とYaw ($\theta_3$) 方向の $\bar{a}'_{33}$ が主要な成分となる。
+これらの要素を横運動の自由度 (Sway, Roll, Yaw) に対応させて整理すると、加速度依存項 $A_L \ddot{\mathbf{x}}_L$ の行列 $A_L$ は次のように表される。
+
+$$
+A_L = \begin{bmatrix}
+a_{22} & a_{21}^{\prime} & a_{23}^{\prime} \\
+a_{12}^{\prime} & \bar{a}_{11}^{\prime} & \bar{a}_{13}^{\prime} \\
+a_{32}^{\prime} & \bar{a}_{31}^{\prime} & \bar{a}_{33}^{\prime}
+\end{bmatrix}
+$$
+ここで、$a'_{ij}$ は並進と回転の間の連成項、$\bar{a}'_{ij}$ は回転同士の連成項も含む。
+
+\subsubsection*{3. 減衰力項}
+流体中で船体が運動する際に生じる反力のうち、速度に比例する成分を減衰力と呼ぶ。講義資料P.23の変量の成分の定義より、横運動に関連する減衰力行列 $B_L$ は以下のように構成される。
+
+並進動揺に対する減衰力行列 $B$ は、sway ($X_2$) 方向の $b_{22}$ が主要な成分となる。
+回転動揺と並進動揺の連成減衰力行列 $B'$ は、縦運動と同様にRoll ($\theta_1$) とSway ($X_2$) およびHeave ($X_3$)、Yaw ($\theta_3$) とSway ($X_2$) の連成が生じる。
+回転運動に対する減衰力係数行列 $\bar{B}'$ は、Roll ($\theta_1$) 方向の $\bar{b}'_{11}$ とYaw ($\theta_3$) 方向の $\bar{b}'_{33}$ が主要な成分となる。
+これらの要素を横運動の自由度に対応させて整理すると、速度依存項 $B_L \dot{\mathbf{x}}_L$ の行列 $B_L$ は次のように表される。
+$$
+B_L = \begin{bmatrix}
+b_{22} & b_{21}^{\prime} & b_{23}^{\prime} \\
+b_{12}^{\prime} & \bar{b}_{11}^{\prime} & \bar{b}_{13}^{\prime} \\
+b_{32}^{\prime} & \bar{b}_{31}^{\prime} & \bar{b}_{33}^{\prime}
+\end{bmatrix}
+$$
+ここで、$b'_{ij}$ は並進と回転の間の連成項、$\bar{b}'_{ij}$ は回転同士の連成項も含む。また、船速 $U_c$ による速度依存の減衰力項も考慮される。縦運動方程式の$b_{13}U_c$, $b_{33}U_c$ と同様に、横運動においても$U_c$に比例する項が存在しうる。
+
+\subsubsection*{4. 復原力項}
+船体が静的に変位した際に、元の位置に戻ろうとする力を復原力と呼ぶ。講義資料P.23の変量の成分の定義より、横運動に関連する復原力行列 $C_L$ は以下のように構成される。
+
+並進動揺に対する復原力行列 $C$ は、sway ($X_2$) 方向には復原力は生じない ($c_{22}=0$)。
+回転動揺と並進動揺の連成復原力行列 $C'$ は、Roll ($\theta_1$) はHeave ($X_3$) と連成するが、Sway ($X_2$) とは連成しない。Yaw ($\theta_3$) は他の運動とは連成しない。
+回転運動に対する復原力係数行列 $\bar{C}'$ は、Roll ($\theta_1$) 方向の $\bar{c}'_{11}$ が主要な成分となる。Yaw ($\theta_3$) 方向には通常復原力は生じないため $\bar{c}'_{33}=0$ となる。
+これらの要素を横運動の自由度に対応させて整理すると、変位依存項 $C_L \mathbf{x}_L$ の行列 $C_L$ は次のように表される。
+
+$$
+C_L = \begin{bmatrix}
+0 & c_{21}^{\prime} & b_{23} U_{c} \\
+c_{12}^{\prime} & \bar{c}_{11}^{\prime} & \bar{b}_{13} U_{c} \\
+c_{32}^{\prime} & \bar{c}_{31}^{\prime} & \bar{b}_{33} U_{c}
+\end{bmatrix}
+$$
+ここで、$c'_{ij}$ は並進と回転の間の連成項、$\bar{c}'_{ij}$ は回転同士の連成項も含む。また、縦運動と同様に、船速 $U_c$ に比例する復原力項も存在する。
+
+\subsubsection*{5. 波強制力項}
+波強制力は、船体の運動に関係なく作用する流体力である。横運動においては、Sway方向の波強制力 $f_{e2}(t)$、Roll方向の波強制モーメント $q_{e1}(t)$、Yaw方向の波強制モーメント $q_{e3}(t)$ が外力となる。
+$$\mathbf{f}_{eL}(t) = \begin{Bmatrix} f_{e2}(t) \\ q_{e1}(t) \\ q_{e3}(t) \end{Bmatrix}$$
+
+\subsubsection*{6. 連成運動方程式のまとめ}
+以上の各項をまとめると、横運動の連成運動方程式は次のように表現される。
+
+$$
+\begin{array}{c}
+\left[\begin{array}{ccc}
+m+a_{22} & a_{21}^{\prime} & a_{23}^{\prime} \\
+a_{12}^{\prime} & I_{1}+\bar{a}_{11}^{\prime} & \bar{a}_{13}^{\prime} \\
+a_{32}^{\prime} & \bar{a}_{31}^{\prime} & I_{3}+\bar{a}_{33}^{\prime}
+\end{array}\right]\left\{\begin{array}{c}
+\ddot{X}_{2} \\
+\ddot{\theta}_{1} \\
+\ddot{\theta}_{3}
+\end{array}\right]+\left[\begin{array}{ccc}
+b_{22} & b_{21}^{\prime} & b_{23}^{\prime} \\
+b_{12}^{\prime} & \bar{b}_{11}^{\prime} & \bar{b}_{13}^{\prime} \\
+b_{32}^{\prime} & \bar{b}_{31}^{\prime} & \bar{b}_{33}^{\prime}
+\end{array}\right]\left\{\begin{array}{c}
+\dot{X}_{2} \\
+\dot{\theta}_{1} \\
+\dot{\theta}_{3}
+\end{array}\right\} \\
++\left[\begin{array}{ccc}
+0 & c_{21}^{\prime} & b_{23} U_{c} \\
+c_{12}^{\prime} & \bar{c}_{11}^{\prime} & \bar{b}_{13} U_{c} \\
+c_{32}^{\prime} & \bar{c}_{31}^{\prime} & \bar{b}_{33} U_{c}
+\end{array}\right]\left\{\begin{array}{c}
+X_{2} \\
+\theta_{1} \\
+\theta_{3}
+\end{array}\right\}=\left\{\begin{array}{c}
+f_{e 2}(t) \\
+q_{e 1}(t) \\
+q_{e 3}(t)
+\end{array}\right\}
+\end{array}
+$$
+
+この方程式は、船が波浪中で横運動する際の各自由度間の相互作用を表現している。
+
+\end{document}

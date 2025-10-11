@@ -1,0 +1,219 @@
+\documentclass[a4j,12pt]{jsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, left=25mm, right=25mm, top=30mm, bottom=30mm}
+
+\begin{document}
+
+\textbf{構造力学２課題レポート}
+
+工学部地球総合工学科船舶海洋工学科目船舶海洋工学コース 3年
+
+08C23031　古賀光一朗
+
+
+\vspace{3cm}
+\section*{演習課題1}
+図に示すように、直径d、長さlの丸棒ABの両端を固定し、断面Cに捩りモーメント$M_T$を作用させる場合の問題である。A, B端に生じる捩りモーメント$M_A, M_B$、最大剪断応力$\tau_{max}$、および断面Cにおける捩れ角$\phi_C$を求める。
+
+これは不静定問題であるため、力のつり合い条件と変形の適合条件を用いて解く。
+
+\subsection*{A, B端に生じる捩りモーメント}
+まず、断面Cにおける力のつり合いを考える。A端に生じる反力モーメントを$M_A$、B端に生じる反力モーメントを$M_B$とすると、これらの和は外力である捩りモーメント$M_T$とつり合う必要がある。
+$$M_A + M_B = M_T \quad \cdots(1)$$
+
+次に、変形の適合条件を考える。両端は固定されているため、A点から見たC点の捩れ角$\phi_{AC}$と、B点から見たC点の捩れ角$\phi_{BC}$は等しくなければならない。棒のねじり剛性を$GJ$とすると、各区間の捩れ角は以下のように表される。
+$$\phi_{AC} = \frac{M_A a}{GJ}, \quad \phi_{BC} = \frac{M_B b}{GJ}$$
+変形の連続性より $\phi_{AC} = \phi_{BC}$ であるから、
+$$\frac{M_A a}{GJ} = \frac{M_B b}{GJ} \quad \Rightarrow \quad M_A a = M_B b \quad \cdots(2)$$
+
+式(1), (2)の連立方程式を解く。式(2)より $M_B = M_A (a/b)$ を式(1)に代入すると、
+$$M_A + M_A \frac{a}{b} = M_T$$
+$$M_A \left(1 + \frac{a}{b}\right) = M_A \frac{a+b}{b} = M_T$$
+ここで、$l=a+b$ であるから、
+$$M_A \frac{l}{b} = M_T \quad \Rightarrow \quad \boldsymbol{M_A = \frac{M_T b}{l}}$$
+これを式(1)に代入して、$M_B$を求める。
+$$\boldsymbol{M_B = M_T - M_A = M_T - \frac{M_T b}{l} = M_T \frac{l-b}{l} = \frac{M_T a}{l}}$$
+
+\subsection*{最大剪断応力}
+剪断応力 $\tau$ は、作用する捩りモーメントに比例する ($\tau = Tr/J$)。問題の条件より $a<b$ であるため、$M_A > M_B$ となる。したがって、最大剪断応力はより大きな捩りモーメントが作用するAC間に生じる。
+中実丸棒の断面係数$Z_p = J/(d/2)$であり、極断面二次モーメント $J = \frac{\pi d^4}{32}$ を用いると、
+$$J = \frac{\pi d^4}{32}, \quad r_{max} = \frac{d}{2}$$
+よって、最大剪断応力 $\tau_{max}$ は、
+$$\boldsymbol{\tau_{max} = \frac{M_A (d/2)}{J} = \frac{\frac{M_T b}{l} \frac{d}{2}}{\frac{\pi d^4}{32}} = \frac{16 M_T b}{\pi l d^3}}$$
+
+\subsection*{断面Cにおける捩れ角}
+断面Cにおける捩れ角 $\phi_C$ は、$\phi_{AC}$ または $\phi_{BC}$ に等しい。ここでは $\phi_{AC}$ を用いて計算する。
+$$\boldsymbol{\phi_C = \frac{M_A a}{GJ} = \frac{\frac{M_T b}{l} a}{G \frac{\pi d^4}{32}} = \frac{32 M_T ab}{\pi G l d^4}}$$
+
+\newpage
+\section*{演習課題2}
+\subsection*{(1) サンブナンの捩り剛性GJの比}
+薄肉閉断面のサンブナンの捩り剛性 $GJ$ は、せん断弾性係数を $G$、板厚中心線で囲まれる面積を $A$、板厚中心線の周長を $\oint ds$、板厚を $t$ として、以下の式で与えられる。
+$$J = \frac{4A^2}{\oint \frac{ds}{t}}$$
+本問では、板厚 $t$ は一定であり、周長は $l = \oint ds$ であるから、
+$$J = \frac{4A^2 t}{l}$$
+$G, t, l$ が3断面で等しいので、捩り剛性 $GJ$ の比は、断面積 $A$ の2乗の比に等しくなる。
+$$GJ_C : GJ_S : GJ_T = A_C^2 : A_S^2 : A_T^2$$
+
+各断面の面積 $A$ を周長 $l$ で表す。
+\begin{itemize}
+    \item \textbf{中空円筒断面 (C):}
+    半径を $r$ とすると、$l = 2\pi r$。面積 $A_C$ は、
+    $$A_C = \pi r^2 = \pi \left(\frac{l}{2\pi}\right)^2 = \frac{l^2}{4\pi}$$
+
+    \item \textbf{中空正方形断面 (S):}
+    一辺の長さを $a$ とすると、$l = 4a$。面積 $A_S$ は、
+    $$A_S = a^2 = \left(\frac{l}{4}\right)^2 = \frac{l^2}{16}$$
+
+    \item \textbf{中空正三角形断面 (T):}
+    一辺の長さを $a$ とすると、$l = 3a$。面積 $A_T$ は、
+    $$A_T = \frac{\sqrt{3}}{4} a^2 = \frac{\sqrt{3}}{4} \left(\frac{l}{3}\right)^2 = \frac{\sqrt{3}l^2}{36}$$
+\end{itemize}
+これらの面積の2乗の比を求める。
+\begin{align*}
+    A_C^2 &= \left(\frac{l^2}{4\pi}\right)^2 = \frac{l^4}{16\pi^2} \\
+    A_S^2 &= \left(\frac{l^2}{16}\right)^2 = \frac{l^4}{256} \\
+    A_T^2 &= \left(\frac{\sqrt{3}l^2}{36}\right)^2 = \frac{3l^4}{1296} = \frac{l^4}{432}
+\end{align*}
+したがって、捩り剛性の比は、
+$$\boldsymbol{GJ_C : GJ_S : GJ_T = \frac{1}{16\pi^2} : \frac{1}{256} : \frac{1}{432}}$$
+$\pi^2 \approx 9.87$ として、おおよその比率を計算すると、
+$$\frac{1}{157.9} : \frac{1}{256} : \frac{1}{432} \approx 0.00633 : 0.00391 : 0.00231 \approx \boldsymbol{2.74 : 1.69 : 1}$$
+
+\subsection*{(2) 極断面二次モーメントの薄肉近似}
+外径 $d_2$、内径 $d_1$ のパイプの極断面二次モーメントは式(a)で与えられる。
+$$J = \frac{\pi}{32}(d_2^4 - d_1^4) \quad \cdots (a)$$
+平均半径を $r$、板厚を $t$ とすると、$d_2$ と $d_1$ は次のように表せる。
+$$d_2 = 2(r + t/2) = 2r+t, \quad d_1 = 2(r - t/2) = 2r-t$$
+これを因数分解した式 $J = \frac{\pi}{32}(d_2^2+d_1^2)(d_2+d_1)(d_2-d_1)$ に代入する。
+\begin{align*}
+    d_2 + d_1 &= (2r+t) + (2r-t) = 4r \\
+    d_2 - d_1 &= (2r+t) - (2r-t) = 2t \\
+    d_2^2 + d_1^2 &= (2r+t)^2 + (2r-t)^2 = (4r^2+4rt+t^2) + (4r^2-4rt+t^2) = 8r^2 + 2t^2
+\end{align*}
+よって、$J$ は、
+$$J = \frac{\pi}{32} (8r^2+2t^2)(4r)(2t) = \frac{\pi}{32} (64r^3 t + 16rt^3) = 2\pi r^3 t + \frac{\pi}{2}rt^3$$
+これを $2\pi r^3 t$ でくくると、
+$$J = 2\pi r^3 t \left(1 + \frac{t^2}{4r^2}\right)$$
+ここで、パイプが薄肉であるという条件 $t/r \ll 1$ を適用すると、$t^2/r^2$ の項は1に比べて十分に小さく無視できる。
+$$J \approx 2\pi r^3 t$$
+これは薄肉閉断面に対する極断面二次モーメントの式(b)と一致する。
+$$J = 2\pi r^3 t = \frac{4(\pi r^2)^2 t}{2\pi r} = \frac{4A^2}{\oint \frac{ds}{t}}$$
+(証明終)
+
+\newpage
+\section*{演習課題3}
+\subsection*{(1) サンブナンの捩り剛性}
+薄肉I形断面のサンブナンの捩り剛性$GJ$は、各長方形要素の捩り剛性の和として計算できる。幅$b$、厚さ$t$の長方形断面の捩り剛性は $G \frac{1}{3}bt^3$ で与えられる。
+I形断面は、幅$b_f$、厚さ$t_f$の上フランジと下フランジの2つの要素と、幅$h_w$、厚さ$t_w$のウェブの1つの要素から構成される。
+したがって、断面全体のサンブナンの捩り剛性$GJ$は、
+$$\boldsymbol{GJ = G \left( 2 \times \frac{1}{3} b_f t_f^3 + \frac{1}{3} h_w t_w^3 \right) = \frac{G}{3} (2 b_f t_f^3 + h_w t_w^3)}$$
+
+\subsection*{(2) 曲げ捩り剛性の導出}
+I形断面に捩りが生じると、上下のフランジはそれぞれ逆方向に水平曲げ変形を起こす。このフランジの曲げに対する抵抗が、付加的な捩りモーメント（曲げ捩りモーメント）を生み出す。ここではフランジ剛性のみを考慮して、曲げ捩り剛性 $E\Gamma$ を導出する。
+
+\begin{enumerate}
+    \item \textbf{フランジの変位:} \\
+    断面がねじれ角 $\phi$ だけ回転したとき、ウェブ高さの中心からの距離が $h_w/2$ であるフランジの水平方向の変位 $y$ は、$\phi$ が微小であるとすれば次式で与えられる。
+    $$y = \frac{h_w}{2} \phi(x)$$
+
+    \item \textbf{フランジの曲げモーメント:} \\
+    フランジをz軸周りに曲がる梁と見なすと、その曲げモーメント $M_f$ は材料力学の公式より、
+    $$M_f = -E I_f \frac{d^2 y}{d x^2}$$
+    ここで $I_f$ はフランジの水平曲げ（z軸周り）の断面二次モーメントであり、$I_f = \frac{t_f b_f^3}{12}$ ではない。フランジはy軸周りに曲がるため、$I_f = \frac{b_f t_f^3}{12}$ ではなく、$I_f = \frac{t_f b_f^3}{12}$ が正しい。問題文の導出過程説明を求める式は$E\Gamma=\frac{Eb_{f}^{3}h_{w}^{2}t_{f}}{24}$であり、これはフランジがz軸（弱軸）周りに曲がることを想定している。したがって、$I_f = \frac{t_f b_f^3}{12}$ を用いる。
+    $$M_f = -E \left( \frac{t_f b_f^3}{12} \right) \left( \frac{h_w}{2} \frac{d^2 \phi}{d x^2} \right) = -\frac{E t_f b_f^3 h_w}{24} \frac{d^2 \phi}{d x^2}$$
+
+    \item \textbf{フランジのせん断力:} \\
+    フランジに作用する水平せん断力 $Q_f$ は、曲げモーメントの微分で与えられる。
+    $$Q_f = \frac{d M_f}{d x} = -\frac{E t_f b_f^3 h_w}{24} \frac{d^3 \phi}{d x^3}$$
+
+    \item \textbf{曲げ捩りモーメント:} \\
+    上下のフランジには、それぞれ逆向きのせん断力 $Q_f$ が作用する。この偶力による捩りモーメント $T_w$ (Warping Torsion) は、
+    $$T_w = Q_f \times h_w = \left( -\frac{E t_f b_f^3 h_w}{24} \frac{d^3 \phi}{d x^3} \right) h_w = -\frac{E t_f b_f^3 h_w^2}{24} \frac{d^3 \phi}{d x^3}$$
+
+    \item \textbf{曲げ捩り剛性 $E\Gamma$:} \\
+    この曲げ捩りモーメントを $T_w = -E\Gamma \frac{d^3\phi}{dx^3}$ と定義する。両式を比較すると、曲げ捩り定数 $\Gamma$ は次のように求まる。
+    $$E\Gamma = \frac{E t_f b_f^3 h_w^2}{24}$$
+    これは設問の式と一致する。
+\end{enumerate}
+
+\subsection*{(3) 剛性の比}
+与えられた寸法を用いて、曲げ捩り剛性における第1項（フランジの寄与）と第2項（ウェブの寄与）の比を求める。
+$$E\Gamma = \underbrace{\frac{E b_f^3 h_w^2 t_f}{24}}_{\text{第1項 (フランジ)}} + \underbrace{\frac{E t_w^3 h_w^3}{144}}_{\text{第2項 (ウェブ)}}$$
+寸法: $b_f=100 \text{mm}, t_f=20 \text{mm}, h_w=200 \text{mm}, t_w=10 \text{mm}$
+
+\begin{itemize}
+    \item \textbf{第1項の剛性 $\Gamma_f$ (フランジ部):}
+    $$\Gamma_f = \frac{b_f^3 h_w^2 t_f}{24} = \frac{(100)^3 (200)^2 (20)}{24} = \frac{10^6 \times 4 \times 10^4 \times 20}{24} = \frac{800 \times 10^{10}}{24} = \frac{100}{3} \times 10^{10} \ [\text{mm}^6]$$
+    \item \textbf{第2項の剛性 $\Gamma_w$ (ウェブ部):}
+    $$\Gamma_w = \frac{t_w^3 h_w^3}{144} = \frac{(10)^3 (200)^3}{144} = \frac{10^3 \times 8 \times 10^6}{144} = \frac{8 \times 10^9}{144} = \frac{1}{18} \times 10^9 = \frac{1}{180} \times 10^{10} \ [\text{mm}^6]$$
+\end{itemize}
+両者の比を求める。ヤング率 $E$ は共通なので、$\Gamma$ の比を計算すればよい。
+$$\boldsymbol{\frac{\text{第1項の剛性}}{\text{第2項の剛性}} = \frac{E\Gamma_f}{E\Gamma_w} = \frac{\frac{100}{3} \times 10^{10}}{\frac{1}{180} \times 10^{10}} = \frac{100}{3} \times 180 = 100 \times 60 = 6000}$$
+したがって、第1項（フランジ）の剛性は、第2項（ウェブ）の剛性の6000倍であり、I形断面の曲げ捩り剛性にはフランジが支配的に寄与することがわかる。
+
+\newpage
+\section*{演習課題4}
+\subsection*{(1) 船体中央(x=0)での捩り角の条件}
+船体構造および捩り変形が前後対称であると仮定されている。対称な変形において、対称軸である船体中央($x=0$)では、変位曲線の傾きは0になる。したがって、ねじれ角$\phi(x)$の傾きが0となる。
+$$\boldsymbol{\frac{d\phi}{dx}(0) = 0}$$
+
+\subsection*{(2) x=±l/2での境界条件}
+船首尾($x=\pm l/2$)では、構造が剛であり、そり変形が拘束されると仮定されている。
+\begin{itemize}
+    \item 構造が剛であるということは、端部での回転が許されないことを意味する。よって、ねじれ角は0となる。
+    $$\boldsymbol{\phi(\pm l/2) = 0}$$
+    \item そり変形が拘束されるとは、軸方向のそり変位 $u$ が0であることを意味する。そり変位は $u = \omega_n \frac{d\phi}{dx}$ と表され、そり関数 $\omega_n$ は断面内で0でないため、そり変位が0であるためにはねじれ率が0でなければならない。
+    $$\boldsymbol{\frac{d\phi}{dx}(\pm l/2) = 0}$$
+\end{itemize}
+
+\subsection*{(3) 捩り角 $\phi$ の導出}
+支配方程式は以下で与えられる。
+$$GJ\frac{d\phi}{dx} - E\Gamma\frac{d^3\phi}{dx^3} = T_{max} \cos\left(\frac{\pi x}{l}\right)$$
+これは3階線形非同次常微分方程式である。一般解は同次解$\phi_h$と特殊解$\phi_p$の和 $\phi = \phi_h + \phi_p$ で与えられる。
+\begin{itemize}
+    \item \textbf{特殊解 $\phi_p$:} \\
+    $T(x)$ が $\cos$ 関数であるため、特殊解を $\phi_p = C \sin\left(\frac{\pi x}{l}\right)$ と仮定する。これを支配方程式に代入すると、
+    $$GJ \left(C\frac{\pi}{l}\cos\frac{\pi x}{l}\right) - E\Gamma \left(-C\left(\frac{\pi}{l}\right)^3\cos\frac{\pi x}{l}\right) = T_{max}\cos\frac{\pi x}{l}$$
+    $$C \left[ GJ\frac{\pi}{l} + E\Gamma\left(\frac{\pi}{l}\right)^3 \right] = T_{max}$$
+    $$C = \frac{T_{max}}{GJ\frac{\pi}{l} + E\Gamma\frac{\pi^3}{l^3}} = \frac{T_{max} l^3}{\pi(GJl^2 + E\Gamma\pi^2)}$$
+
+    \item \textbf{同次解 $\phi_h$:} \\
+    $GJ\phi_h' - E\Gamma\phi_h''' = 0 \Rightarrow \phi_h''' - k^2 \phi_h' = 0$ (ただし $k^2 = GJ/E\Gamma$)
+    特性方程式は $\lambda^3 - k^2\lambda = 0 \Rightarrow \lambda(\lambda-k)(\lambda+k)=0$ より、$\lambda = 0, k, -k$。
+    よって同次解は、
+    $$\phi_h(x) = C_1 + C_2 e^{kx} + C_3 e^{-kx} = C_1 + D_2 \cosh(kx) + D_3 \sinh(kx)$$
+\end{itemize}
+一般解は、
+$$\phi(x) = C_1 + D_2 \cosh(kx) + D_3 \sinh(kx) + C \sin\left(\frac{\pi x}{l}\right)$$
+ここに境界条件 (1), (2) を適用して積分定数$C_1, D_2, D_3$を決定する。これにより捩り角$\phi(x)$の具体的な式が定まる。
+
+\subsection*{(4) $T_1$ および $T_2$ の導出}
+サンブナンの捩り剛性に基づく捩りモーメント$T_1$と、曲げ捩り剛性に基づく捩りモーメント$T_2$は、(3)で求めた捩り角$\phi(x)$を用いて次のように計算される。
+$$\boldsymbol{T_1(x) = GJ \frac{d\phi}{dx} = GJ \left[ k(D_2 \sinh(kx) + D_3 \cosh(kx)) + C \frac{\pi}{l} \cos\left(\frac{\pi x}{l}\right) \right]}$$
+$$\boldsymbol{T_2(x) = -E\Gamma \frac{d^3\phi}{dx^3} = -E\Gamma \left[ k^3(D_2 \sinh(kx) + D_3 \cosh(kx)) - C \left(\frac{\pi}{l}\right)^3 \cos\left(\frac{\pi x}{l}\right) \right]}$$
+ここで、$C, D_2, D_3$は境界条件から定まる定数である。
+
+\subsection*{(5) そり応力がゼロおよび最大・最小値を取る位置}
+そり応力 $\sigma$ は、次式で与えられる。
+$$\sigma(x, y, z) = E \omega_n(y, z) \frac{d^2\phi}{dx^2}$$
+そり応力の船長方向の分布は $\frac{d^2\phi}{dx^2}$ の分布に比例する。
+\begin{itemize}
+    \item \textbf{そり応力が最大・最小となる位置:} \\
+    そり応力が最大・最小となるのは、$\frac{d^2\phi}{dx^2}$ が極値をとる位置であり、その微分 $\frac{d^3\phi}{dx^3}$ が0になる位置である。
+    支配方程式 $T = GJ\phi' - E\Gamma\phi'''$ と境界条件 $\phi'(\pm l/2) = 0$ を考える。
+    船首尾 $x=\pm l/2$ では、外力 $T(\pm l/2) = T_{max} \cos(\pm \pi/2) = 0$ であるから、
+    $$T(\pm l/2) = GJ\phi'(\pm l/2) - E\Gamma\phi'''(\pm l/2) = 0 - E\Gamma\phi'''(\pm l/2) = 0$$
+    $E\Gamma \neq 0$ であるから、$\phi'''(\pm l/2)=0$ となる。
+    これは $\frac{d^2\phi}{dx^2}$ の傾きが0であることを意味し、極値をとる点である。
+    よって、そり応力は\textbf{船首尾($\boldsymbol{x=\pm l/2}$)}で最大値または最小値をとる。
+
+    \item \textbf{そり応力がゼロとなる位置:} \\
+    そり応力がゼロとなるのは、$\frac{d^2\phi}{dx^2}=0$ となる位置である。
+    変形の対称性から、$\phi(x)$は奇関数、$\frac{d\phi}{dx}$は偶関数、$\frac{d^2\phi}{dx^2}$は奇関数となる。奇関数の性質より、原点で0の値をとる。
+    したがって、そり応力は少なくとも\textbf{船体中央($\boldsymbol{x=0}$)}でゼロとなる。
+\end{itemize}
+
+\end{document}
