@@ -1,0 +1,108 @@
+%==============================================================================
+% LaTeX Magic Comments
+%==============================================================================
+% !TEX encoding = UTF-8
+% !TEX ts-program = platex
+
+%==============================================================================
+% Document Class (ユーザーの環境に合わせてjsarticleを使用)
+%==============================================================================
+\documentclass[11pt, dvipdfmx]{jsarticle}
+
+%==============================================================================
+% Packages (ユーザーの元の環境設定をベースにする)
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage{newtxtt} % URL表示のエラー対策
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{float}
+
+%----- その他 -----
+\usepackage{setspace} % <<<【追加】行間調整のために追加
+\usepackage[hidelinks, unicode]{hyperref} % hidelinksでURLの枠線を消す
+\usepackage{pxjahyper}
+\usepackage{url}
+
+%==============================================================================
+% Main Document Start
+%==============================================================================
+\begin{document}
+
+% --- ヘッダー・フッターを消去 ---
+\pagestyle{empty}
+
+% --- フォントサイズを10.5ptに、行間を少し広めに設定 ---
+\fontsize{10.5pt}{12.5pt}\selectfont
+\linespread{1.09}
+
+% --- タイトルと氏名、学籍番号 ---
+\begin{center}
+    \Large{\textbf{Terminology Explanation}}
+\end{center}
+
+\noindent Name: Koichiro Koga \\
+Student ID: 08C23031
+
+
+% --- 用語 ---
+\noindent\large{\textbf{Terminology (Technical word)}}
+\hrule
+\vspace{0.2cm}
+\noindent Linear
+
+
+% --- 説明 ---
+\noindent\large{\textbf{Explanation}}
+\hrule
+\vspace{0.2cm}
+In mathematics and engineering, a relationship is described as \textbf{linear} if it can be represented graphically as a straight line. 
+This implies a proportional relationship ($y = ax + b$) between an input and an output, making the system's behavior simple and predictable. 
+While most real-world phenomena are governed by complex non-linear dynamics, 
+their behavior can often be effectively modeled as linear within a specific, limited operational range. 
+This powerful technique, known as \textbf{linear approximation}, is a cornerstone of engineering analysis, 
+allowing us to transform potentially unsolvable problems into manageable calculations.
+This principle was crucial during the final tuning of our basketball launcher for the NHK Student Robocon. 
+To achieve consistent accuracy, we needed a reliable model linking roller speed to shooting distance. 
+We conducted a series of controlled experiments, systematically varying the roller speed and measuring the resulting distance for each trial. 
+When this empirical data was plotted on a graph, it revealed a surprisingly clear trend: the data points formed an almost perfect straight line, 
+indicating the system behaved linearly within our range of interest.
+Capitalizing on this discovery, we fit an optimal approximate line to our data points, 
+which yielded a simple linear equation that served as an accurate predictive model. With this tool, 
+we could instantly calculate the precise motor speed needed for any target distance, 
+bypassing the slow and often frustrating process of manual trial-and-error. 
+This mathematical shortcut not only saved invaluable time during our final practice sessions 
+but also gave us deep confidence in our machine's calibration and consistency.
+Our experience is a clear testament to the power of linear approximation in a practical setting. 
+It shows how a fundamental mathematical concept can be applied to effectively model, 
+predict, and control a complex physical system. This ability to simplify reality into a predictive model is foundational in engineering, 
+enabling intelligent, data-driven solutions to replace inefficient guesswork with calculated precision.
+
+\vspace{1cm}
+
+% --- 出典 ---
+\noindent\large{\textbf{Source}}
+\hrule
+\vspace{0.3cm}
+\begin{itemize}
+    \item "Linear Differential Equations (線形微分方程式)." \textit{Kogakuin University}. Accessed: Oct. 15, 2025. \url{https://brain.cc.kogakuin.ac.jp/~kanamaru/lecture/simdif/03-01.html}
+\end{itemize}
+
+\end{document}
