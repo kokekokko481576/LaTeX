@@ -1,11 +1,11 @@
 # Fdb version 4
-["dvipdf"] 1760512996.2561 "day2.dvi" "day2.pdf" "day2" 1760512996.34827 0
-  "day2.dvi" 1760512996 5272 e85ebdaa2ff37d15dc34735d5c25bda9 "latex"
+["dvipdf"] 1760519862.26072 "day3.dvi" "day3.pdf" "day3" 1760519862.39363 0
+  "day3.dvi" 1760519862 5260 1a77f06a76da0b90c76f79e13896bd2d "latex"
   (generated)
-  "day2.pdf"
+  "day3.pdf"
   (rewritten before read)
-["latex"] 1760512995.60847 "c:/code/latex/b3/autumn/english_for_maritime_engineering/day2.tex" "day2.dvi" "day2" 1760512996.34516 2
-  "c:/code/latex/b3/autumn/english_for_maritime_engineering/day2.tex" 1760512992 4928 f751fece821ca7ff8b3d0d5cbc72db73 ""
+["latex"] 1760519861.63716 "c:/code/latex/b3/autumn/english_for_maritime_engineering/day3.tex" "day3.dvi" "day3" 1760519862.39026 2
+  "c:/code/latex/b3/autumn/english_for_maritime_engineering/day3.tex" 1760519858 4673 5f8493066fbe3947612c7f5f0af4dfc8 ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm" 1760148644 3584 adb004a0c8e7c46ee66cad73671f37b4 ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/jis/jis.tfm" 1760149205 468 53f854284f6afa6c36aaa2d1090ecc12 ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/jis/jisg.tfm" 1760149205 468 53f854284f6afa6c36aaa2d1090ecc12 ""
@@ -16,6 +16,7 @@
   "c:/texlive/2025/texmf-dist/fonts/tfm/public/bxjatoucs/bxjatoucs-tojis.tfm" 1760148569 94324 bd3f43e0aaaca3b429b7538d8c4692bf ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmr8.tfm" 1760148584 1292 21c1c5bfeaebccffdb478fd231a0997d ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Bold-tlf-t1.tfm" 1760153445 11564 696f16cb350c2e296a6df5198a20c96a ""
+  "c:/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Italic-tlf-t1.tfm" 1760153445 11524 8ba2f557ba7dc63d1e9e4c8cc65c9b60 ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-ot1.tfm" 1760153445 3008 ca0c83ca288d9f1c5d2fca0e8e268f10 ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-t1.tfm" 1760153445 11580 86fb9f1fbe830bcc3e5ca9d9fb704e6b ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxexa.tfm" 1760153445 760 e8ec875a87aa119f1af7ea4be48da9e8 ""
@@ -113,12 +114,12 @@
   "c:/texlive/2025/texmf-dist/web2c/texmf.cnf" 1760148419 42213 4e2ca030e8e2640502016e9e45868dcb ""
   "c:/texlive/2025/texmf-var/web2c/euptex/platex.fmt" 1760149471 2362449 92ab50ceb0035d2ead2602441d1d7a14 ""
   "c:/texlive/2025/texmf.cnf" 1760149418 713 e69b156964470283e0530f5060668171 ""
-  "day2.aux" 1760512996 128 8ec89a09013e497d5b92563b73b0583f "latex"
-  "day2.out" 1760512996 54 05b9ff7757fe6a446d8f294b02146d28 "latex"
-  "day2.tex" 1760512992 4928 f751fece821ca7ff8b3d0d5cbc72db73 ""
+  "day3.aux" 1760519862 128 852fc3e86949e4a73cd552c13992dc37 "latex"
+  "day3.out" 1760519862 54 05b9ff7757fe6a446d8f294b02146d28 "latex"
+  "day3.tex" 1760519858 4673 5f8493066fbe3947612c7f5f0af4dfc8 ""
   (generated)
-  "day2.aux"
-  "day2.dvi"
-  "day2.log"
-  "day2.out"
+  "day3.aux"
+  "day3.dvi"
+  "day3.log"
+  "day3.out"
   (rewritten before read)

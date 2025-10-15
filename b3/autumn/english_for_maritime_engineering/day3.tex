@@ -1,57 +1,109 @@
-\documentclass[10.5pt, a4paper]{article}
+%==============================================================================
+% LaTeX Magic Comments
+%==============================================================================
+% !TEX encoding = UTF-8
+% !TEX ts-program = platex
 
-% --- パッケージ設定 ---
-\usepackage[margin=20mm]{geometry} % マージンを上下左右20mmに設定
-\usepackage{newtxtext, newtxmath}     % フォントをTimes New Roman系に設定
-\usepackage{amsmath}               % 数式用パッケージ
-\usepackage{graphicx}              % 図の挿入用パッケージ
-\usepackage{setspace}              % 行間設定用
-\usepackage{url}                   % URLをきれいに改行するためのパッケージを追加
-\usepackage{hyperref}              % URLをクリッカブルにするパッケージ
-\linespread{1.1}                   % 適度な行間を設定
+%==============================================================================
+% Document Class (ユーザーの環境に合わせてjsarticleを使用)
+%==============================================================================
+\documentclass[11pt, dvipdfmx]{jsarticle}
+
+%==============================================================================
+% Packages (ユーザーの元の環境設定をベースにする)
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage{newtxtt} % URL表示のエラー対策
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{float}
+
+%----- その他 -----
+\usepackage{setspace} % <<<【追加】行間調整のために追加
+\usepackage[hidelinks, unicode]{hyperref} % hidelinksでURLの枠線を消す
+\usepackage{pxjahyper}
+\usepackage{url}
+
+%==============================================================================
+% Main Document Start
+%==============================================================================
+\begin{document}
 
 % --- ヘッダー・フッターを消去 ---
 \pagestyle{empty}
 
-\begin{document}
+% --- フォントサイズを10.5ptに、行間を少し広めに設定 ---
+\fontsize{10.5pt}{12.5pt}\selectfont
+\linespread{1.1}
 
 % --- タイトルと氏名、学籍番号 ---
 \begin{center}
     \Large{\textbf{Terminology Explanation}}
 \end{center}
 
-\vspace{1cm} % 1cmの垂直方向の空白
+\vspace{0.2cm}
 
+\noindent Name: Koichiro Koga \\
+Student ID: 08C23031
 
-\noindent 氏名: 古賀光一朗 \\ 
-学籍番号: 08C23031 
-\vspace{1.5cm} % 1.5cmの垂直方向の空白
 
 % --- 用語 ---
 \noindent\large{\textbf{Terminology (Technical word)}}
 \hrule
-\vspace{0.3cm}
-\noindent 
-
-\vspace{1cm} % 1cmの空白
+\vspace{0.1cm}
+\noindent Moment of Inertia
 
 % --- 説明 ---
 \noindent\large{\textbf{Explanation}}
 \hrule
 \vspace{0.3cm}
+The \textbf{moment of inertia} is a physical quantity that measures an object's resistance to a change in its rotational motion. 
+It is the rotational analog of mass; just as an object with a larger mass is harder to accelerate, 
+an object with a larger moment of inertia is more difficult to start or stop rotating. 
+The key factor is not just the mass itself, but its distribution relative to the axis of rotation. 
+For a rigid body, this is calculated by the integral $I = \int r^2 dm$, 
+which shows that mass distributed farther from the center contributes more significantly.
 
+A powerful real-world application of this principle was demonstrated in our project for the NHK Student Robocon 2025, 
+which required launching a heavy basketball. Our initial design featured a shooter with two small, lightweight rollers. 
+However, this prototype failed to perform; the shots were weak and inconsistent. 
+The problem lay in the rollers' low moment of inertia. 
+When the heavy ball came into contact with the fast-spinning rollers, their rotational speed dropped drastically. 
+They could not transfer sufficient kinetic energy because they lacked the necessary stored rotational energy.
+The solution was to increase the moment of inertia of the rollers. 
+We re-engineered them using a material with a higher mass and a significantly larger diameter. 
+According to the relationship $I \propto mr^2$, both changes dramatically increased the moment of inertia. 
+These new, heavier rollers could store much more rotational kinetic energy ($E_k = \frac{1}{2}I\omega^2$) at the same angular velocity. 
+As a result, when the basketball made contact, the rollers' speed barely decreased, 
+allowing them to transfer energy to the ball both efficiently and consistently.
+This modification transformed our machine's performance, enabling powerful and repeatable shots that met the competition's requirements. 
+Our experience clearly illustrates that the moment of inertia is not merely an abstract textbook concept, 
+but a critical, practical tool for solving tangible engineering challenges where controlling and transferring energy is paramount to success.
 
-\vspace{1cm} % 1cmの空白
+\vspace{1cm}
 
 % --- 出典 ---
 \noindent\large{\textbf{Source}}
 \hrule
-\vspace{0.3cm}
 \begin{itemize}
-    \item Japan Aluminium Association website, ``Characteristics of Aluminum,'' accessed October 1, 2025.\\
-    \url{https://www.aluminum.or.jp/more_knowledge/}
-    \item Shima Industries Co., Ltd. website, ``Aluminum Plate,'' accessed October 1, 2025. \\\url{https://simametals.com/home/ita%20arumihtml.html}
+    \item "Moment of Inertia (慣性モーメント)." \textit{Kanazawa Institute of Technology}. Accessed: Oct. 15, 2025. \url{https://w3e.kanazawa-it.ac.jp/math/physics/category/mechanics/rigidbody_mechanics/rotational_motion/moment_of_inertia.html}
 \end{itemize}
 
 \end{document}
-

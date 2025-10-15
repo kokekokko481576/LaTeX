@@ -1,19 +1,57 @@
-\documentclass[10.5pt, a4paper]{article}
+%==============================================================================
+% LaTeX Magic Comments
+%==============================================================================
+% !TEX encoding = UTF-8
+% !TEX ts-program = platex
 
-% --- パッケージ設定 ---
-\usepackage[margin=20mm]{geometry} % マージンを上下左右20mmに設定
-\usepackage{newtxtext, newtxmath}     % フォントをTimes New Roman系に設定
-\usepackage{amsmath}               % 数式用パッケージ
-\usepackage{graphicx}              % 図の挿入用パッケージ
-\usepackage{setspace}              % 行間設定用
-\usepackage{url}                   % URLをきれいに改行するためのパッケージを追加
-\usepackage{hyperref}              % URLをクリッカブルにするパッケージ
-\linespread{1.1}                   % 適度な行間を設定
+%==============================================================================
+% Document Class (ユーザーの環境に合わせてjsarticleを使用)
+%==============================================================================
+\documentclass[11pt, dvipdfmx]{jsarticle}
+
+%==============================================================================
+% Packages (ユーザーの元の環境設定をベースにする)
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage{newtxtt} % URL表示のエラー対策
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{float}
+
+%----- その他 -----
+\usepackage{setspace} % <<<【追加】行間調整のために追加
+\usepackage[hidelinks, unicode]{hyperref} % hidelinksでURLの枠線を消す
+\usepackage{pxjahyper}
+\usepackage{url}
+
+%==============================================================================
+% Main Document Start
+%==============================================================================
+\begin{document}
 
 % --- ヘッダー・フッターを消去 ---
 \pagestyle{empty}
 
-\begin{document}
+% --- フォントサイズを10.5ptに、行間を少し広めに設定 ---
+\fontsize{10.5pt}{12.5pt}\selectfont
+\linespread{1.1}
 
 % --- タイトルと氏名、学籍番号 ---
 \begin{center}
@@ -22,16 +60,15 @@
 
 \vspace{1cm} % 1cmの垂直方向の空白
 
-
-\noindent 氏名: 古賀光一朗 \\ 
-学籍番号: 08C23031 
+\noindent Name: Koichiro Koga \\
+Student ID: XXXXXXXX
 \vspace{1.5cm} % 1.5cmの垂直方向の空白
 
 % --- 用語 ---
 \noindent\large{\textbf{Terminology (Technical word)}}
 \hrule
 \vspace{0.3cm}
-\noindent Aluminum alloy
+\noindent Moment of Inertia
 
 \vspace{1cm} % 1cmの空白
 
