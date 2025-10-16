@@ -1,4 +1,4 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.sjis) (TeX Live 2025) (preloaded format=platex 2025.10.11)  16 OCT 2025 21:04
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.sjis) (TeX Live 2025) (preloaded format=platex 2025.10.11)  16 OCT 2025 21:07
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -986,12 +986,11 @@ LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 13.83836pt on input line 86.
 LaTeX Font Info:    Trying to load font information for T1+qhv on input line 86.
-LaTeX Font Info:    No file T1qhv.fd. on input line 86.
-
-
-LaTeX Font Warning: Font shape `T1/qhv/m/n' undefined
-(Font)              using `T1/cmr/m/n' instead on input line 86.
-
+ (c:/texlive/2025/texmf-dist/tex/latex/tex-gyre/t1qhv.fd
+File: t1qhv.fd 2009/09/25 v1.2 font definition file for T1/qhv
+)
+LaTeX Font Info:    Font shape `T1/qhv/m/n' will be
+(Font)              scaled to size 13.53603pt on input line 86.
 File: gm_01.png Graphic file (type bmp)
 <gm_01.png>
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
@@ -1053,49 +1052,22 @@ LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 LaTeX Font Info:    Font shape `U/ntxexa/m/n' will be
 (Font)              scaled to size 5.5pt on input line 97.
 LaTeX Font Info:    Trying to load font information for TS1+ntxtlf on input line 105.
-(c:/texlive/2025/texmf-dist/tex/latex/newtx/ts1ntxtlf.fd
+ (c:/texlive/2025/texmf-dist/tex/latex/newtx/ts1ntxtlf.fd
 File: ts1ntxtlf.fd 2015/01/18 v1.0 fd file for TS1/ntxtlf
 )
 LaTeX Font Info:    Font shape `TS1/ntxtlf/m/n' will be
 (Font)              scaled to size 10.0pt on input line 105.
 
-c:/code/latex/b3/autumn/Ships-and-Offshore-Structures-Design-and-Exercise/draft_01.tex:105: Font TS1/ntxtlf/m/n/10=ts1-qtmr at 10.0pt not loadable: Metric (TFM/OFM) file not found.
-<to be read again> 
-                   relax 
-l.105     \item $
-                 R$ : 円筒柱の外径
-I wasn't able to read the size data for this font,
-so I will ignore the font specification.
-[Wizards can fix TFM files using TFtoPL/PLtoTF.]
-You might try inserting a different font spec;
-e.g., type `I\font<same font id>=<substitute font name>'.
-
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
-
 
 [1
 
 ]
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
-Missing character: There is no ^^88 in font nullfont!
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
 (Font)              scaled to size 11.53198pt on input line 126.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 11.53198pt on input line 126.
+LaTeX Font Info:    Font shape `T1/qhv/m/n' will be
+(Font)              scaled to size 11.28003pt on input line 126.
 
 
 [2]
@@ -1111,20 +1083,16 @@ pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2020/03/25>
  ***********
-
-
-LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
 Package rerunfilecheck Info: File `draft_01.out' has not changed.
 (rerunfilecheck)             Checksum: CC6A0B75DFFD9618F0FC7B9C6FEBE19B;605.
  ) 
 Here is how much of TeX's memory you used:
- 40728 strings out of 469857
- 924782 string characters out of 5479619
+ 40786 strings out of 469857
+ 925781 string characters out of 5479619
  1392637 words of memory out of 5000000
- 68717 multiletter control sequences out of 15000+600000
- 729232 words of font info for 137 fonts, out of 8000000 for 9000
+ 68772 multiletter control sequences out of 15000+600000
+ 734070 words of font info for 138 fonts, out of 8000000 for 9000
  41 hyphenation exceptions out of 8191
  84i,9n,87p,803b,1174s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on draft_01.dvi (3 pages, 14848 bytes).
+Output written on draft_01.dvi (3 pages, 15060 bytes).

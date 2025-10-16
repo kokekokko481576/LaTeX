@@ -411,7 +411,10 @@ INPUT c:/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/jis/jis.tfm
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-t1.tfm
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/standard/tgoth10.tfm
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/jis/jisg.tfm
-INPUT c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm
+INPUT c:/texlive/2025/texmf-dist/tex/latex/tex-gyre/t1qhv.fd
+INPUT c:/texlive/2025/texmf-dist/tex/latex/tex-gyre/t1qhv.fd
+INPUT c:/texlive/2025/texmf-dist/tex/latex/tex-gyre/t1qhv.fd
+INPUT c:/texlive/2025/texmf-dist/fonts/tfm/public/tex-gyre/ec-qhvr.tfm
 INPUT ./gm_01.png
 INPUT ./gm_01.png
 INPUT ./gm_01.png
@@ -448,10 +451,11 @@ INPUT c:/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxexa.tfm
 INPUT c:/texlive/2025/texmf-dist/tex/latex/newtx/ts1ntxtlf.fd
 INPUT c:/texlive/2025/texmf-dist/tex/latex/newtx/ts1ntxtlf.fd
 INPUT c:/texlive/2025/texmf-dist/tex/latex/newtx/ts1ntxtlf.fd
+INPUT c:/texlive/2025/texmf-dist/fonts/tfm/public/tex-gyre/ts1-qtmr.tfm
 OUTPUT draft_01.dvi
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/standard/tgoth10.tfm
 INPUT c:/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/jis/jisg.tfm
-INPUT c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecrm1200.tfm
+INPUT c:/texlive/2025/texmf-dist/fonts/tfm/public/tex-gyre/ec-qhvr.tfm
 INPUT draft_01.aux
 INPUT ./draft_01.out
 INPUT ./draft_01.out

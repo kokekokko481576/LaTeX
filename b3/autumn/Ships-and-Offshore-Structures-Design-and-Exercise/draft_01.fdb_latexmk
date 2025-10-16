@@ -1,14 +1,12 @@
 # Fdb version 4
-["dvipdf"] 1760616268.30995 "draft_01.dvi" "draft_01.pdf" "draft_01" 1760616269.94434 0
-  "draft_01.dvi" 1760616268 14848 10e54c921d126c8f3a1eae36922d76ee "latex"
+["dvipdf"] 1760616427.18815 "draft_01.dvi" "draft_01.pdf" "draft_01" 1760616428.82795 0
+  "draft_01.dvi" 1760616426 15060 c8c9da4dd2dc806bb5a8c1a8defb4871 "latex"
   (generated)
   "draft_01.pdf"
   (rewritten before read)
-["latex"] 1760616266.64303 "c:/code/latex/b3/autumn/Ships-and-Offshore-Structures-Design-and-Exercise/draft_01.tex" "draft_01.dvi" "draft_01" 1760616269.93541 2
-  "c:/code/latex/b3/autumn/Ships-and-Offshore-Structures-Design-and-Exercise/draft_01.tex" 1760616259 7692 44095792b5d100e6dae0e5de7045ce84 ""
+["latex"] 1760616425.62797 "c:/code/latex/b3/autumn/Ships-and-Offshore-Structures-Design-and-Exercise/draft_01.tex" "draft_01.dvi" "draft_01" 1760616428.81394 0
+  "c:/code/latex/b3/autumn/Ships-and-Offshore-Structures-Design-and-Exercise/draft_01.tex" 1760616417 7690 5cc8ea615a6640c1107ce0cbd756508d ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecrm1000.tfm" 1760148644 3584 adb004a0c8e7c46ee66cad73671f37b4 ""
-  "c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecrm1200.tfm" 1760148644 3584 f80ddd985bd00e29e9a6047ebd9d4781 ""
-  "c:/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/ecrm1440.tfm" 1760148644 3584 3169d30142b88a27d4ab0e3468e963a2 ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/jis/jis.tfm" 1760149205 468 53f854284f6afa6c36aaa2d1090ecc12 ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/jis/jisg.tfm" 1760149205 468 53f854284f6afa6c36aaa2d1090ecc12 ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/standard/tgoth10.tfm" 1760149205 856 7404843a5f798859944d7973a47821d5 ""
@@ -30,6 +28,8 @@
   "c:/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxsy7.tfm" 1760153445 2000 c8518036fe884fa294a1eeb2da3075ed ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxsyc.tfm" 1760153445 1028 2f6cbe812325cff65b38e4c0a517f4cb ""
   "c:/texlive/2025/texmf-dist/fonts/tfm/public/newtx/ntxsym.tfm" 1760153445 1560 755acbe6da75f914298c79fa8bb324fd ""
+  "c:/texlive/2025/texmf-dist/fonts/tfm/public/tex-gyre/ec-qhvr.tfm" 1760616335 12084 374c5b7e91efcc10472ab8e61f66d36b ""
+  "c:/texlive/2025/texmf-dist/fonts/tfm/public/tex-gyre/ts1-qtmr.tfm" 1760616335 1600 20cdf11dab97d5d39e847571f9314407 ""
   "c:/texlive/2025/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty" 1760148554 40635 c40361e206be584d448876bba8a64a3b ""
   "c:/texlive/2025/texmf-dist/tex/generic/bitset/bitset.sty" 1760148556 33961 6b5c75130e435b2bfdb9f480a09a39f9 ""
   "c:/texlive/2025/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty" 1760148706 8371 9d55b8bd010bc717624922fb3477d92e ""
@@ -212,6 +212,7 @@
   "c:/texlive/2025/texmf-dist/tex/latex/refcount/refcount.sty" 1760149222 9878 9e94e8fa600d95f9c7731bb21dfb67a4 ""
   "c:/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty" 1760149224 9684 a33a14b82ce60d6e77cb9be689d79ee6 ""
   "c:/texlive/2025/texmf-dist/tex/latex/siunitx/siunitx.sty" 1760159227 344221 f0c98c737eca26294f5039e8afde731f ""
+  "c:/texlive/2025/texmf-dist/tex/latex/tex-gyre/t1qhv.fd" 1760616335 2378 01e898189bf06467f2f6fe33decbff09 ""
   "c:/texlive/2025/texmf-dist/tex/latex/tools/array.sty" 1760149332 15698 f5f20b24886bb50156054c53e19b13fd ""
   "c:/texlive/2025/texmf-dist/tex/latex/url/url.sty" 1760149367 12796 8edb7d69a20b857904dd0ea757c14ec9 ""
   "c:/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty" 1760149388 55384 b454dec21c2d9f45ec0b793f0995b992 ""
@@ -225,9 +226,9 @@
   "c:/texlive/2025/texmf-dist/web2c/texmf.cnf" 1760148419 42213 4e2ca030e8e2640502016e9e45868dcb ""
   "c:/texlive/2025/texmf-var/web2c/euptex/platex.fmt" 1760149471 2362449 92ab50ceb0035d2ead2602441d1d7a14 ""
   "c:/texlive/2025/texmf.cnf" 1760149418 713 e69b156964470283e0530f5060668171 ""
-  "draft_01.aux" 1760616268 1006 7ab100e341b61edf17ed159ef06252d1 "latex"
-  "draft_01.out" 1760616268 605 cc6a0b75dffd9618f0fc7b9c6febe19b "latex"
-  "draft_01.tex" 1760616259 7692 44095792b5d100e6dae0e5de7045ce84 ""
+  "draft_01.aux" 1760616426 1006 7ab100e341b61edf17ed159ef06252d1 "latex"
+  "draft_01.out" 1760616426 605 cc6a0b75dffd9618f0fc7b9c6febe19b "latex"
+  "draft_01.tex" 1760616417 7690 5cc8ea615a6640c1107ce0cbd756508d ""
   "gm_01.png" 1760523989 1144675 12538ad56483274f3ec19bc787802c4a ""
   (generated)
   "draft_01.aux"
