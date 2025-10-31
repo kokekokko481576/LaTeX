@@ -1,0 +1,27 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2025.10.25)  27 OCT 2025 10:57
+entering extended mode
+ \write18 enabled.
+ %&-line parsing enabled.
+**\def\tikzexternalrealjob{Template}\input{Template}
+(./Template.tex (/usr/share/texlive/texmf-dist/tex/platex/jsclasses/jsarticle.c
+ls
+
+! LaTeX Error: This file needs format `pLaTeX2e'
+               but this is `LaTeX2e'.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.14 \NeedsTeXFormat{pLaTeX2e}
+                               
+Here is how much of TeX's memory you used:
+ 42 strings out of 478287
+ 1227 string characters out of 5849288
+ 289394 words of memory out of 5000000
+ 18330 multiletter control sequences out of 15000+600000
+ 469259 words of font info for 28 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 29i,0n,37p,132b,17s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+!  ==> Fatal error occurred, no output PDF file produced!

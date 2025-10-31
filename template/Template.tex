@@ -2,12 +2,10 @@
 % LaTeXの処理に関するおまじない (マジックコメント)
 %==============================================================================
 % !TEX encoding = UTF-8
-% !TEX ts-program = platex
-
 %==============================================================================
 % ドキュメントクラス
 %==============================================================================
-\documentclass[11pt, dvipdfmx]{jsarticle}
+\documentclass[11pt]{ltjsarticle}
 
 %==============================================================================
 %【必須級】便利なパッケージたち
@@ -22,7 +20,7 @@
 ]{geometry}
 
 %----- フォント設定 -----
-\usepackage[T1]{fontenc} %【警告対策①】欧文フォントエンコーディングを指定
+\usepackage[T1]{fontenc}
 \usepackage{newtxtext}
 \usepackage{courier} 
 \usepackage{newtxmath}
@@ -31,15 +29,10 @@
 
 %----- 数式関連 -----
 \usepackage{amsmath}
-\usepackage{siunitx}
-\usepackage[detect-all]{siunitx} % フォントを自動検出させて警告を消す！
+\usepackage[detect-all]{siunitx}
 
 %----- 図表・画像関連 -----
-% [demo]オプションで画像ファイルが無くてもコンパイルOKにしてるよ
-\usepackage[demo]{graphicx} 
-\usepackage{tikz}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.18}
+\usepackage{graphicx}
 \usepackage{here}
 \usepackage{booktabs}
 \usepackage{float}
@@ -58,22 +51,21 @@
     numberstyle=\tiny\color[gray]{0.5},
     captionpos=b
 }
-% \usepackage{lmodern}
 
 %----- その他便利機能 -----
-\usepackage[dvipdfmx, unicode]{hyperref}
-\usepackage{pxjahyper} % ブックマークの日本語文字化け対策
+\usepackage{hyperref}
 \usepackage{cleveref}
 \crefname{figure}{図}{図}
 \crefname{table}{表}{表}
 \crefname{section}{第}{第}
 \crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
 
 %==============================================================================
 % ドキュメント情報
 %==============================================================================
-\title{ここにレポートのタイトルを記入}
-\author{地球総合工学科 \quad B3 \quad XXXXXXXX(学籍番号) \quad 古賀 光一朗}
+\title{タイトル}
+\author{地球総合工学科 \quad B3 \quad 08C23031 \quad 古賀 光一朗}
 \date{\today}
 
 %==============================================================================
@@ -98,41 +90,10 @@
 
 \cref{fig:sample-image}は、`graphicx`パッケージを使って挿入した画像の例です。
 
-\section{グラフの作成例}
-
-`PGFPlots`を使えば綺麗なグラフが作れます。
-
-\begin{figure}[H]
-    \centering
-    \begin{tikzpicture}
-        \begin{axis}[
-            width=0.8\linewidth,
-            height=6cm,
-            title={三角関数のグラフ},
-            xlabel={$x$},
-            ylabel={$y$},
-            xmin=-pi, xmax=pi,
-            ymin=-1.2, ymax=1.2,
-            grid=major,
-            legend pos=outer north east,
-        ]
-        \addplot[blue, thick, domain=-pi:pi, samples=100] {sin(deg(x))};
-        \addlegendentry{$\sin(x)$}
-        
-        \addplot[red, thick, domain=-pi:pi, samples=100] {cos(deg(x))};
-        \addlegendentry{$\cos(x)$}
-        \end{axis}
-    \end{tikzpicture}
-    \caption{PGFPlotsで作成したグラフ}
-    \label{fig:sample-graph}
-\end{figure}
-
-\cref{fig:sample-graph}は、サインカーブとコサインカーブを描画した例です。
-
 \section{【追加機能】綺麗な表の作り方}
 
 `booktabs`パッケージを使うと、論文で見るようなプロっぽい表が作れます。
-【警告対策】ポイントは、縦の罫線を使わず、横の罫線も\verb|\toprule|, \verb|\midrule|, \verb|\bottomrule|で使い分けること！
+【警告対策】ポイントは、縦の罫線を使わず、横の罫線も\verb|\\toprule|, \verb|\\midrule|, \verb|\\bottomrule|で使い分けること！
 
 \begin{table}[H]
     \centering
@@ -167,4 +128,4 @@ if __name__ == '__main__':
 
 \cref{lst:py-sample}のように、プログラムの引用も簡単です。
 
-\end{document}
+\end{document}end{document}
