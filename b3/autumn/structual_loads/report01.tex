@@ -1,0 +1,225 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{構造荷重論 レポート課題1}
+\author{地球総合工学科 \quad B3 \quad 08C23031 \quad 古賀 光一朗}
+\date{\today}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\subsection*{1}
+波浪中（波向きは船長方向と一致）の船体中央での縦曲げモーメントの位相ゼロ成分は、
+\begin{equation}
+B.M. = \rho g h_A B \left(\frac{L}{2}\right)^2 \frac{1}{\gamma^2} \left[ \frac{1}{2} \gamma \sin\gamma - 1 + \cos\gamma \right] \quad (*)
+\end{equation}
+
+の式で与えられた。記号などについては授業中の資料を参照のこと。
+
+\begin{itemize}
+    \item(1) 波長が無限大（もしくは周波数がゼロ）に漸近するとき、縦曲げモーメントはどのような値に収束するか、式(*)より導きなさい。
+    \item(2) このことが力学的に正しいことを説明しなさい。
+\end{itemize}
+
+
+(1)
+
+
+$\lambda$
+が無限大に漸近するとき、$\gamma$は$0$に漸近する。したがって、
+(*)式は
+\begin{align}
+    B.M. &= \rho g h_A B \left(\frac{L}{2}\right)^2 (\lim_{\gamma \to 0} \frac{1}{\gamma^2} [ \frac{1}{2} \gamma \sin\gamma - 1 + \cos\gamma ]) \\
+         &= \rho g h_A B \left(\frac{L}{2}\right)^2 (\lim_{\gamma \to 0} \{\frac{\sin\gamma}{2\gamma}+ \frac{\cos\gamma - 1}{\gamma^2 })\} \\
+&= 0
+  \end{align}
+
+
+(2)
+
+
+波長が無限大に漸近するということは、波の山と谷の間隔が非常に長くなることを意味する。したがって、船体全体がほぼ同じ高さに位置することになり、船体にかかる波の影響が均一化される。このため、船体中央での縦曲げモーメントはゼロに近づく。力学的には、波の影響が均一化されることで、船体にかかる応力分布が均等化され、結果として縦曲げモーメントが減少することが理解できる。
+
+\subsection*{2}
+位相 $\pi/2$ ($\omega t = \pi/2$, $\sin$ 成分) の縦曲げモーメントは以下の式となることを説明した。
+
+\begin{itemize}
+    \item[(1)] この導出を示した部分に誤りの表記があることが判明した。配布テキストの誤りを指摘しなさい（係数について大きく二か所の誤りがある）。
+\end{itemize}
+
+\begin{align*}
+  B.M. = & \frac{3}{2} \frac{\rho g b h_A }{\left(\frac{kL}{2}\right)^2}\left(\frac{L}{2}\right)^2 \left(-\frac{kL}{2} \cos\frac{kL}{2} + \sin\frac{kL}{2}\right) \left(\left(1-\left(\frac{x}{\frac{L}{2}}\right)\right)-\frac{1}{3}\left(1-\left(\frac{x}{\frac{L}{2}}\right)^3\right)\right)\\
+         & -\frac{\rho g b h_A }{\left(\frac{kL}{2}\right)^2}\left(\frac{L}{2}\right)^2 \left(\left(\frac{kL}{2} \cos\frac{kL}{2} - \sin\frac{kL}{2}\right) - \left(kx\cos{\frac{kL}{2} - \sin{kx}}\right)\right) \\
+\end{align*}
+
+
+
+(2)
+
+
+
+\begin{align*}
+  EI\frac{\partial^4 w(x,t)}{\partial x^4} = & - \frac{\rho g B h_A \frac{L^2}{2}\left(\frac{kL}{2}\right)^{-2}\left(-\frac{kL}{2}\cos{\frac{kL}{2}} + \sin{\frac{kL}{2}}\right)}{\frac{L^3}{12}}x + \rho g B h_A \sin{kx} \\
+  = & - \frac{\rho g B h_A \left(\frac{kL}{2}\right)^{-2}\left(-\frac{kL}{2}\cos{\frac{kL}{2}} + \sin{\frac{kL}{2}}\right)}{L}x + \rho g B h_A \sin{kx} \\
+\end{align*}
+
+とあるが、この次の式変形に誤りを発見した。
+
+一階積分を行うと、
+
+\begin{align*}
+        SF(L/2) - EI\frac{\partial^3 w(x,t)}{\partial x^3}
+        = & -\rho g B h_A \frac{3}{2\left(\frac{L}{2}\right)} \left(\frac{(L/2)^2}{(L/2)^2}\right) \left(\frac{kL}{2}\right)^{-2}\left(-\frac{kL}{2}\cos{\frac{kL}{2}} + \sin{\frac{kL}{2}}\right)\left(\left(\frac{L}{2}\right
+     )^2-x^2\right) \\
+          & - \frac{\rho g B h_A }{k}\left(\cos{\frac{kL}{2}} - \cos{kx}\right) \\
+        = & -\rho g B h_A \frac{L}{8} \left(\frac{kL}{2}\right)^{-2}\left(-\frac{kL}{2}\cos{\frac{kL}{2}} + \sin{\frac{kL}{2}}\right) \left( 1-\left(\frac{x}{L/2}\right)^2\right) \\
+          & - \frac{\rho g B h_A}{\frac{kL}{2}}\frac{L}{2}\left(\cos{\frac{kL}{2}} - \cos{kx}\right)
+\end{align*}
+
+と記載れているが、正しくは
+
+
+\begin{align*}
+        SF(L/2) - EI\frac{\partial^3 w(x,t)}{\partial x^3}
+        = & \rho g B h_A \frac{3}{2\left(\frac{L}{2}\right)} \left(\frac{(L/2)^2}{(L/2)^2}\right) \left(\frac{kL}{2}\right)^{-2}\left(-\frac{kL}{2}\cos{\frac{kL}{2}} + \sin{\frac{kL}{2}}\right)\left(\left(\frac{L}{2}\right
+     )^2-x^2\right) \\
+          &  \frac{\rho g B h_A }{k}\left(\cos{\frac{kL}{2}} - \cos{kx}\right) \\
+        = & \rho g B h_A \frac{3L}{4} \left(\frac{kL}{2}\right)^{-2}\left(-\frac{kL}{2}\cos{\frac{kL}{2}} + \sin{\frac{kL}{2}}\right) \left( 1-\left(\frac{x}{L/2}\right)^2\right) \\
+          &  \frac{\rho g B h_A}{\frac{kL}{2}}\frac{L}{2}\left(\cos{\frac{kL}{2}} - \cos{kx}\right)
+\end{align*}
+
+
+\begin{itemize}
+      \item[(2)] (2)上の式で、両端でのモーメントがゼロになることを示しなさい。また、力学的になぜ両端でモーメントがゼロになるかを説明しなさい。
+\end{itemize}
+
+
+(2)
+
+
+両端 $x = \pm L/2$ でゼロになることを示す。
+
+\subsubsection*{(i) $x = L/2$ (船尾側) の場合}
+$x = L/2$ を代入する。
+このとき、$\frac{x}{L/2} = 1$、 $kx = \frac{kL}{2}$
+
+第1項の $x$ に依存する部分は、
+$$
+\left(1-\frac{x}{L/2}\right)-\frac{1}{3}\left(1-\left(\frac{x}{L/2}\right)^3\right) = (1-1) - \frac{1}{3}(1 - 1^3) = 0 - 0 = 0
+$$
+となり、第1項全体が $0$ となる。
+
+第2項の $x$ に依存する部分は、
+$$
+\left(kx\cos{\frac{kL}{2}} - \sin{kx}\right) = \left(\frac{kL}{2}\cos{\frac{kL}{2}} - \sin{\frac{kL}{2}}\right)
+$$
+となるため、第2項全体は、
+$$
+-\frac{\rho g B h_A }{\left(\frac{kL}{2}\right)^2}\left(\frac{L}{2}\right)^2 \left[ \left(\frac{kL}{2} \cos\frac{kL}{2} - \sin\frac{kL}{2}\right) - \left(\frac{kL}{2}\cos{\frac{kL}{2}} - \sin{\frac{kL}{2}}\right) \right] = 0
+$$
+したがって、$B.M.(x=L/2) = 0 + 0 = 0$ 
+
+\subsubsection*{(ii) $x = -L/2$ (船首側) の場合}
+$x = -L/2$ を代入する
+このとき、$\frac{x}{L/2} = -1$、 $kx = -\frac{kL}{2}$ となります。$\sin$ は奇関数であるため $\sin(kx) = \sin(-\frac{kL}{2}) = -\sin(\frac{kL}{2})$ 
+
+第1項の $x$ に依存する部分は、
+\begin{align*}
+\left(1-\frac{x}{L/2}\right)-\frac{1}{3}\left(1-\left(\frac{x}{L/2}\right)^3\right) &= (1 - (-1)) - \frac{1}{3}(1 - (-1)^3) \\
+&= 2 - \frac{1}{3}(1 - (-1)) \\
+&= 2 - \frac{2}{3} = \frac{4}{3}
+\end{align*}
+よって、第1項は $T_1$ とおくと、
+\begin{align*}
+T_1 &= -\frac{3}{2} \frac{\rho g B h_A }{\left(\frac{kL}{2}\right)^2}\left(\frac{L}{2}\right)^2 \left(-\frac{kL}{2} \cos\frac{kL}{2} + \sin\frac{kL}{2}\right) \times \frac{4}{3} \\
+&= -2 \frac{\rho g B h_A }{\left(\frac{kL}{2}\right)^2}\left(\frac{L}{2}\right)^2 \left(-\frac{kL}{2} \cos\frac{kL}{2} + \sin\frac{kL}{2}\right)
+\end{align*}
+
+第2項の $x$ に依存する部分は、
+\begin{align*}
+\left(kx\cos{\frac{kL}{2}} - \sin{kx}\right) &= \left(-\frac{kL}{2}\cos{\frac{kL}{2}} - \sin(-\frac{kL}{2})\right) \\
+&= \left(-\frac{kL}{2}\cos{\frac{kL}{2}} + \sin{\frac{kL}{2}}\right)
+\end{align*}
+よって、第2項は $T_2$ とおくと、
+\begin{align*}
+T_2 &= -\frac{\rho g B h_A }{\left(\frac{kL}{2}\right)^2}\left(\frac{L}{2}\right)^2 \left[ \left(\frac{kL}{2} \cos\frac{kL}{2} - \sin\frac{kL}{2}\right) - \left(-\frac{kL}{2}\cos{\frac{kL}{2}} + \sin{\frac{kL}{2}}\right) \right] \\
+&= -\frac{\rho g B h_A }{\left(\frac{kL}{2}\right)^2}\left(\frac{L}{2}\right)^2 \left[ 2\left(\frac{kL}{2} \cos\frac{kL}{2} - \sin\frac{kL}{2}\right) \right] \\
+&= +2 \frac{\rho g B h_A }{\left(\frac{kL}{2}\right)^2}\left(\frac{L}{2}\right)^2 \left[ -\frac{kL}{2} \cos\frac{kL}{2} + \sin\frac{kL}{2} \right]
+\end{align*}
+
+$T_1$ と $T_2$ は、大きさが同じで符号が逆であるため、
+$B.M.(x=-L/2) = T_1 + T_2 = 0$ となる。
+以上より、両端 $x = \pm L/2$ でモーメントがゼロになる
+
+\subsubsection*{力学的な理由}
+船体は水に浮かんでおり、その両端（船首・船尾）は壁などに固定されていない「自由端」である。自由端は外部からの拘束を受けないため、曲げモーメントやせん断力が $0$ になるという境界条件が適用できる。
+したがって、船体梁の縦曲げモーメントは、両端 $x = \pm L/2$ において $0$ とならなければならない。
+
+\end{document}
