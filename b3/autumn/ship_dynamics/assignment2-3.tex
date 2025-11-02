@@ -1,0 +1,325 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{船体運動力学　課題 2-3}
+\author{地球総合工学科 \quad B3 \quad 08C23031 \quad 古賀 光一朗}
+\date{\today}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+次式で表される進行波の時空間変位
+$$
+\zeta(x_1, t) = \zeta_a \cos(kx_1 - \omega t)
+$$
+に対して次の支配方程式と境界条件が与えられている。
+
+\bigskip % 条件間を少しあける
+
+[L]ラプラス方程式
+$$
+\nabla^2 \Phi = \frac{\partial^2 \Phi}{\partial x_1^2} + \frac{\partial^2 \Phi}{\partial x_3^2} = 0
+$$
+
+[F]自由表面条件
+$$
+\frac{\partial^2 \Phi}{\partial t^2} - g \frac{\partial \Phi}{\partial x_3} = 0 \quad \text{at} \ x_3 = 0
+$$
+
+[B]水底条件
+$$
+\frac{\partial \Phi}{\partial x_3} = 0 \quad \text{at} \ x_3 = h
+$$
+
+\bigskip
+
+これより、進行波の速度ポテンシャルを求め（導出過程を整理し）、流体内の進行波による変動圧力を数式で示しなさい。なお、記号の意味や座標系は講義資料に従う。
+
+\vspace{2cm} % 提出期限との間のスペース
+
+% 提出期限
+提出期限：2025年 11月 10日 (月) 10:30AM
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+\subsection*{1. 速度ポテンシャル $\Phi$ の導出}
+
+速度ポテンシャル $\Phi(x_1, x_3, t)$ を変数分離を用いて求め、
+$$
+\Phi(x_1, x_3, t) = Z(x_3) \sin(kx_1 - \omega t)
+$$
+と仮定する。
+
+\subsubsection*{[L] ラプラス方程式への代入}
+$\Phi$ を [L] に代入すると、$Z(x_3)$ に関する常微分方程式
+
+$$
+Z''(x_3) - k^2 Z(x_3) = 0
+$$
+
+が得られる。この一般解は、
+
+$$
+Z(x_3) = A_3 \exp(-k x_3) + B_3 \exp(k x_3)
+$$
+
+となる。
+
+\subsubsection*{[B] 水底条件の適用}
+[B] $\frac{\partial \Phi}{\partial x_3} = 0$ at $x_3 = h$ を適用する。
+
+$$
+\frac{\partial \Phi}{\partial x_3} = Z'(x_3) \sin(kx_1 - \omega t)
+$$
+
+$$
+Z'(x_3) = -k A_3 \exp(-k x_3) + k B_3 \exp(k x_3)
+$$
+
+$x_3 = h$ を代入して $Z'(h) = 0$ より、
+
+$$
+-k A_3 \exp(-kh) + k B_3 \exp(kh) = 0
+$$
+
+係数 $A_3, B_3$ の関係式が得られる。
+
+\begin{equation}
+\frac{B_3}{A_3} = \frac{\exp(-kh)}{\exp(kh)} = \exp(-2kh)
+\label{eq:B_A_ratio}
+\end{equation}
+
+\subsubsection*{[F] 自由表面条件の適用}
+
+[F] $\frac{\partial^2 \Phi}{\partial t^2} - g \frac{\partial \Phi}{\partial x_3} = 0$ at $x_3 = 0$ を適用する。
+
+$$
+\frac{\partial^2 \Phi}{\partial t^2} = Z(x_3) \cdot [-\omega^2 \sin(kx_1 - \omega t)]
+$$
+
+これらを[F]に代入し、$x_3=0$ とすると、
+
+$$
+[-\omega^2 Z(0) - g Z'(0)] \sin(kx_1 - \omega t) = 0
+$$
+
+よって、
+
+$$
+-\omega^2 Z(0) - g Z'(0) = 0
+$$
+
+ここで、$Z(0) = A_3 + B_3$、$Z'(0) = k(B_3 - A_3)$ を代入すると、
+
+$$
+-\omega^2 (A_3 + B_3) - g k (B_3 - A_3) = 0
+$$
+
+$$
+(-\omega^2 + gk) A_3 + (-\omega^2 - gk) B_3 = 0
+$$
+
+これも $A_3, B_3$ の関係式である。
+
+\begin{equation}
+(gk - \omega^2) A_3 = (gk + \omega^2) B_3
+\label{eq:A_B_relation}
+\end{equation}
+
+\subsubsection*{分散関係式の導出}
+
+式 \eqref{eq:B_A_ratio} を 式 \eqref{eq:A_B_relation} に代入し、$\frac{B_3}{A_3}$ を消去する。
+
+$$
+(gk - \omega^2) = (gk + \omega^2) \frac{B_3}{A_3}
+$$
+
+$$
+\frac{gk - \omega^2}{gk + \omega^2} = \exp(-2kh) = \frac{\exp(-kh)}{\exp(kh)}
+$$
+
+$$
+(gk - \omega^2) \exp(kh) = (gk + \omega^2) \exp(-kh)
+$$
+
+$\omega^2$ と $k$ の項で整理すると、
+
+$$
+gk (\exp(kh) - \exp(-kh)) = \omega^2 (\exp(kh) + \exp(-kh))
+$$
+
+$2 \sinh(kh) = \exp(kh) - \exp(-kh)$ および $2 \cosh(kh) = \exp(kh) + \exp(-kh)$ の関係より、
+
+$$
+gk (2 \sinh(kh)) = \omega^2 (2 \cosh(kh))
+$$
+
+したがって、分散関係式が得られる。
+
+\begin{equation}
+\omega^2 = gk \tanh(kh)
+\label{eq:dispersion}
+\end{equation}
+
+\subsubsection*{$Z(x_3)$ の整理と $A_3$ の決定}
+
+式 \eqref{eq:B_A_ratio} の関係 $B_3 = A_3 \exp(-2kh)$ を $Z(x_3)$ の一般解に代入する。
+
+$$
+\begin{aligned}
+Z(x_3) &= A_3 \exp(-k x_3) + (A_3 \exp(-2kh)) \exp(k x_3) \\
+&= A_3 (\exp(-k x_3) + \exp(k x_3 - 2kh)) \\
+&= A_3 \exp(-kh) (\exp(-k x_3 + kh) + \exp(k x_3 - kh)) \\
+&= 2 A_3 \exp(-kh) \cosh(k(x_3 - h))
+\end{aligned}
+$$
+
+よって、速度ポテンシャルは
+
+$$
+\Phi(x_1, x_3, t) = 2 A_3 \exp(-kh) \cosh(k(x_3 - h)) \sin(kx_1 - \omega t)
+$$
+
+と書ける。
+次に、関係式 $\zeta = -\frac{1}{g} \frac{\partial \Phi}{\partial t} \big|_{x_3=0}$ と $\zeta(x_1, t) = \zeta_a \cos(kx_1 - \omega t)$ を用いて $A_3$ を決定する。
+
+$$
+\frac{\partial \Phi}{\partial t} \Bigg|_{x_3=0} = -2 \omega A_3 \exp(-kh) \cosh(-kh) \cos(kx_1 - \omega t)
+$$
+
+$$
+\zeta(x_1, t) = -\frac{1}{g} \left[ -2 \omega A_3 \exp(-kh) \cosh(kh) \cos(kx_1 - \omega t) \right]
+$$
+
+$$
+\zeta(x_1, t) = \frac{2 \omega A_3}{g} \exp(-kh) \cosh(kh) \cos(kx_1 - \omega t)
+$$
+
+$\zeta_a$ と係数を比較して、
+
+$$
+\zeta_a = \frac{2 \omega A_3}{g} \exp(-kh) \cosh(kh)
+$$
+
+$A_3$ について解くと、
+
+$$
+A_3 = \frac{g \zeta_a \exp(kh)}{2 \omega \cosh(kh)}
+$$
+
+これを $\Phi$ の式に代入して整理すると、最終的な速度ポテンシャルが得られる。
+
+\begin{equation}
+\Phi(x_1, x_3, t) = \frac{g \zeta_a}{\omega} \frac{\cosh(k(x_3 - h))}{\cosh(kh)} \sin(kx_1 - \omega t)
+\label{eq:Phi_final}
+\end{equation}
+
+\subsection*{2. 流体内の変動圧力 $p_d$ の導出}
+
+微小振幅波理論における、線形化されたベルヌーイの式は
+
+$$
+\frac{p}{\rho} + \frac{\partial \Phi}{\partial t} + g x_3 = C \quad (\text{Cは定数})
+$$
+
+である。ここで $p$ はゲージ圧であり、静水圧成分 $p_s = -\rho g x_3$ と変動圧力成分 $p_d$ の和 $p = p_s + p_d$ と表せる（$x_3$が下向き正のため静水圧は負号）。
+
+$$
+\frac{-\rho g x_3 + p_d}{\rho} + \frac{\partial \Phi}{\partial t} + g x_3 = C
+$$
+
+$$
+-g x_3 + \frac{p_d}{\rho} + \frac{\partial \Phi}{\partial t} + g x_3 = C
+$$
+
+変動圧力 $p_d$ は、流れがない状態 ($\Phi=0$) で $p_d=0$ となるため、定数 $C=0$ とおける。
+
+\begin{equation}
+p_d = -\rho \frac{\partial \Phi}{\partial t}
+\label{eq:pd_def}
+\end{equation}
+
+式 \eqref{eq:Phi_final} の $\Phi$ を時間 $t$ で偏微分する。
+
+$$
+\begin{aligned}
+\frac{\partial \Phi}{\partial t} &= \frac{\partial}{\partial t} \left[ \frac{g \zeta_a}{\omega} \frac{\cosh(k(x_3 - h))}{\cosh(kh)} \sin(kx_1 - \omega t) \right] \\
+&= \frac{g \zeta_a}{\omega} \frac{\cosh(k(x_3 - h))}{\cosh(kh)} \cdot [-\omega \cos(kx_1 - \omega t)] \\
+&= -g \zeta_a \frac{\cosh(k(x_3 - h))}{\cosh(kh)} \cos(kx_1 - \omega t)
+\end{aligned}
+$$
+
+これを式 \eqref{eq:pd_def} に代入して、変動圧力 $p_d$ を得る。
+
+\begin{equation}
+p_d(x_1, x_3, t) = \rho g \zeta_a \frac{\cosh(k(x_3 - h))}{\cosh(kh)} \cos(kx_1 - \omega t)
+\label{eq:pd_final}
+\end{equation}
+
+\end{document}
