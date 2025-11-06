@@ -1,0 +1,150 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{溶接力学第２回課題}
+\author{地球総合工学科 \quad B3 \quad 08C23031 \quad 古賀 光一朗}
+\date{\today}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+
+\begin{document}
+
+\maketitle
+
+\section{残留応力分布の正誤と理由}
+
+残留応力は、外力が作用していない部材内部で自己平衡している応力である。したがって、任意の仮想断面において、断面に作用する垂直応力の合力 $F$ とモーメント $M$ は、ともにゼロでなければならない。
+
+$$
+F = \int_A \sigma dA = 0
+$$
+
+$$
+M = \int_A y \sigma dA = 0 \quad (\text{または} \int_A z \sigma dA = 0)
+$$
+
+この2つの釣り合い条件に基づき、各分布の妥当性を評価する。
+
+\subsection{幅方向yに分布する残留応力$\sigma_x$ (a), (b)}
+
+この場合、板厚を $t$ とすると、釣り合い条件は以下のようになる。
+
+$$
+F_x = t \int \sigma_x(y) dy = 0
+$$
+
+$$
+M_z = t \int y \sigma_x(y) dy = 0
+$$
+
+\begin{itemize}
+    \item \textbf{形状 (a): 正しい} \\
+    \textbf{理由:} この分布は $y=0$ (溶接部中心) に対して\textbf{対称（偶関数）}である。
+    \begin{itemize}
+        \item \textbf{合力の釣り合い:} 溶接部の引張応力（$+$ 領域）と母材部の圧縮応力（$-$ 領域）の面積の総和がゼロになるようバランスさせることが可能である。
+        \item \textbf{モーメントの釣り合い:} 被積分関数 $y \sigma_x(y)$ は、奇関数 $y$ と偶関数 $\sigma_x(y)$ の積であるため、\textbf{奇関数}となる。奇関数を $y$ の対称区間（例: $-W/2$ から $W/2$）で積分すると必ずゼロになるため、$M_z = 0$ が自動的に満たされる。
+    \end{itemize}
+
+    \item \textbf{形状 (b): 誤り} \\
+    \textbf{理由:} 応力 $\sigma_x$ が全域で引張（$+$）またはゼロである。
+    \begin{itemize}
+        \item \textbf{合力の釣り合い:} 積分値 $F_x = t \int \sigma_x(y) dy$ は必ず正の値となり、ゼロにならない。これは合力の釣り合い条件に違反する。
+    \end{itemize}
+\end{itemize}
+
+\subsection{板厚方向zに分布する残留応力$\sigma_y$ (c), (d)}
+
+この場合、板幅を $W$ とすると、釣り合い条件は以下のようになる。
+
+$$
+F_y = W \int \sigma_y(z) dz = 0
+$$
+
+$$
+M_y = W \int z \sigma_y(z) dz = 0
+$$
+
+\begin{itemize}
+    \item \textbf{形状 (c): 誤り} \\
+    \textbf{理由:} この分布は $z=0$ (板厚中心) に対して\textbf{非対称（奇関数）}である。
+    \begin{itemize}
+        \item \textbf{合力の釣り合い:} $\sigma_y(z)$ は奇関数であるため、対称区間（$-t/2$ から $t/2$）で積分すると $F_y = 0$ となり、合力の釣り合いは満たす。
+        \item \textbf{モーメントの釣り合い:} 被積分関数 $z \sigma_y(z)$ は、奇関数 $z$ と奇関数 $\sigma_y(z)$ の積であるため、\textbf{偶関数}となる。偶関数（この場合、常に正または常に負）を対称区間で積分すると、積分値 $M_y$ はゼロにならない。これはモーメントの釣り合い条件に違反する。
+    \end{itemize}
+
+    \item \textbf{形状 (d): 正しい} \\
+    \textbf{理由:} この分布は $z=0$ (板厚中心) に対して\textbf{対称（偶関数）}である。
+    \begin{itemize}
+        \item \textbf{合力の釣り合い:} 板厚中央部の圧縮応力（$-$ 領域）と、両表面近傍の引張応力（$+$ 領域）の面積の総和がゼロになるようバランスさせることが可能である。
+        \item \textbf{モーメントの釣り合い:} 被積分関数 $z \sigma_y(z)$ は、奇関数 $z$ と偶関数 $\sigma_y(z)$ の積であるため、\textbf{奇関数}となる。奇関数を $z$ の対称区間（$-t/2$ から $t/2$）で積分すると必ずゼロになるため、$M_y = 0$ が自動的に満たされる。
+    \end{itemize}
+\end{itemize}
+
+
+
+\end{document}
