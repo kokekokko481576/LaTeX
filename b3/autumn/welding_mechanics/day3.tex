@@ -64,7 +64,7 @@
 %==============================================================================
 % ドキュメント情報
 %==============================================================================
-\title{溶接力学第２回課題}
+\title{溶接力学第３回課題}
 \author{地球総合工学科 \quad B3 \quad 08C23031 \quad 古賀 光一朗}
 \date{\today}
 
@@ -76,75 +76,75 @@
 
 \maketitle
 
-\section{残留応力分布の正誤と理由}
+\section{A1温度とA3温度}
 
-残留応力は、外力が作用していない部材内部で自己平衡している応力である。したがって、任意の仮想断面において、断面に作用する垂直応力の合力 $F$ とモーメント $M$ は、ともにゼロでなければならない。
-
-$$
-F = \int_A \sigma dA = 0
-$$
-
-$$
-M = \int_A y \sigma dA = 0 \quad (\text{または} \int_A z \sigma dA = 0)
-$$
-
-この2つの釣り合い条件に基づき、各分布の妥当性を評価する。
-
-\subsection{幅方向yに分布する残留応力$\sigma_x$ (a), (b)}
-
-この場合、板厚を $t$ とすると、釣り合い条件は以下のようになる。
-
-$$
-F_x = t \int \sigma_x(y) dy = 0
-$$
-
-$$
-M_z = t \int y \sigma_x(y) dy = 0
-$$
+鋼材の加熱・冷却時に組織が変化する変態点である。
 
 \begin{itemize}
-    \item \textbf{形状 (a): 正しい} \\
-    \textbf{理由:} この分布は $y=0$ (溶接部中心) に対して\textbf{対称（偶関数）}である。
+    \item \textbf{A1温度（共析変態点）}: 約\SI{727}{\celsius}
     \begin{itemize}
-        \item \textbf{合力の釣り合い:} 溶接部の引張応力（$+$ 領域）と母材部の圧縮応力（$-$ 領域）の面積の総和がゼロになるようバランスさせることが可能である。
-        \item \textbf{モーメントの釣り合い:} 被積分関数 $y \sigma_x(y)$ は、奇関数 $y$ と偶関数 $\sigma_x(y)$ の積であるため、\textbf{奇関数}となる。奇関数を $y$ の対称区間（例: $-W/2$ から $W/2$）で積分すると必ずゼロになるため、$M_z = 0$ が自動的に満たされる。
+        \item 鋼が加熱される際、パーライト組織（フェライト＋セメンタイト）が\textbf{オーステナイト}に変態（共析変態）を開始する温度である。
     \end{itemize}
-
-    \item \textbf{形状 (b): 誤り} \\
-    \textbf{理由:} 応力 $\sigma_x$ が全域で引張（$+$）またはゼロである。
+    \item \textbf{A3温度（変態点）}: 炭素量に依存（純鉄で\SI{912}{\celsius}）
     \begin{itemize}
-        \item \textbf{合力の釣り合い:} 積分値 $F_x = t \int \sigma_x(y) dy$ は必ず正の値となり、ゼロにならない。これは合力の釣り合い条件に違反する。
+        \item 亜共析鋼において、加熱時に\textbf{フェライト}から\textbf{オーステナイト}への変態が完了する温度である。$A_1$～$A_3$温度間は、フェライトとオーステナイトの共存領域となる。
     \end{itemize}
 \end{itemize}
 
-\subsection{板厚方向zに分布する残留応力$\sigma_y$ (c), (d)}
-
-この場合、板幅を $W$ とすると、釣り合い条件は以下のようになる。
-
-$$
-F_y = W \int \sigma_y(z) dz = 0
-$$
-
-$$
-M_y = W \int z \sigma_y(z) dz = 0
-$$
+\section{アーク溶接とレーザー溶接の熱効率}
 
 \begin{itemize}
-    \item \textbf{形状 (c): 誤り} \\
-    \textbf{理由:} この分布は $z=0$ (板厚中心) に対して\textbf{非対称（奇関数）}である。
-    \begin{itemize}
-        \item \textbf{合力の釣り合い:} $\sigma_y(z)$ は奇関数であるため、対称区間（$-t/2$ から $t/2$）で積分すると $F_y = 0$ となり、合力の釣り合いは満たす。
-        \item \textbf{モーメントの釣り合い:} 被積分関数 $z \sigma_y(z)$ は、奇関数 $z$ と奇関数 $\sigma_y(z)$ の積であるため、\textbf{偶関数}となる。偶関数（この場合、常に正または常に負）を対称区間で積分すると、積分値 $M_y$ はゼロにならない。これはモーメントの釣り合い条件に違反する。
-    \end{itemize}
-
-    \item \textbf{形状 (d): 正しい} \\
-    \textbf{理由:} この分布は $z=0$ (板厚中心) に対して\textbf{対称（偶関数）}である。
-    \begin{itemize}
-        \item \textbf{合力の釣り合い:} 板厚中央部の圧縮応力（$-$ 領域）と、両表面近傍の引張応力（$+$ 領域）の面積の総和がゼロになるようバランスさせることが可能である。
-        \item \textbf{モーメントの釣り合い:} 被積分関数 $z \sigma_y(z)$ は、奇関数 $z$ と偶関数 $\sigma_y(z)$ の積であるため、\textbf{奇関数}となる。奇関数を $z$ の対称区間（$-t/2$ から $t/2$）で積分すると必ずゼロになるため、$M_y = 0$ が自動的に満たされる。
-    \end{itemize}
+    \item \textbf{アーク溶接}: $\eta \approx \SIrange{60}{90}{\percent}$
+    \item \textbf{レーザー溶接}: $\eta \approx \SIrange{20}{40}{\percent}$
 \end{itemize}
 
+\section{溶接熱源モデル}
 
+
+\begin{enumerate}
+    \item \textbf{点熱源モデル (Point Heat Source)}
+    \begin{itemize}
+        \item 熱源を一点に集中させる。厚板の解析や熱源から遠い領域の計算に適した、最も単純なモデルである。
+    \end{itemize}
+    \item \textbf{表面熱源モデル (Surface Heat Source)}
+    \begin{itemize}
+        \item 熱が母材の表面から入熱されると仮定する。ガウス分布（正規分布）に従う熱流束を与えるモデルが代表的である。
+    \end{itemize}
+    \item \textbf{体積熱源モデル (Volumetric Heat Source)}
+    \begin{itemize}
+        \item 熱が母材の内部（体積）で発生すると仮定する。レーザー溶接のキーホール効果や、移動する溶融池の形状を模擬するのに適している。（例: Goldakの二重楕円体熱源モデル）
+    \end{itemize}
+\end{enumerate}
+
+
+
+\section{溶接温度場の最高到達温度}
+
+溶接部の最高到達温度（$T_{\max}$）は、材料の\textbf{沸点 (Boiling Point)}である。
+
+\begin{itemize}
+    \item アークやレーザービームが照射される中心部では、金属が溶融する融点 (Melting Point) をはるかに超え、沸点に達して気化（蒸発）する。
+\end{itemize}
+
+\section{数値解析結果のチェック項目}
+
+溶接温度場の解析結果の妥当性を評価するために、主に以下の項目をチェックする。
+
+\begin{enumerate}
+    \item \textbf{実験結果との比較（妥当性検証）}
+    \begin{itemize}
+        \item \textbf{熱履歴}: 熱電対などで実測した特定の点の温度履歴（サーマルサイクル）と、解析結果が一致するか。
+        \item \textbf{溶融部・ビード形状}: 実際の溶接断面（マクロ組織）と、解析における溶融池の幅や深さ、ビード形状が一致するか。
+        \item \textbf{熱影響部（HAZ）の範囲}: 実際の熱影響部 (Heat Affected Zone, HAZ) の大きさと、解析で$A_1$変態点以上に達した領域が一致するか。
+    \end{itemize}
+    \item \textbf{メッシュ依存性の確認}
+    \begin{itemize}
+        \item 解析モデルのメッシュ（計算格子）の粗さを変更（細分化）しても、計算結果（温度やHAZ範囲など）が大きく変わらないか（収束しているか）を確認する。
+    \end{itemize}
+    \item \textbf{物理的な妥当性}
+    \begin{itemize}
+        \item 最高温度が沸点近傍に収まるなど、物理的に妥当な結果が得られているかを確認する。
+    \end{itemize}
+\end{enumerate}
 
 \end{document}

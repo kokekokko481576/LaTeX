@@ -620,8 +620,5 @@ INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT ./day3.aux
 INPUT ./day3.out
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb
-INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI7.pfb
-INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txexs.pfb
-INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txsys.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/ztmr.pfb
