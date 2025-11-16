@@ -1037,7 +1037,7 @@ LaTeX Info: Redefining \nameref on input line 74.
 \openout4 = report01.out
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
 (Font)              scaled to size 17.28pt on input line 77.
-LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
+LaTeX Font Info:    Font shape `JT3/mc/m/n' will be    Font shape `JT3/mc/m/n' will be
 (Font)              scaled to size 15.97903pt on input line 77.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 15.97903pt on input line 77.
@@ -1047,25 +1047,34 @@ LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
 (Font)              scaled to size 11.09656pt on input line 77.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 11.09656pt on input line 77.
-LaTeX Font Info:    Calculating math sizes for size <13.14001> on input line 77.
-LaTeX Font Info:    Trying to load font information for OT1+ntxtlf on input line 77.
- (/usr/share/texlive/texmf-dist/tex/latex/newtx/ot1ntxtlf.fd
+LaTeX Font Info:    Calculating math sizes for size <13.14001> on input line 77
+.
+LaTeX Font Info:    Trying to load font information for OT1+ntxtlf on input lin
+e 77.
+
+(/usr/share/texlive/texmf-dist/tex/latex/newtx/ot1ntxtlf.fd
 File: ot1ntxtlf.fd 2021/05/24 v1.0 font definition file for OT1/ntx/tlf
 )
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 8.10043pt on input line 77.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 6.10313pt on input line 77.
-LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 77.
- (/usr/share/texlive/texmf-dist/tex/latex/newtx/untxmia.fd
+LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 
+77.
+
+(/usr/share/texlive/texmf-dist/tex/latex/newtx/untxmia.fd
 File: untxmia.fd 2018/04/14 Fontinst v1.933 font definitions for U/ntxmia.
 )
-LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 77.
- (/usr/share/texlive/texmf-dist/tex/latex/newtx/untxsym.fd
+LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 
+77.
+
+(/usr/share/texlive/texmf-dist/tex/latex/newtx/untxsym.fd
 File: untxsym.fd 2015/03/20 Fontinst v1.933 font definitions for U/ntxsym.
 )
-LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 77.
- (/usr/share/texlive/texmf-dist/tex/latex/newtx/untxsyc.fd
+LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 
+77.
+
+(/usr/share/texlive/texmf-dist/tex/latex/newtx/untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
 LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
@@ -1073,7 +1082,8 @@ LaTeX Font Info:    Font shape `JT3/gt/m/n' will be
 LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
 (Font)              scaled to size 11.09656pt on input line 78.
 (load cache: extra_lmsans12-regular.luc)
-LaTeX Font Info:    Calculating math sizes for size <10.95001> on input line 80.
+LaTeX Font Info:    Calculating math sizes for size <10.95001> on input line 80
+.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 6.75035pt on input line 80.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
@@ -1081,44 +1091,39 @@ LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
  [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-
-./report01.tex:160: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.160       \item[(2)]
-                       (2)上の式で、両端でのモーメントがゼロ...
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-./report01.tex:160: LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.160       \item[(2)]
-                       (2)上の式で、両端でのモーメントがゼロ...
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+! Extra }, or forgotten \right.
+<template> }
+ $}\ifmeasuring@ \savefieldlength@ \fi \set@field \hfil \endtemplate 
+l.144 \end{align*}
+                
+? 
+! Emergency stop.
+<template> }
+ $}\ifmeasuring@ \savefieldlength@ \fi \set@field \hfil \endtemplate 
+l.144 \end{align*}
+                
+End of file on the terminal!
 
 
-./report01.tex:160: LaTeX Error: Something's wrong--perhaps a missing \item.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.160       \item[(2)]
-                       (2)上の式で、両端でのモーメントがゼロ...
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-./report01.tex:161: LaTeX Error: Something's wrong--perhaps a missing \item.
+Here is how much of LuaTeX's memory you used:
+ 24916 strings out of 477805
+ 195703,953878 words of node,token memory allocated 50695 words of node memory still in use:
+   384 hlist, 45 vlist, 76 rule, 6 local_par, 7 dir, 26 math, 248 glue, 564 kern
+, 21 penalty, 1 unset, 1 style, 60 noad, 8 fraction, 15 fence, 47 math_char, 35 
+sub_mlist, 15 delim, 293 glyph, 2 align_record, 17431 attribute, 218 glue_spec, 
+892 attribute_list, 11 temp, 1 align_stack, 99 user_defined nodes
+   avail lists: 1:48,2:37059,3:228,4:314,5:201,6:40,7:4114,8:17,9:1953,10:16
+ 44508 multiletter control sequences out of 65536+600000
+ 164 fonts using 54034895 bytes
+ 114i,14n,112p,1746b,778s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!
+:38,7:3490,8:100,9:1403,10:16
+ 44508 multiletter control sequences out of 65536+600000
+ 164 fonts using 54034895 bytes
+ 114i,14n,112p,1746b,778s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!
+t01.tex:161: LaTeX Error: Something's wrong--perhaps a missing \item.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
