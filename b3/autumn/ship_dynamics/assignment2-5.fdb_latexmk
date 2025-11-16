@@ -1,5 +1,5 @@
 # Fdb version 3
-["lualatex"] 1763317001 "assignment2-5.tex" "assignment2-5.pdf" "assignment2-5" 1763317003
+["lualatex"] 1763318189 "assignment2-5.tex" "assignment2-5.pdf" "assignment2-5" 1763318191
   "/home/kokko/.texlive2021/texmf-var/luatex-cache/generic/fonts/otl/haranoajigothic-medium.luc" 1761532560 1871096 84e5d4e41518b627f96dceb8f3717958 ""
   "/home/kokko/.texlive2021/texmf-var/luatex-cache/generic/fonts/otl/haranoajimincho-regular.luc" 1761532558 1957701 ff65c0ebff0dc3aa559c03561e26d29f ""
   "/home/kokko/.texlive2021/texmf-var/luatex-cache/generic/fonts/otl/lmmono9-regular.luc" 1761532558 77690 6ddaa6024a6cd1bfe9b61b63591c4502 ""
@@ -271,8 +271,8 @@
   "/usr/share/texmf/tex/latex/lm/t1lmr.fd" 1256929440 1865 afbfccbe7fda9c2dc5078ad7c486bbed ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1761394138 4379155 98693266ff65f58d9f98aff394de12d2 ""
   "/var/lib/texmf/web2c/luahbtex/lualatex.fmt" 1761394151 4555478 103533bf66390aabf5fa4a5e343c8024 ""
-  "assignment2-5.aux" 1763317002 686 4ce905362b6645b598ea182482e9aeed "lualatex"
-  "assignment2-5.out" 1763317002 0 d41d8cd98f00b204e9800998ecf8427e "lualatex"
+  "assignment2-5.aux" 1763318191 686 4ce905362b6645b598ea182482e9aeed "lualatex"
+  "assignment2-5.out" 1763318190 0 d41d8cd98f00b204e9800998ecf8427e "lualatex"
   "assignment2-5.tex" 1763317001 7080 6df5bff991afea1330393cd91cf4f05a ""
   (generated)
   "assignment2-5.aux"

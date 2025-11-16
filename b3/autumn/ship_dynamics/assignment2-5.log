@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2025.10.25)  17 NOV 2025 03:16
+This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2025.10.25)  17 NOV 2025 03:36
  restricted system commands enabled.
 **assignment2-5.tex
 (./assignment2-5.tex
@@ -1275,35 +1275,29 @@ LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 6.75035pt on input line 78.
 LaTeX Font Info:    Font shape `JY3/mc/m/n' will be
 (Font)              scaled to size 5.08594pt on input line 78.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 9.24713pt on input line 105.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 6.75035pt on input line 105.
+LaTeX Font Info:    Font shape `JY3/gt/m/n' will be
+(Font)              scaled to size 5.08594pt on input line 105.
+ [1
 
-! Missing { inserted.
-<to be read again> 
-\mathop 
-l.94 \iint_{S_H + S_F + S_B + S_\inf
-                                  } \left( \phi_4 \frac{\partial \phi_2}{\pa...
-? 
-! Emergency stop.
-<to be read again> 
-\mathop 
-l.94 \iint_{S_H + S_F + S_B + S_\inf
-                                  } \left( \phi_4 \frac{\partial \phi_2}{\pa...
-End of file on the terminal!
-
-
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 7.29994pt on input line 140.
+LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
+(Font)              scaled to size 6.75035pt on input line 140.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 5.50003pt on input line 140.
+LaTeX Font Info:    Font shape `JT3/mc/m/n' will be
+(Font)              scaled to size 5.08594pt on input line 140.
+ [2] (./assignment2-5.aux)
+Package rerunfilecheck Info: File `assignment2-5.out' has not changed.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
+)
 
 Here is how much of LuaTeX's memory you used:
- 24904 strings out of 477805
- 125244,953878 words of node,token memory allocated 72328 words of node memory still in use:
-   126 hlist, 7 vlist, 238 rule, 1 disc, 7 local_par, 3 dir, 22 math, 386 glue, 
-443 kern, 59 penalty, 8 noad, 13 math_char, 390 glyph, 28570 attribute, 105 glue
-_spec, 1465 attribute_list, 2 temp, 1 write, 39 user_defined, 1 pdf_dest, 2 pdf_
-colorstack nodes
-   avail lists: 1:32,2:21,3:13,4:16,7:30,8:45,10:13
- 44504 multiletter control sequences out of 65536+600000
- 162 fonts using 50119679 bytes
- 114i,6n,112p,1751b,388s stack positions out of 5000i,500n,10000p,200000b,80000s
-!  ==> Fatal error occurred, no output PDF file produced!
-re is how much of LuaTeX's memory you used:
  24933 strings out of 477805
  156562,953878 words of node,token memory allocated
  22320 words of node memory still in use:
