@@ -1,0 +1,163 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{船体運動力学　課題 2-5}
+\author{地球総合工学科 \quad B3 \quad 08C23031 \quad 古賀 光一朗}
+\date{\today}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+グリーンの公式を用いれば、下記の通りにディフラクションポテンシャル$\phi_4$による圧力積分は、ラデ
+ィエイションポテンシャル$\phi_2$による圧力積分に置き換えられることを説明しなさい
+$$
+\Delta f_{y(d)} = Re\left[\rho g \zeta_a e^{i \omega t} \iint_{S} e_2 \cdot \phi_4 n dS \right] = - Re \left[\frac{\rho g  \zeta_a}{v_a}e^{i\omega t} \iint_S \phi_2 \frac{\partial \phi_0}{\partial n} dS \right]
+$$
+\underline{提出期限：2025年 11月 17日（月）10:30AM}
+
+\vspace{10mm}
+
+グリーンの公式
+$$
+\iint_{S} \left( \phi \frac{\partial \psi}{\partial n} - \psi \frac{\partial \phi}{\partial n}\right)dS = \iiint_V\left( \phi \nabla^2\psi - \psi \nabla^2 \phi \right)dV
+$$
+ここで、$\phi_2$（ラディエイションポテンシャル）と$\phi_4$（ディフラクションポテンシャル）は、物体表面$S_H$以外（自由表面$S_F$、水底$S_B$、無限遠方$S_\infty$）において同じ境界条件を満たすため、これらの面状での積分は互いにキャンセルされ0となる。
+したがって、積分領域は物体表面$S_H$のみとなり、
+$$
+\iint_{S_H} \left( \phi_4 \frac{\partial \phi_2}{\partial n} - \phi_2 \frac{\partial \phi_4}{\partial n}\right)dS = 0
+$$
+これを移項すると、以下の関係式が得られる。
+$$
+\iint_{S_H} \phi_4 \frac{\partial \phi_2}{\partial n} dS = \iint_{S_H} \phi_2 \frac{\partial \phi_4}{\partial n} dS
+$$
+
+\vspace{5mm}
+
+次に、課題のディフラクション力$\Delta f_{y(d)}$の計算式を考える。
+$$
+\Delta f_{y(d)} = Re\left[\rho g \zeta_a e^{i \omega t} \iint_{S_H} \phi_4 (\mathbf{e}_2 \cdot \mathbf{n}) dS \right]
+$$
+(課題の式では積分領域が$S$となっているが、ここでは物体表面$S_H$とする。また $e_2 \cdot \phi_4 n dS$ を $\phi_4 (\mathbf{e}_2 \cdot \mathbf{n}) dS$ と解釈した)
+
+ここで、ラディエイション問題（ヒーブ運動）における物体表面$S_H$での境界条件を考える。
+ヒーブ方向（$y$軸、$\mathbf{e}_2$方向）の速度ベクトルを$\mathbf{v} = v_a \mathbf{e}_2$とすると、物体表面の法線方向速度$v_n$は、
+$$
+v_n = \mathbf{v} \cdot \mathbf{n} = (v_a \mathbf{e}_2) \cdot \mathbf{n} = v_a (\mathbf{e}_2 \cdot \mathbf{n})
+$$
+一方、ラディエイションポテンシャル$\phi_2$の定義より、
+$$
+v_n = \frac{\partial \phi_2}{\partial n}
+$$
+したがって、
+$$
+v_a (\mathbf{e}_2 \cdot \mathbf{n}) = \frac{\partial \phi_2}{\partial n}
+$$
+が成り立ち、これを変形すると
+$$
+\mathbf{e}_2 \cdot \mathbf{n} = \frac{1}{v_a} \frac{\partial \phi_2}{\partial n}
+$$
+となる。
+
+これをディフラクション力の式の積分項に代入すると、
+$$
+\iint_{S_H} \phi_4 (\mathbf{e}_2 \cdot \mathbf{n}) dS = \iint_{S_H} \phi_4 \left( \frac{1}{v_a} \frac{\partial \phi_2}{\partial n} \right) dS = \frac{1}{v_a} \iint_{S_H} \phi_4 \frac{\partial \phi_2}{\partial n} dS
+$$
+先に導出したグリーンの公式による関係式 $\iint_{S_H} \phi_4 \frac{\partial \phi_2}{\partial n} dS = \iint_{S_H} \phi_2 \frac{\partial \phi_4}{\partial n} dS$ を用いて、上式を書き換えると、
+$$
+\frac{1}{v_a} \iint_{S_H} \phi_4 \frac{\partial \phi_2}{\partial n} dS = \frac{1}{v_a} \iint_{S_H} \phi_2 \frac{\partial \phi_4}{\partial n} dS
+$$
+となる。
+
+ここで、ディフラクション問題において、入射波ポテンシャル$\phi_0$とディフラクションポテンシャル$\phi_4$の物体表面での境界条件は、
+$$
+\frac{\partial (\phi_0 + \phi_4)}{\partial n} = 0 \quad \text{すなわち} \quad \frac{\partial \phi_4}{\partial n} = - \frac{\partial \phi_0}{\partial n}
+$$
+であるため、これを代入すると、
+$$
+\frac{1}{v_a} \iint_{S_H} \phi_2 \frac{\partial \phi_4}{\partial n} dS = \frac{1}{v_a} \iint_{S_H} \phi_2 \left( - \frac{\partial \phi_0}{\partial n} \right) dS = - \frac{1}{v_a} \iint_{S_H} \phi_2 \frac{\partial \phi_0}{\partial n} dS
+$$
+以上をまとめると、
+$$
+\iint_{S_H} \phi_4 (\mathbf{e}_2 \cdot \mathbf{n}) dS = - \frac{1}{v_a} \iint_{S_H} \phi_2 \frac{\partial \phi_0}{\partial n} dS
+$$
+が導かれる。
+
+これを元のディフラクション力の式に代入すれば、
+\begin{align*}
+\Delta f_{y(d)} &= Re\left[\rho g \zeta_a e^{i \omega t} \iint_{S_H} \phi_4 (\mathbf{e}_2 \cdot \mathbf{n}) dS \right] \\
+&= Re\left[\rho g \zeta_a e^{i \omega t} \left( - \frac{1}{v_a} \iint_{S_H} \phi_2 \frac{\partial \phi_0}{\partial n} dS \right) \right] \\
+&= - Re \left[\frac{\rho g \zeta_a}{v_a}e^{i\omega t} \iint_{S_H} \phi_2 \frac{\partial \phi_0}{\partial n} dS \right]
+\end{align*}
+となり、課題の式（積分領域を$S_H$とし、$S$と表記）が示された。
+
+\end{document}
+
+
+\end{document}
