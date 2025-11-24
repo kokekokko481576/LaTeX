@@ -1,0 +1,152 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{船体運動力学課題2-6}
+\author{地球総合工学科 \quad 船舶海洋工学科目 \quad 08C23031 \quad 古賀光一朗}
+\date{2025年11月26日}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\underline{提出期限：2025年11月26日（水）10:30AM}
+
+\section*{(1)}
+ストリップ法の概念を、数式を使わずに簡潔に述べなさい。
+
+\vspace{5mm}
+
+ストリップ法（Strip Method）とは、細長い船体を長さ方向に多数の2次元断面（ストリップ）に分割し、各断面における2次元的な流体力を計算して、それらを船長方向に積分することで、船体全体に働く3次元的な流体力を近似的に求める手法である。
+
+\section*{(2)}
+船速$U$で前進している船体のある断面まわりの3次元速度ポテンシャルが次式で表せる。
+$$
+\phi(x)=-\frac{ig\zeta_{a}}{\omega}\{\varphi_{0}(x)+\varphi_{7}(x)\}+\sum_{j=2}^{6}i\omega_{e}X_{j}\varphi_{j}(x)
+$$
+ここで、$\varphi_{0}(x)$は入射波ポテンシャル、$\varphi_{7}(x)$はディフラクションポテンシャル、$\varphi_{j}(x)$はラディエイションポテンシャルを表す。ただし、$j=3$は上下運動 (heave)、$j=5$は縦運動 (pitch)を表す。$\zeta_a$は入射波振幅(実数)、$X_{j}$は船体運動の複素振幅である。このとき、物体表面条件は次の通りに表せる。①〜③を埋めなさい。
+
+\begin{itemize}
+    \item ディフラクションポテンシャルについて
+    $$
+    \frac{\partial}{\partial n}(\varphi_{0}(x)+\boxed{\varphi_{7}(x)})=0
+    $$
+    \item ラディエイションポテンシャルについて
+    \begin{align*}
+        \text{Heave} \quad & \frac{\partial\varphi_{3}(x)}{\partial n}=\boxed{n_3} \\
+        \text{Pitch} \quad & \frac{\partial\varphi_{5}(x)}{\partial n}=-(\boxed{x_1}-\frac{U}{i\omega_{e}})n_3
+    \end{align*}
+\end{itemize}
+
+\section*{(3)}
+ストリップ法では、船体の2次元断面に作用する2次元流体力を船長方向に積分すれば、船体全体に作用する流体力になると考える。ある断面に作用する流体圧力を$p(x)$として、方向に作用する流体力を計算する式を示しなさい。
+
+\vspace{5mm}
+
+船体全体に作用する流体力$F$は、各断面に作用する流体力（または圧力の断面積分値）$p(x)$を船長$L$にわたって積分することで得られる。
+$$
+F = \int_{L} p(x) dx
+$$
+
+\section*{(4)}
+(3)の考え方に従えば、船速$U$で前進している船体に作用する上下方向のディフラクション力は
+$$
+E_{3}^{S}=\frac{i\rho g\zeta_{a}}{\omega}\int_{L}dx\int_{S_{H}}n_{3}(i\omega_{e}-U\frac{\partial}{\partial x})\varphi_{7}(x)dl
+$$
+で表される。この式を、入射波ポテンシャル $\varphi_{0}(x)$ とラディエイションポテンシャル $\varphi_{3}(x)$(上下運動)を用いて書き換えなさい。
+
+\vspace{5mm}
+
+問(2)で確認した通り、物体表面上において以下の境界条件が成り立つ。
+\begin{equation*}
+    n_3 = \frac{\partial \varphi_3}{\partial n}, \quad \frac{\partial \varphi_7}{\partial n} = -\frac{\partial \varphi_0}{\partial n}
+\end{equation*}
+また、流体ポテンシャルの性質として、積分領域内での順序交換が可能である（$\int \varphi_A \frac{\partial \varphi_B}{\partial n} dl = \int \varphi_B \frac{\partial \varphi_A}{\partial n} dl$）。
+これらを用いて、式中の $\varphi_7$ と $n_3$ を入れ替えるように変形を行うと、以下のようになる。
+$$
+E_{3}^{S} = -\frac{i\rho g\zeta_{a}}{\omega}\int_{L}dx\int_{S_{H}} (i\omega_{e}-U\frac{\partial}{\partial x})\varphi_{3}(x) \frac{\partial \varphi_{0}(x)}{\partial n}dl
+$$
+このように変形することで、散乱波（$\varphi_7$）を直接求めなくとも、放射波（$\varphi_3$）と既知の入射波（$\varphi_0$）のみから波強制力を求めることができる。
+
+\section*{(5)}
+次の図は、典型的な船体の上下運動 (heave) の特性 (周波数応答関数)である。この図の縦軸は何を表すか説明しなさい。また、$\lambda/L=1.1$ 付近でピークが見られることの最大の要因は何か、$\lambda/L \to \infty$ のとき、縦軸の値はどうなるかを説明しなさい。
+
+\vspace{5mm}
+
+\begin{itemize}
+    \item \textbf{縦軸の意味} \\
+    縦軸は「Heave Amplitude / $\zeta_a$」であり、入射波振幅 $\zeta_a$ に対する船体の上下運動（Heave）の振幅の比（無次元化された振幅）を表している。
+
+    \item \textbf{ピークの最大の要因} \\
+    $\lambda/L=1.1$ 付近で振幅が大きくなっているのは、波の出会い周期が、船体の上下運動の固有周期と一致するためである。固有周波数近傍では、慣性力（付加慣性力含む）と復原力が釣り合い、減衰力のみが運動を抑制するため、大きな運動振幅が生じる。
+    
+    \item \textbf{$\lambda/L \to \infty$ のときの値} \\
+    $\lambda/L \to \infty$ は、波長が船長に対して極めて長い状態を意味する。このとき、船体は波の傾斜や高さの変化にそのまま追従して運動するため、船体の上下変位は波の変位とほぼ等しくなる。したがって、縦軸の値（振幅比）は $1.0$ に近づく。
+\end{itemize}
+
+\end{document}
