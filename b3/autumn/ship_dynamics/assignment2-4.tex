@@ -1,0 +1,180 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{船体運動力学課題2-4}
+\author{地球総合工学科 \quad 船舶海洋工学科目 \quad 08C23031 \quad 古賀光一朗}
+\date{2025年11月29日}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\underline{提出期限：2025年11月10日（月）10:30AM}
+
+\section*{課題}
+浮体の後方から規則波が入射する際の、浮体に作用するフルード・クリロフ力を前後方向 ($x_1$)、上下方向 ($x_3$)、縦回転方向 ($x_2$ 軸まわり) について数式で示す。
+なお、波による速度ポテンシャル $\Phi(x,t)$ は次式で与えられる。
+$$
+\Phi(x,t)=-\zeta_{a}\frac{g}{\omega}e^{-kx_{3}}\sin(kx_{1}-\omega t)
+$$
+また、波変動圧 $p$ はベルヌーイの定理（線形項のみ）より次式で表される。
+$$
+p = -\rho\frac{\partial\Phi}{\partial t} = -\rho g\zeta_{a}e^{-kx_{3}}\cos(kx_{1}-\omega t) = \text{Re}\left[-\rho g\zeta_{a}e^{-kx_{3}}e^{ikx_{1}}e^{-i\omega t}\right]
+$$
+以下の計算では、複素数表示を用いて積分を行い、最後に実部をとるものとする。
+
+\section*{(a) 面積分による $f_{FK3}$ (上下方向力) の計算}
+
+水圧は浮体表面の法線方向に作用する。底面 ($x_3 = d$) において、法線ベクトルは下向き ($n_3 = 1$) であるが、圧力は面を押す方向に働くため、上向き ($x_3$ 負方向) の力となる。したがって、底面での面積分は次のように計算できる。
+
+$$
+f_{FK3}=-\iint_{S}e_{3}\cdot p\boldsymbol{n}dS=-\int_{-l}^{l}2b_{0}p~dx_{1}
+$$
+
+これに圧力を代入して計算する。
+\begin{align*}
+f_{FK3} &= \int_{-l}^{l}2b_{0}\rho g\zeta_{a}e^{-kd}e^{ikx_{1}}e^{-i\omega t}dx_{1} \\
+&= 2b_{0}\rho g\zeta_{a}e^{-kd}e^{-i\omega t}\int_{-l}^{l}e^{ikx_{1}}dx_{1} \\
+&= 2b_{0}\rho g\zeta_{a}e^{-kd}e^{-i\omega t}\left[\frac{e^{ikx_{1}}}{ik}\right]_{-l}^{l} \\
+&= 2b_{0}\rho g\zeta_{a}e^{-kd}e^{-i\omega t}\frac{e^{ikl}-e^{-ikl}}{ik} \\
+&= 2b_{0}\rho g\zeta_{a}e^{-kd}e^{-i\omega t}\frac{2i\sin kl}{ik} \\
+&= 4b_{0}\rho g\zeta_{a}\frac{e^{-kd}}{k}e^{-i\omega t}\sin kl
+\end{align*}
+
+最後に実部をとって解とする。
+$$
+f_{FK3} = 4b_{0}\rho g\zeta_{a}\frac{e^{-kd}}{k}\cos\omega t \sin kl
+$$
+
+\section*{(b) 体積積分による $f_{FK1}$ (前後方向力) の計算}
+
+$x_1$ 方向の力は、浮体側面に作用する圧力の積分であるが、ガウスの発散定理を用いることで体積積分に変換して計算できる。
+$$
+f_{FK1}=-\iint_{S}e_{1}\cdot p\boldsymbol{n}dS=-\iint_{V}\frac{\partial p}{\partial x_{1}}dV
+$$
+ここで、
+$$
+\frac{\partial p}{\partial x_1} = -\rho g \zeta_a (ik) e^{-kx_3} e^{ikx_1} e^{-i\omega t}
+$$
+であるから、これを体積積分する。
+\begin{align*}
+f_{FK1} &= \iint_{V}\rho g\zeta_{a}(ik)e^{-kx_{3}}e^{ikx_{1}}e^{-i\omega t}dV \\
+&= \int_{-l}^{l}\int_{-b_{0}}^{b_{0}}\int_{\zeta(x_{1},t)}^{d}\rho g\zeta_{a}(ik)e^{-kx_{3}}e^{ikx_{1}}e^{-i\omega t}dx_{3}dx_{2}dx_{1} \\
+&= 2b_{0}\rho g\zeta_{a}(ik)e^{-i\omega t}\int_{-l}^{l}\left(\int_{\zeta(x_{1},t)}^{d}e^{-kx_{3}}dx_{3}\right)e^{ikx_{1}}dx_{1}
+\end{align*}
+$x_3$ に関する積分を行う。
+$$
+\int_{\zeta}^{d}e^{-kx_{3}}dx_{3} = \left[\frac{e^{-kx_{3}}}{-k}\right]_{\zeta}^{d} = \frac{e^{-kd}}{-k} - \frac{e^{-k\zeta}}{-k}
+$$
+ここで自由表面条件より、波面上 ($x_3=\zeta$) での波変動圧の寄与はゼロ（高次項として無視）とすると、
+\begin{align*}
+f_{FK1} &= 2b_{0}\rho g\zeta_{a}(ik)e^{-i\omega t}\int_{-l}^{l}\frac{e^{-kd}}{-k}e^{ikx_{1}}dx_{1} \\
+&= -2i b_{0}\rho g\zeta_{a}e^{-kd}e^{-i\omega t}\int_{-l}^{l}e^{ikx_{1}}dx_{1} \\
+&= -2i b_{0}\rho g\zeta_{a}e^{-kd}e^{-i\omega t} \frac{2\sin kl}{k} \\
+&= -i 4b_{0}\rho g\zeta_{a}\frac{e^{-kd}}{k}e^{-i\omega t}\sin kl
+\end{align*}
+実部をとる（$-i e^{-i\omega t} = -i(\cos\omega t - i\sin\omega t) = -\sin\omega t - i\cos\omega t$ の実部は $-\sin\omega t$）。
+$$
+f_{FK1} = -4b_{0}\rho g\zeta_{a}\frac{e^{-kd}}{k}\sin kl \sin\omega t
+$$
+
+\section*{(c) 体積積分による $f_{FK5}$ (縦回転モーメント) の計算}
+
+原点周りのモーメントは次式で定義される。
+$$
+f_{FK5} = -\iint_{S} \boldsymbol{e}_{2}\cdot (\boldsymbol{x}\times p\boldsymbol{n})dS = -\iint_{V} \text{div}(p\boldsymbol{e}_{2}\times \boldsymbol{x})dV
+$$
+被積分関数の発散 (div) は以下のようになる。
+$$
+\text{div}(p\boldsymbol{e}_{2}\times \boldsymbol{x}) = \frac{\partial p}{\partial x_{1}}x_{3}-\frac{\partial p}{\partial x_{3}}x_{1} = -\rho g\zeta_{a}\{(ik)x_{3}+kx_{1}\}e^{-kx_{3}}e^{ikx_{1}}e^{-i\omega t}
+$$
+これを体積積分する。
+\begin{align*}
+f_{FK5} &= \iint_{V}\rho g\zeta_{a}\{(ik)x_{3}+kx_{1}\}e^{-kx_{3}}e^{ikx_{1}}e^{-i\omega t}dV \\
+&= 2b_{0}\rho g\zeta_{a}ke^{-i\omega t}\int_{-l}^{l}\left(\int_{\zeta}^{d}(ix_{3}+x_{1})e^{-kx_{3}}dx_{3}\right)e^{ikx_{1}}dx_{1}
+\end{align*}
+$x_3$ に関する積分を部分積分を用いて計算し、表面項を無視して整理すると以下のようになる。
+$$
+\int_{\zeta}^{d}(ix_{3}+x_{1})e^{-kx_{3}}dx_{3} \approx \frac{(id+x_{1})e^{-kd}}{-k} - \frac{ie^{-kd}}{k^2}
+$$
+これを代入して $x_1$ で積分する。
+\begin{align*}
+f_{FK5} &= 2b_{0}\rho g\zeta_{a}ke^{-i\omega t}\int_{-l}^{l} \left\{ \frac{-ikd-kx_1-i}{k^2} e^{-kd} \right\} e^{ikx_{1}}dx_{1} \\
+&= -2b_{0}\rho g\zeta_{a}\frac{e^{-kd}}{k}e^{-i\omega t}\int_{-l}^{l} \{i(kd+1)+kx_{1}\}e^{ikx_{1}}dx_{1}
+\end{align*}
+ここで、$\int_{-l}^{l}x_{1}e^{ikx_{1}}dx_{1} = \frac{2l}{ik}\cos kl - \frac{2i}{k^2}\sin kl$ などの公式を用いて整理すると、
+$$
+f_{FK5} = -4b_{0}\rho g\zeta_{a}\frac{e^{-kd}}{k}e^{-i\omega t}\{i(d \sin kl - l \cos kl)\}
+$$
+となる。最後に実部をとって解を得る。
+$$
+f_{FK5} = -4b_{0}\rho g\zeta_{a}\frac{e^{-kd}}{k}(d \sin kl - l \cos kl)\sin \omega t
+$$
+
+\end{document}
