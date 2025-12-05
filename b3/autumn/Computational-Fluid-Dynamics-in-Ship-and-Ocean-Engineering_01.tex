@@ -1,0 +1,269 @@
+%==============================================================================
+% LaTeXの処理に関する設定
+%==============================================================================
+% !TEX encoding = UTF-8
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+% パッケージの読み込み
+%==============================================================================
+\usepackage[top=20mm, bottom=20mm, left=20mm, right=20mm]{geometry} % 余白設定
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext} % 欧文フォント
+\usepackage{newtxmath} % 数式フォント
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{cleveref} % 相互参照の自動化
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+
+%==============================================================================
+% レポート情報
+%==============================================================================
+\title{数値流体解析 レポート課題}
+\author{大阪大学 工学部 地球総合工学科 船舶海洋工学科目 船舶海洋工学コース 3年 \\ 学籍番号：08C23031 \quad 古賀 光一朗}
+\date{\today}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\section{緒言}
+本課題では、流体現象の基礎となる1次元移流方程式を対象とし、有限差分法を用いた数値シミュレーションを行う。
+特に、時間積分の手法（陽解法・陰解法）、空間微分の手法（前進・後退・中心差分）、および移流方向（$a$の正負）の組み合わせ全12パターンについて計算を行い、各スキームの数値安定性と精度の違いを体系的に明らかにすることを目的とする。
+
+支配方程式は以下の通りである。
+\begin{equation}
+\frac{\partial u}{\partial t} + a \frac{\partial u}{\partial x} = 0
+\label{eq:governing}
+\end{equation}
+ここで、$u$は物理量、$t$は時間、$x$は空間座標、$a$は移流速度（定数）である。
+
+\section{数値計算法}
+時間刻みを$\Delta t$、空間刻みを$\Delta x$とし、格子点$(j\Delta x, n\Delta t)$における物理量を$u_j^n$とする。
+また、クーラン数（Courant Number）$C$を以下のように定義する。
+\begin{equation}
+C = \frac{a \Delta t}{\Delta x}
+\end{equation}
+
+本解析では、以下の2通りの時間積分法と3通りの空間差分法を組み合わせる。
+
+\subsection{時間積分法}
+\begin{itemize}
+    \item \textbf{陽解法 (Explicit Euler):} 時間微分に前進差分を用いる。次時刻の値を現時刻の値のみから決定できるが、CFL条件による安定性制約を受ける。
+    \item \textbf{陰解法 (Implicit Euler):} 時間微分に後退差分を用いる。次時刻の値が空間的に連成するため連立方程式を解く必要があるが、一般に無条件安定である。本計算では反復計算を用いて解を求めた。
+\end{itemize}
+
+\subsection{空間差分法}
+\begin{itemize}
+    \item \textbf{前進差分 (Forward):} $u_{j+1}$ と $u_j$ を用いる（右側参照）。
+    \item \textbf{後退差分 (Backward):} $u_j$ と $u_{j-1}$ を用いる（左側参照）。
+    \item \textbf{中心差分 (Central):} $u_{j+1}$ と $u_{j-1}$ を用いる（両側参照）。
+\end{itemize}
+
+\section{計算結果}
+初期条件として矩形波を与え、Excelを用いて数値計算を行った。
+以下に、移流速度の符号（$a>0, a<0$）ごとに、各スキームの結果を示す。
+
+%==============================================================================
+% 陽解法の結果
+%==============================================================================
+\subsection{陽解法 (Explicit Method)}
+陽解法において計算を行った結果を\cref{fig:explicit-pos,fig:explicit-neg}に示す。
+
+\subsubsection{ケース1: $a > 0$ (右進行波) の場合}
+移流方向が正の場合、波は左から右へ移動する。このとき、情報は左側（$j-1$）から伝播するため、後退差分が「風上差分」となる。
+
+\begin{figure}[H]
+    \centering
+    % 画像を3枚並べるレイアウト
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image (6).png} 
+        \caption{前進差分\\(不安定/風下)}
+        \label{fig:exp-pos-fwd}
+    \end{minipage}
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image (7).png} 
+        \caption{後退差分\\(\textbf{安定}/風上)}
+        \label{fig:exp-pos-bwd}
+    \end{minipage}
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image (3).png} 
+        \caption{中心差分\\(不安定)}
+        \label{fig:exp-pos-cen}
+    \end{minipage}
+    \caption{陽解法・$a > 0$ における計算結果}
+    \label{fig:explicit-pos}
+\end{figure}
+
+\subsubsection{ケース2: $a < 0$ (左進行波) の場合}
+移流方向が負の場合、波は右から左へ移動する。情報は右側（$j+1$）から伝播するため、前進差分が「風上差分」となる。
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image (4).png}
+        \caption{前進差分\\(\textbf{安定}/風上)}
+        \label{fig:exp-neg-fwd}
+    \end{minipage}
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image (5).png}
+        \caption{後退差分\\(不安定/風下)}
+        \label{fig:exp-neg-bwd}
+    \end{minipage}
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image (1).png}
+        \caption{中心差分\\(不安定)}
+        \label{fig:exp-neg-cen}
+    \end{minipage}
+    \caption{陽解法・$a < 0$ における計算結果}
+    \label{fig:explicit-neg}
+\end{figure}
+
+%==============================================================================
+% 陰解法の結果
+%==============================================================================
+\subsection{陰解法 (Implicit Method)}
+陰解法において計算を行った結果を以下に示す。
+
+\subsubsection{ケース3: $a > 0$ (右進行波) の場合}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image (2) (1).png}
+        \caption{前進差分\\(不安定/風下)}
+        \label{fig:imp-pos-fwd}
+    \end{minipage}
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image (1) (1).png}
+        \caption{後退差分\\(\textbf{安定}/風上)}
+        \label{fig:imp-pos-bwd}
+    \end{minipage}
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image (10).png}
+        \caption{中心差分\\(\textbf{安定})}
+        \label{fig:imp-pos-cen}
+    \end{minipage}
+    \caption{陰解法・$a > 0$ における計算結果 ($C=2.0$)}
+    \label{fig:implicit-pos}
+\end{figure}
+
+\subsubsection{ケース4: $a < 0$ (左進行波) の場合}
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image.png}
+        \caption{前進差分\\(\textbf{安定}/風上)}
+        \label{fig:imp-neg-fwd}
+    \end{minipage}
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image (2).png}
+        \caption{後退差分\\(不安定/風下)}
+        \label{fig:imp-neg-bwd}
+    \end{minipage}
+    \begin{minipage}{0.32\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{image (9).png}
+        \caption{中心差分\\(\textbf{安定})}
+        \label{fig:imp-neg-cen}
+    \end{minipage}
+    \caption{陰解法・$a < 0$ における計算結果}
+    \label{fig:implicit-neg}
+\end{figure}
+
+\section{考察と結論}
+
+本解析で得られた全12パターンの安定性結果を\cref{tab:summary}に総括する。
+
+\begin{table}[H]
+    \centering
+    \caption{移流方程式における各スキームの安定性まとめ}
+    \label{tab:summary}
+    \begin{tabular}{lcccccc}
+        \toprule
+        & \multicolumn{3}{c}{\textbf{陽解法 (Explicit)}} & \multicolumn{3}{c}{\textbf{陰解法 (Implicit)}} \\
+        \cmidrule(lr){2-4} \cmidrule(lr){5-7}
+        移流条件 & 前進差分 & 後退差分 & 中心差分 & 前進差分 & 後退差分 & 中心差分 \\
+        \midrule
+        $a > 0$ (右進行) & $\times$ (風下) & \textbf{$\bigcirc$ (風上)} & $\times$ & $\times$ (風下) & \textbf{$\bigcirc$ (風上)} & \textbf{$\bigcirc$} \\
+        $a < 0$ (左進行) & \textbf{$\bigcirc$ (風上)} & $\times$ (風下) & $\times$ & \textbf{$\bigcirc$ (風上)} & $\times$ (風下) & \textbf{$\bigcirc$} \\
+        \bottomrule
+    \end{tabular}
+    \footnotesize
+    \\ \raggedright ※ $\bigcirc$: 安定 (Stable), $\times$: 不安定 (Unstable) \\
+\end{table}
+
+陽解法においては「風上（Upwind）」側の点を参照するスキームのみが安定であることが確認された。
+具体的には、$a>0$では後退差分、$a<0$では前進差分が安定となる。
+一方、空間中心差分は陽解法と組み合わせると無条件に不安定となり、計算が発散した。
+
+また、陰解法の結果（\cref{fig:implicit-pos,fig:implicit-neg}）を見ると、空間中心差分および風上差分を用いた場合は、$|C|=2.0$という大きな時間刻みにおいても計算は安定した。
+しかし、陰解法であっても、情報の流れていく方向（風下）を参照するスキーム（$a>0$での前進差分、および$a<0$での後退差分）を用いた場合は、計算が破綻し解が発散することが確認された。
+
+以上の結果より、移流方程式の数値解析においては、陽解法・陰解法のいずれを用いる場合であっても、物理現象の伝播方向（特性曲線）と整合する空間差分スキーム（風上差分など）を選ぶことが不可欠であると結論付けられる。
+
+%==============================================================================
+% 課題(2) 高精度解法の検討
+%==============================================================================
+\section{発展課題：高精度スキームの検討}
+
+前節までの結果より、1次精度の風上差分では数値拡散による解のなまりが顕著であることが分かった。
+そこで、より高精度な解法として、空間・時間ともに2次精度を持つ\textbf{Lax-Wendroff法（ラックス・ヴェンドロフ法）}を導入し、その計算精度を検証する。
+
+\subsection{離散化式}
+
+Lax-Wendroff法は、テーラー展開を用いて時間方向の2次精度まで考慮した手法である。
+移流方程式 $\frac{\partial u}{\partial t} + a \frac{\partial u}{\partial x} = 0$ に対する離散化式は以下の通りである。
+
+\begin{equation}
+u_j^{n+1} = u_j^n - \frac{C}{2} (u_{j+1}^n - u_{j-1}^n) + \frac{C^2}{2} (u_{j+1}^n - 2u_j^n + u_{j-1}^n)
+\end{equation}
+
+ここで第2項までは空間中心差分を用いたオイラー法と同様であるが、第3項に$C^2$に比例する項が付加されている。
+この項は、数値的な安定化に寄与すると同時に、精度の向上に寄与する。
+本スキームの安定条件は $|C| \le 1$ である。
+
+\subsection{計算結果と考察}
+
+Lax-Wendroff法を用い、クーラン数 $C=0.9$ にて計算を行った結果を\cref{fig:lax-wendroff}に示す。
+
+\begin{figure}[H]
+    \centering
+    % ここにさっきのグラフ画像を入れる
+    \includegraphics[width=0.8\linewidth]{image (11).png}
+    \caption{Lax-Wendroff法による計算結果 ($C=0.9$)}
+    \label{fig:lax-wendroff}
+\end{figure}
+
+\cref{fig:lax-wendroff}と前節の風上差分の結果（\cref{fig:exp-pos-bwd}等）を比較すると、以下の特徴が確認できる。
+
+\begin{itemize}
+    \item \textbf{数値拡散の抑制:} 風上差分で見られたような波高の著しい減少（なまり）が抑えられており、初期波形に近い形状を保ったまま移流している。これは本手法が2次精度を有しているためである。
+    \item \textbf{分散誤差の発生:} 波の後方に、風上差分には見られなかった振動（ギザギザ）が発生している。これは高精度スキーム特有の\textbf{分散誤差（Dispersion Error）}の影響である。
+\end{itemize}
+
+以上の結果より、Lax-Wendroff法は、分散誤差による振動を許容できる範囲において、風上差分よりも極めて精度の高い解を与える手法であると結論付けられる。
+
+\end{document}
