@@ -1,0 +1,221 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{tikz} % グラフ描画用に追記
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{構造信頼性工学1 day1}
+\author{地球総合工学科 \quad B3 \quad 08C23031 \quad 古賀 光一朗}
+\date{\today}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\section{タイタニック号からSOLAS条約}
+タイタニック号事故を契機として採択・批准を経て発効したSOLAS条約の中身について、リスク低減の観点から効用をまとめなさい。その際、
+\begin{equation}
+R = P \times C = P(B|A)P(A)\times C
+\end{equation}
+のように分解し、どの項目が右辺のどの項の低減につながるかを述べなさい。SOLAS1929年版の2-5章について着目すること。
+
+\subsection{タイタニック号の事故の概要を述べなさい}
+
+\begin{enumerate}
+    \item 1912年4月10日、イギリスのサウサンプトンを出港し、アメリカのニューヨークへ向かう処女航海中に北大西洋で氷山と衝突。（$P(A)$）
+    \item 船体の前方が大きく損傷し、複数の隔壁が浸水。 
+    \item 構造強度が不十分であったため、浸水が広がり沈没に至る。($P(B|A)$) 
+    \item 約2時間40分後に沈没し、乗客・乗員約2200人中約1500人が死亡。
+    \item 当時の最新技術を駆使した豪華客船であったが、救命設備の不足や乗員の訓練不足が被害を拡大させた。
+\end{enumerate}
+
+\subsection{P(B|A), P(A)に相当するものを見出しなさい。}
+リスクの定義式 $R = P(B|A)P(A) \times C$ において、各確率は以下のように解釈できる。
+
+\begin{itemize}
+    \item \textbf{$P(A)$ (ハザードの発生確率)}：\\
+    船舶が航行中に氷山などの危険物と遭遇・衝突する確率。
+    \item \textbf{$P(B|A)$ (フラジリティ/条件付き破損確率)}：\\
+    氷山との衝突などの事故が発生した条件下で、船体が持ちこたえられずに浸水・沈没に至る確率（船体の脆弱性）。
+\end{itemize}
+
+\subsection{Cは何か？}
+    沈没事故が発生した場合の被害の大きさ。ここでは主に「人命損失（死亡者数）」を指す。
+
+\subsection{SOLAS1929の各章がどこにどのように寄与しているか、考えを述べなさい。}
+SOLAS条約（1929年版）の各章は、リスク式の各項を低減させるために以下のように寄与していると考えられる。
+
+\begin{enumerate}
+    \item \textbf{第5章：航行の安全 (Safety of Navigation)} $\rightarrow$ \textbf{$P(A)$ の低減}\\
+    氷山巡視船の制度化や、北大西洋における航路の指定などが含まれる。これにより、氷山との衝突そのものを回避し、事故発生確率 $P(A)$ を低下させる。
+    
+    \item \textbf{第4章：無線電信 (Radiotelegraphy)} $\rightarrow$ \textbf{$P(A)$ および $C$ の低減}\\
+    無線設備の設置義務化により、氷山情報の受信が可能となり衝突回避につながる（$P(A)$低減）。また、事故発生時に救難信号（SOS）を迅速に発信し、救助船の早期到着を促すことで、人命損失 $C$ を最小限に抑える。
+
+    \item \textbf{第2章：構造 (Construction)} $\rightarrow$ \textbf{$P(B|A)$ の低減}\\
+    水密区画（Subdivision）の設置基準や復原性（Stability）の要件を強化した章。これにより、万が一衝突事故が発生しても（$A$が発生）、浸水を限定的な区画に留め、沈没に至る確率（条件付き確率 $P(B|A)$）を低下させる。
+
+    \item \textbf{第3章：救命設備 (Life-saving appliances)} $\rightarrow$ \textbf{$C$ の低減}\\
+    全ての乗船者のための救命ボートや救命胴衣の備え付けを義務化した章。船が沈没するという最悪の事態に至った場合でも、乗客・乗員の命を守り、結果としての被害 $C$ を低減させる。
+\end{enumerate}
+
+\section{確率密度関数}
+確率変数$X$が従う確率密度関数が次のように与えられている。このとき各設問に答えなさい。
+ただし、問題文の表記より定義域を $0 \le x \le \pi$ とし、それ以外では $0$ であるとする。
+
+\begin{equation}
+f_X(x) = 
+\begin{cases}
+\alpha \sin{x} & (0 \le x \le \pi) \\
+0 & (\text{otherwise})
+\end{cases}
+\end{equation}
+
+\subsection{(1) 確率密度関数の性質から定数 $\alpha$ の値を定めよ}
+確率密度関数の全区間での積分値は $1$ となる性質 $\int_{-\infty}^{\infty} f_X(x) dx = 1$ を利用する。
+
+\begin{equation}
+\int_{0}^{\pi} \alpha \sin x \, dx = \alpha \left[ -\cos x \right]_{0}^{\pi} 
+= \alpha ( -(-1) - (-1) ) = 2\alpha
+\end{equation}
+したがって、
+\begin{equation}
+2\alpha = 1 \quad \therefore \quad \alpha = \frac{1}{2}
+\end{equation}
+
+\subsection{(2) 確率密度関数と確率分布関数をそれぞれ図示せよ}
+確率密度関数 $f_X(x) = \frac{1}{2}\sin x$ および、確率分布関数 $F_X(x)$ は以下の通りとなる。
+分布関数 $F_X(x)$ は次式で求められる。
+\begin{equation}
+F_X(x) = \int_{0}^{x} \frac{1}{2} \sin t \, dt = \frac{1}{2} \left[ -\cos t \right]_{0}^{x} = \frac{1}{2}(1 - \cos x) \quad (0 \le x \le \pi)
+\end{equation}
+
+% 簡易的な図示（TikZを使用しない場合はこの環境を削除し、手書き画像を貼るなどの対応をしてください）
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        % PDF
+        \begin{scope}[xshift=0cm]
+            \draw[->] (-0.5,0) -- (3.5,0) node[right] {$x$};
+            \draw[->] (0,-0.5) -- (0,1.5) node[above] {$f_X(x)$};
+            \draw[domain=0:3.14, smooth, variable=\x, blue, thick] plot ({\x}, {0.5*sin(\x r)*2}); % 高さ強調のため2倍
+            \node at (1.57, -0.3) {$\pi/2$};
+            \node at (3.14, -0.3) {$\pi$};
+            \node at (0, 0) [below left] {0};
+            \node at (1.57, 1.2) {Peak $\alpha=0.5$};
+            \node at (1.5, -1) {(a) 確率密度関数};
+        \end{scope}
+        
+        % CDF
+        \begin{scope}[xshift=6cm]
+            \draw[->] (-0.5,0) -- (3.5,0) node[right] {$x$};
+            \draw[->] (0,-0.5) -- (0,1.5) node[above] {$F_X(x)$};
+            \draw[domain=0:3.14, smooth, variable=\x, red, thick] plot ({\x}, {0.5*(1-cos(\x r))}); 
+            \draw[dashed] (0,1) -- (3.14,1) -- (3.14,0);
+            \node at (0, 1) [left] {1};
+            \node at (3.14, -0.3) {$\pi$};
+            \node at (1.5, -1) {(b) 確率分布関数};
+        \end{scope}
+    \end{tikzpicture}
+    \caption{確率密度関数と確率分布関数の概形}
+\end{figure}
+
+\subsection{(3) 確率変数Xの平均と分散を求めよ}
+
+\subsubsection*{平均 $E[X]$}
+定義より $E[X] = \int_{-\infty}^{\infty} x f_X(x) dx$ を計算する。
+\begin{align}
+E[X] &= \int_{0}^{\pi} x \cdot \frac{1}{2} \sin x \, dx \\
+     &= \frac{1}{2} \left( \left[ -x \cos x \right]_{0}^{\pi} - \int_{0}^{\pi} (-\cos x) \, dx \right) \\
+     &= \frac{1}{2} \left( (-\pi \cdot (-1) - 0) + \left[ \sin x \right]_{0}^{\pi} \right) \\
+     &= \frac{1}{2} (\pi + 0) = \frac{\pi}{2}
+\end{align}
+
+\subsubsection*{分散 $V[X]$}
+分散の公式 $V[X] = E[X^2] - (E[X])^2$ を用いる。まず $E[X^2]$ を求める。
+\begin{align}
+E[X^2] &= \int_{0}^{\pi} x^2 \cdot \frac{1}{2} \sin x \, dx \\
+       &= \frac{1}{2} \left( \left[ -x^2 \cos x \right]_{0}^{\pi} - \int_{0}^{\pi} -2x \cos x \, dx \right) \\
+       &= \frac{1}{2} \left( (\pi^2 - 0) + 2 \int_{0}^{\pi} x \cos x \, dx \right)
+\end{align}
+ここで、部分積分 $\int x \cos x \, dx = [x \sin x] - \int \sin x \, dx = x \sin x + \cos x$ を用いると、
+\begin{align}
+\int_{0}^{\pi} x \cos x \, dx &= [x \sin x + \cos x]_{0}^{\pi} \\
+                              &= (\pi \cdot 0 + (-1)) - (0 + 1) = -2
+\end{align}
+よって、
+\begin{equation}
+E[X^2] = \frac{1}{2} (\pi^2 + 2(-2)) = \frac{\pi^2}{2} - 2
+\end{equation}
+最後に分散を求める。
+\begin{equation}
+V[X] = \left( \frac{\pi^2}{2} - 2 \right) - \left( \frac{\pi}{2} \right)^2 
+     = \frac{\pi^2}{2} - 2 - \frac{\pi^2}{4} 
+     = \frac{\pi^2}{4} - 2
+\end{equation}
+
+\end{document}
