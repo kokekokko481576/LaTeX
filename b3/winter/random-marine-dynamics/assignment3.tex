@@ -1,0 +1,127 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{ランダム海洋現象学 課題3}
+\author{地球総合工学科 \quad B3 \quad 08C23031 \quad 古賀 光一朗}
+\date{\today}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\section{数式の導出}
+
+方針：海洋波をフーリエ級数展開し、波スペクトラムを満足するようにフーリエ係数を決定する。
+
+\begin{itemize}
+    \item 海洋波のフーリエ級数展開
+$$
+x(t)=\sum_{n=1}^{\infty}C_{n}\cos(n\Delta\omega t+\epsilon_{n})
+$$
+
+    \item $x(t)$ の自己相関関数 $R(\tau)$
+$$
+R(\tau)=\lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2}x(t)x(t+\tau)dt=\sum_{n=1}^{\infty}\frac{C_{n}^{2}}{2}\cos(n\Delta\omega\tau)
+$$
+
+    \item $x(t)$ のパワースペクトラム $S(\omega)$
+$$
+S(\omega)=\frac{1}{2\pi}\int_{-\infty}^{\infty}R(\tau)e^{-i\omega\tau}d\tau=\sum_{n=1}^{\infty}\frac{C_{n}^{2}}{4}\{\delta(\omega-n\Delta\omega)+\delta(\omega+n\Delta\omega)\}
+$$
+
+    \item パワースペクトラムの微小区間での積分
+$$
+\int_{n\Delta\omega-\frac{\Delta\omega}{2}}^{n\Delta\omega+\frac{\Delta\omega}{2}}S(\omega)d\omega=\frac{C_{n}^{2}}{4}=S(n\Delta\omega)\Delta\omega
+$$
+
+    \item 振幅 $C_{n}$ の決定（Single side spectrumの場合）
+$$
+C_{n}=\sqrt{2S(n\Delta\omega)\Delta\omega}
+$$
+
+    \item 海洋波の時系列モデル
+$$
+x(t)=\sum_{n=1}^{\infty}\sqrt{2S(n\Delta\omega)\Delta\omega}\cos(n\Delta\omega t+\epsilon_{n})
+$$
+\end{itemize}
+
+\section{重ね合わせ法で注意すべきこと}
+
+\begin{itemize}
+    \item 離散化周波数幅 $\Delta\omega$ に起因する周期性 $T$ が現れる。
+$$
+T=\frac{2\pi}{\Delta\omega}
+$$
+
+    \item 周期性の回避策として $\Delta\omega$ を不等間隔（$\Delta\omega_{n}$）にする手法がある。
+    \item 不等間隔にした場合でも、各成分の周期 $T_{n}=2\pi/\Delta\omega_{n}$ の最小公倍数で周期性が現れるため、本質的な回避ではない。
+    \item 実用上は、周期を極めて長くすることで回避する。
+\end{itemize}
+
+\end{document}
