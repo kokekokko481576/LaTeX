@@ -1,0 +1,189 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{数値構造解析学 3回目講義後宿題}
+\author{地球総合工学科 \quad B3 \quad 08C23031 \quad 古賀 光一朗}
+\date{\today}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\section{}
+
+\subsection*{Q1: 変位、ひずみ、応力および断面力の関係式}
+1次元問題における各物理量の関係式を以下に示す。
+\begin{description}
+    \item[変位 (Displacement)] $u$
+    \item[ひずみ (Strain)] 変位の微分として定義される。
+$$
+\epsilon = \frac{du}{dx}
+$$
+    \item[応力 (Stress)] フックの法則 (Hooke's law) により、ヤング率 $E$ を用いて表される。
+$$
+\sigma = E\epsilon
+$$
+    \item[断面力 (Force)] 断面積 $A$ と応力 $\sigma$ の積で表される。
+$$
+f = A\sigma
+$$
+\end{description}
+
+\subsection*{Q2: 外力による仕事と内部ひずみによるエネルギーの定義式}
+\begin{description}
+    \item[外力による仕事 (Work by external force)] 外力 $f$ と変位 $u$ の積で定義される（スカラー量）。
+$$
+W_f = f \cdot u
+$$
+    \item[ひずみエネルギー (Strain energy)] 内部応力とひずみによるエネルギーとして定義される。
+$$
+W_e = \int \frac{1}{2} \epsilon \cdot \sigma dV
+$$
+    (1次元ばねモデルの場合、剛性 $K$ を用いて $\frac{1}{2}Ku^2$ と表される)
+\end{description}
+
+\subsection*{Q3: 全ポテンシャルエネルギーの定義式}
+全ポテンシャルエネルギー $\pi(u)$ は、ひずみエネルギー $W_e$ から外力のポテンシャルエネルギー（外力の仕事）$W_f$ を引いたものとして定義される。
+$$
+\pi(u) = W_e - W_f = \frac{1}{2}Ku^2 - fu
+$$
+
+\subsection*{Q4: 最小ポテンシャルエネルギーの条件式}
+最小ポテンシャルエネルギーの原理より、釣合条件を満たす解は全ポテンシャルエネルギー $\pi(u)$ を最小にする。その条件式（停留条件）は、変位 $u$ による1次微分が0になることである。
+$$
+\frac{d\pi(u)}{du} = Ku - f = 0
+$$
+
+\section{}
+\textbf{課題：} 物理的考察に基づくマトリックス法で導出された釣合方程式（二要素棒モデル）において、境界条件 $u_1=0$ と固定した場合の $u_2$ と $u_3$ を計算する。
+
+二要素棒モデルの全体剛性マトリックスを用いた釣合方程式は以下の通りである。
+$$
+\begin{bmatrix}
+k_{e1} & -k_{e1} & 0 \\
+-k_{e1} & k_{e1}+k_{e2} & -k_{e2} \\
+0 & -k_{e2} & k_{e2}
+\end{bmatrix}
+\begin{Bmatrix}
+u_1 \\
+u_2 \\
+u_3
+\end{Bmatrix}
+=
+\begin{Bmatrix}
+F_1 \\
+F_2 \\
+F_3
+\end{Bmatrix}
+$$
+ここで、境界条件 $u_1 = 0$ を代入し、第2行と第3行の式を展開する。
+
+第2行の式：
+$$
+-k_{e1}(0) + (k_{e1} + k_{e2})u_2 - k_{e2}u_3 = F_2
+$$
+整理すると、
+$$
+(k_{e1} + k_{e2})u_2 - k_{e2}u_3 = F_2 \quad \cdots (1)
+$$
+
+第3行の式：
+$$
+0 - k_{e2}u_2 + k_{e2}u_3 = F_3 \quad \cdots (2)
+$$
+
+式(1)と式(2)の辺々を加えると、
+$$
+(k_{e1} + k_{e2})u_2 - k_{e2}u_2 = F_2 + F_3
+$$
+$$
+k_{e1}u_2 = F_2 + F_3
+$$
+よって、$u_2$ は以下のように求められる。
+$$
+u_2 = \frac{F_2 + F_3}{k_{e1}}
+$$
+
+次に、式(2)より、
+$$
+k_{e2}(u_3 - u_2) = F_3
+$$
+$$
+u_3 = u_2 + \frac{F_3}{k_{e2}}
+$$
+求めた $u_2$ を代入して、
+$$
+u_3 = \frac{F_2 + F_3}{k_{e1}} + \frac{F_3}{k_{e2}}
+$$
+
+$$
+u_2 = \frac{F_2 + F_3}{k_{e1}}, \quad u_3 = \frac{F_2 + F_3}{k_{e1}} + \frac{F_3}{k_{e2}}
+$$
+
+\end{document}
