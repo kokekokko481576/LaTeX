@@ -1,0 +1,151 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier}
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{ランダム海洋現象学 課題4}
+\author{船舶海洋工学コース \quad B3 \quad 08C23031 \quad 古賀 光一朗}
+\date{2026年1月15日}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\section{修正PMスペクトラムのゼロアップクロス波周期}
+
+ゼロアップクロス波周期 $T_{02}$ は次式で定義される。
+
+$$
+T_{02} = 2\pi \sqrt{\frac{m_0}{m_2}}
+$$
+
+修正PMスペクトラム $S_{xx}(\omega) = A\omega^{-5} \exp\{-B\omega^{-4}\}$ に対し、変数変換 $t = B\omega^{-4}$ を用いて各モーメントを計算する。
+
+$$
+m_0 = \int_{0}^{\infty} S_{xx}(\omega) d\omega = \frac{A}{4B}
+$$
+
+$$
+m_2 = \int_{0}^{\infty} \omega^2 S_{xx}(\omega) d\omega = \frac{A\sqrt{\pi}}{4\sqrt{B}}
+$$
+
+これらを定義式に代入し整理することで、求める $T_{02}$ が得られる。
+
+$$
+T_{02} = 2\pi \sqrt{\frac{A/4B}{A\sqrt{\pi}/4\sqrt{B}}} = 2 \pi^{3/4} B^{-1/4}
+$$
+
+\section{ランダム海洋波の横断問題}
+
+\subsection{アップクロスの条件}
+
+変位 $x$ が閾値 $x_c$ を下から上に横断（アップクロス）する条件は以下の通りである。
+
+$$
+x = x_c \quad \text{かつ} \quad \dot{x} > 0
+$$
+
+\subsection{単位時間あたりの平均横断回数の導出}
+
+同時確率密度関数を $p(x, \dot{x})$ とする。微小時間 $\Delta t$ の間にアップクロスが生じる条件は、変位が $x_c - \dot{x}\Delta t < x < x_c$ （ただし $\dot{x} > 0$）の範囲にあることである。
+したがって、横断確率 $P_1$ は次のように近似できる。
+
+$$
+P_1 \approx \int_{0}^{\infty} p(x_c, \dot{x}) \dot{x} \Delta t d\dot{x}
+$$
+
+単位時間あたりの平均回数 $\nu_+(x_c)$ は、$P_1$ を $\Delta t$ で除して極限をとることで得られる。
+
+$$
+\nu_+(x_c) = \lim_{\Delta t \to 0} \frac{P_1}{\Delta t} = \int_{0}^{\infty} p(x_c, \dot{x}) \dot{x} d\dot{x}
+$$
+
+\section{狭帯域現象の特徴}
+
+線形で狭帯域な波の特徴として、課題文の「ひとつのゼロアップクロスに対してひとつのピークが現れる」以外に以下が挙げられる。
+
+\begin{itemize}
+    \item スペクトラムが特定の周波数帯域に集中し、鋭いピークを持つ。
+    \item 瞬時値の確率分布は正規分布、波頂高さ（ピーク値）の確率分布はレーリー分布に従う。
+\end{itemize}
+
+\section{波のピーク超過確率の導出}
+
+狭帯域波では、単位時間あたりの全ピーク数 $N_p$ はゼロアップクロス回数 $\nu_+(0)$ にほぼ等しい。また、ピーク値 $x_p$ が $x_c$ を超える頻度は、アップクロス回数 $\nu_+(x_c)$ と等価である。
+ガウス過程における $\nu_+(x_c)$ は次式である。
+
+$$
+\nu_+(x_c) = \nu_+(0) \exp\left(-\frac{x_c^2}{2m_0}\right)
+$$
+
+よって、ピーク値の超過確率 $P(x_p > x_c)$ は以下の通りレーリー分布となる。
+
+$$
+P(x_p > x_c) = \frac{\nu_+(x_c)}{N_p} \approx \frac{\nu_+(x_c)}{\nu_+(0)} = \exp\left(-\frac{x_c^2}{2m_0}\right)
+$$
+
+\end{document}
