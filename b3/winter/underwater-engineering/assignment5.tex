@@ -1,0 +1,129 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage{bm} % ベクトル表記用
+\usepackage[detect-all]{siunitx}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{海中工学 第5回課題レポート}
+\author{地球総合工学科 \quad 船舶海洋工学科目 船舶海洋工学コース \\ B3 \quad 08C23031 \quad 古賀 光一朗}
+\date{\today}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\section{課題}
+機体固定座標系でのZ方向に関する運動方程式(a)より、線形運動方程式(b)を導出する 
+\begin{equation}
+ A_{13}=A_{15}=A_{24}=A_{46}=0
+\end{equation}
+
+\subsection{微小擾乱の仮定}
+定常航走状態からの微小擾乱運動を仮定する。
+\begin{align}
+ & U_X = U_{X0} + u(t), \quad U_Y = v(t), \quad U_Z = U_{Z0} + w(t) \notag \\
+ & \Phi = \varphi(t), \quad \Theta = \theta_0 + \theta(t), \quad \Psi = \psi(t)
+\end{align}
+角速度の近似：
+\begin{equation}
+ \omega_X \cong \dot{\varphi} - \dot{\psi}\sin\theta_0, \quad \omega_Y \approx \dot{\theta}, \quad \omega_Z = \dot{\psi}\cos\theta_0
+\end{equation}
+
+\section{導出}
+
+運動方程式(a)左辺の各項を線形化する。
+\begin{itemize}
+ \item $\dot{U}_Z = \dot{w}$
+ \item $U_Y\omega_X - U_X\omega_Y \cong v(\dot{\varphi}-\dot{\psi}\sin\theta_0) - (U_{X0}+u)\dot{\theta} \cong -U_{X0}\dot{\theta}$
+ \item $-z_G(\omega_X^2+\omega_Y^2) \cong 0$ （2次の微小項）
+ \item $-x_G(\dot{\omega}_Y - \omega_X\omega_Z) \cong -x_G(\ddot{\theta} - (\dot{\varphi}\dots)(\dot{\psi}\dots)) \cong -x_G\ddot{\theta}$
+ \item $A_{33}\dot{V}_Z \cong A_{33}\dot{w}$
+ \item $A_{35}\dot{\omega}_Y \cong A_{35}\ddot{\theta}$
+ \item $-(A_{11}V_X + \dots)\omega_Y \cong -(A_{11}U_{X0} + \dots)\dot{\theta} \cong -A_{11}U_{X0}\dot{\theta}$
+\end{itemize}
+これらを整理すると、左辺は次式となる。
+\begin{equation}
+ \text{左辺} = (M+A_{33})\dot{w} + (-M x_G + A_{35})\ddot{\theta} - (M+A_{11})U_{X0}\dot{\theta}
+\end{equation}
+
+重力・浮力項の線形化：
+\begin{equation}
+ \cos\Theta \cos\Phi \cong \cos(\theta_0+\theta) \cong \cos\theta_0 - \theta \sin\theta_0
+\end{equation}
+釣り合い条件 $F_{HZ0} - (\rho g V_B - Mg)\cos\theta_0 = 0$ を用いて定常項を消去すると、右辺は次式となる。
+\begin{equation}
+ \text{右辺} = F_{HZw} w + F_{HZ\dot{\theta}}\dot{\theta} + (\rho g V_B - Mg)(-\sin\theta_0)\theta + F_{HZ\delta a}\delta a
+\end{equation}
+
+左辺と右辺を等置し、移項整理する。
+\begin{align}
+ (M+A_{33})\dot{w} + (-M x_G + A_{35})\ddot{\theta} &= F_{HZw} w + \{ (M+A_{11})U_{X0} + F_{HZ\dot{\theta}} \}\dot{\theta} \notag \\
+ &\quad + (\rho V_B - Mg)g \sin\theta_0 \cdot \theta + F_{HZ\delta a}\delta a
+\end{align}
+これにより式(b)を得る。
+
+\end{document}
