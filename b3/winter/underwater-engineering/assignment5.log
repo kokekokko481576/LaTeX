@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2025.10.25)  16 JAN 2026 14:22
+This is LuaHBTeX, Version 1.14.0 (TeX Live 2022/dev/Debian)  (format=lualatex 2025.10.25)  16 JAN 2026 14:25
  restricted system commands enabled.
 **assignment5.tex
 (./assignment5.tex
@@ -1338,11 +1338,4 @@ PDF statistics: 90 PDF objects out of 1000 (max. 8388607)
  67 compressed objects within 1 object stream
  13 named destinations out of 1000 (max. 131072)
  25 words of extra memory for PDF output out of 10000 (max. 100000000)
-
- (2 pages, 102423 bytes).
-
-PDF statistics: 80 PDF objects out of 1000 (max. 8388607)
- 57 compressed objects within 1 object stream
- 13 named destinations out of 1000 (max. 131072)
- 1 words of extra memory for PDF output out of 10000 (max. 100000000)
 
