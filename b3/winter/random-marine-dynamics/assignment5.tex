@@ -1,0 +1,165 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{ランダム海洋現象学 課題5}
+\author{地球総合工学科 \quad B3 \quad 08C23031 \quad 古賀 光一朗}
+\date{2026年1月19日}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\section{有義波高と標準偏差の関係}
+
+線形・狭帯域性を仮定し、波頂高さ $x$ はRayleigh分布に従うとする。
+波変位の分散を $m_0$ （標準偏差 $\sigma = \sqrt{m_0}$）とすると、確率密度関数 $p(x)$ は次式となる。
+
+$$
+p(x) = \frac{x}{m_0} \exp \left( - \frac{x^2}{2m_0} \right)
+$$
+
+上位 $1/3$ の波頂高さの下限値 $x_c$ は、以下の条件より求まる。
+
+$$
+\int_{x_c}^{\infty} p(x) dx = \exp \left( - \frac{x_c^2}{2m_0} \right) = \frac{1}{3}
+$$
+
+これを解いて、
+
+$$
+x_c = \sqrt{2 m_0 \ln 3}
+$$
+
+上位 $1/3$ の波頂高さの平均値 $E_{1/3}$ は次式で計算される。
+
+$$
+E_{1/3} = 3 \int_{x_c}^{\infty} x p(x) dx = 3 \int_{\sqrt{2 m_0 \ln 3}}^{\infty} \frac{x^2}{m_0} \exp \left( - \frac{x^2}{2m_0} \right) dx
+$$
+
+$t = x^2 / (2m_0)$ とおいて積分を行うと、
+
+$$
+E_{1/3} \approx 2.002 \sqrt{m_0}
+$$
+
+狭帯域性の仮定 $H_{1/3} \approx 2 E_{1/3}$ より、
+
+$$
+H_{1/3} \approx 4.004 \sqrt{m_0} \approx 4 \sigma
+$$
+
+よって、有義波高は標準偏差の約4倍となる。
+
+\section{修正PMスペクトラムのパラメータ}
+
+修正Pierson-Moskowitzスペクトラムは次式で与えられる。
+
+$$
+S_{xx}(\omega) = A \omega^{-5} \exp( -B \omega^{-4} )
+$$
+
+0次モーメント $m_0$ および2次モーメント $m_2$ は以下の通り。
+
+$$
+m_0 = \int_{0}^{\infty} S_{xx}(\omega) d\omega = \frac{A}{4B}
+$$
+
+$$
+m_2 = \int_{0}^{\infty} \omega^2 S_{xx}(\omega) d\omega = \frac{\sqrt{\pi} A}{4\sqrt{B}}
+$$
+
+有義波高 $H_{1/3}$ とゼロクロスアップ平均波周期 $T_{02}$ は次のように表される。
+
+$$
+H_{1/3} \approx 4\sqrt{m_0} = 2\sqrt{\frac{A}{B}}
+$$
+
+$$
+T_{02} = 2\pi \sqrt{\frac{m_0}{m_2}} = 2\pi (\pi B)^{-1/4}
+$$
+
+これらを $A, B$ について解く。まず $T_{02}$ の式より、
+
+$$
+B = \frac{16 \pi^3}{T_{02}^4}
+$$
+
+これを $H_{1/3}$ の式に代入して $A$ を求める。
+
+$$
+A = \frac{B H_{1/3}^2}{4} = \frac{4 \pi^3 H_{1/3}^2}{T_{02}^4}
+$$
+
+以上より、パラメータ $A, B$ は以下のようになる。
+
+$$
+A = \frac{4 \pi^3 H_{1/3}^2}{T_{02}^4}, \quad B = \frac{16 \pi^3}{T_{02}^4}
+$$
+
+\end{document}
