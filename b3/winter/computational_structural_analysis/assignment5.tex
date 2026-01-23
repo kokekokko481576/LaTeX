@@ -1,0 +1,217 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle} %
+
+%==============================================================================
+% パッケージ設定
+%==============================================================================
+\usepackage[top=20mm, bottom=20mm, left=20mm, right=20mm]{geometry} %
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier}
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs} %
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{cleveref} %
+
+% 図表名の設定
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{equation}{式}{式}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{構造解析実習レポート：実習問題の設計}
+\author{地球総合工学科 \quad 氏名：古賀 光一朗} %,
+\date{\today}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+% 課題要件(1): 対象試験片と寸法
+\section{対象試験片と寸法}
+
+本解析では、単純な角柱形状の梁（梁 1）を解析対象とした。
+Autodesk Inventor Professional 2026を用いてモデルを作成した,。
+
+試験片の寸法および物理特性は以下の通りである。
+体積および表面積のデータより、幾何形状は 幅 \SI{10}{\mm}、高さ \SI{10}{\mm}、長さ \SI{100}{\mm} の角柱である。
+
+\begin{itemize}
+    \item 体積: \SI{10000}{\mm^3}
+    \item 表面積: \SI{4200}{\mm^2}
+    \item 質量: \SI{0.0785}{\kg}
+\end{itemize}
+
+% 課題要件(2): 要素分割
+\section{要素分割}
+
+メッシュ生成にはInventorの自動メッシュ生成機能を使用した。
+設定されたメッシュパラメータは以下の通りである。
+
+\begin{itemize}
+    \item 平均要素サイズ: モデル寸法の \num{0.1}
+    \item 最小要素サイズ: 平均サイズの \num{0.2}
+    \item 要素拡大係数: \num{1.5}
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{image.png} 
+    \caption{メッシュ分割のイメージ図}
+    \label{fig:mesh}
+\end{figure}
+
+% 課題要件(3): 材料特性
+\section{材料特性}
+
+解析対象の材料には「鋼、軟鋼 (Mild Steel)」を適用した,。
+解析に使用された主な材料定数を\cref{tab:material-props}に示す。
+
+\begin{table}[H]
+\centering
+\caption{材料特性 (鋼、軟鋼)}
+\label{tab:material-props}
+\begin{tabular}{lcc}
+\toprule
+項目 & 値 & 単位 \\
+\midrule
+ヤング率 ($E$) & \num{206} & \si{\GPa} (\SI{206000}{\MPa}) \\ 
+ポアソン比 ($\nu$) & \num{0.275} & - \\ 
+密度 ($\rho$) & \num{7.85} & \si{\g/\cm^3} \\ 
+降伏強さ ($\sigma_Y$) & \num{207} & \si{\MPa} \\ 
+\bottomrule
+\end{tabular}
+\end{table}
+
+% 課題要件(4): 境界条件
+\section{境界条件}
+
+梁の一端に対して「固定拘束」を適用した。
+これにより、当該面上の全ての自由度が拘束される。
+
+\begin{itemize}
+    \item 拘束タイプ: 固定拘束
+    \item 適用箇所: 梁の端面 ($10 \times 10$ \si{\mm} の面)
+\end{itemize}
+
+% 課題要件(5): 荷重条件
+\section{荷重条件}
+
+梁の側面（上面）に対して、圧力荷重を付与した。
+
+\begin{itemize}
+    \item 荷重タイプ: 圧力
+    \item 大きさ: \SI{0.100}{\MPa}
+    \item 適用箇所: 梁の上面 ($100 \times 10$ \si{\mm} の面)
+\end{itemize}
+
+これは梁の長手方向に一様に分布する等分布荷重として作用する。
+
+% 課題要件(6): 評価項目 (変位、ひずみ、応力、反力と現象説明・考察)
+\section{評価項目と考察}
+
+\subsection{解析結果}
+
+解析によって得られた各評価項目の最大値および反力を\cref{tab:fem-result}に示す。
+
+\begin{table}[H]
+\centering
+\caption{FEM解析結果のまとめ}
+\label{tab:fem-result}
+\begin{tabular}{lccc}
+\toprule
+評価項目 & 最大値 & 単位 & 参照元 \\
+\midrule
+最大変位 & \num{0.0731} & \si{\mm} & \\
+相当ひずみ & \num{1.335e-04} & - & \\
+フォン・ミーゼス応力 & \num{30.25} & \si{\MPa} & \\
+反力 (大きさ) & \num{100} & \si{\N} & \\
+反モーメント (大きさ) & \num{5.00} & \si{\N\cdot\m} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+最大応力は固定端付近で発生し、最大変位は自由端で発生した。また、最大安全率は 15、最小安全率は 6.84 であった。
+
+% ※必要に応じて結果画像（応力図、変位図）を挿入
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=8cm]{image (1).png}
+    \caption{フォン・ミーゼス応力分布}
+    \label{fig:stress}
+\end{figure}
+
+\subsection{現象説明・考察}
+
+本解析モデル（等分布荷重を受ける片持ち梁）の理論解を算出し、解析結果の妥当性を検証する。
+
+\subsubsection*{理論値の算出}
+
+荷重条件および断面特性は以下の通りである。
+\begin{itemize}
+    \item 単位長さあたりの荷重: $w = p \cdot b = 0.1 \times 10 = \SI{1.0}{\N/\mm}$
+    \item 断面二次モーメント: $I = \frac{bh^3}{12} = \frac{10 \times 10^3}{12} \approx \SI{833.33}{\mm^4}$
+    \item 断面係数: $Z = \frac{bh^2}{6} \approx \SI{166.67}{\mm^3}$
+    \item ヤング率: $E = \SI{206000}{\MPa}$
+\end{itemize}
+
+これらの値を用いて、最大曲げ応力 $\sigma_{max}$ および最大たわみ $\delta_{max}$ の理論値を計算する。
+
+\begin{equation}
+\sigma_{max} = \frac{M_{max}}{Z} = \frac{w L^2}{2 Z} = \frac{1.0 \times 100^2}{2 \times 166.67} \approx \SI{30.0}{\MPa}
+\end{equation}
+
+\begin{equation}
+\delta_{max} = \frac{w L^4}{8 E I} = \frac{1.0 \times 100^4}{8 \times 206000 \times 833.33} \approx \SI{0.0728}{\mm}
+\end{equation}
+
+また、固定端における反力 $R$ および反モーメント $M$ の理論値は以下の通りである。
+\begin{itemize}
+    \item 反力: $R = w L = 1.0 \times 100 = \SI{100}{\N}$
+    \item 反モーメント: $M = \frac{w L^2}{2} = \SI{5000}{\N\mm} = \SI{5.0}{\N\m}$
+\end{itemize}
+
+\subsubsection*{比較と結論}
+
+解析値と理論値の比較を\cref{tab:comparison}に示す。
+
+\begin{table}[H]
+\centering
+\caption{解析値と理論値の比較}
+\label{tab:comparison}
+\begin{tabular}{lcc}
+\toprule
+項目 & 解析値 & 理論値 \\
+\midrule
+最大応力 (\si{\MPa}) & \num{30.25} & \num{30.0} \\
+最大変位 (\si{\mm}) & \num{0.0731} & \num{0.0728} \\
+反力 (\si{\N}) & \num{100} & \num{100} \\
+反モーメント (\si{\N\m}) & \num{5.00} & \num{5.0} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+変位、応力、反力のいずれにおいても、FEM解析結果は理論値と極めて良い一致を示している。
+わずかな誤差は、メッシュ分割による近似や、固定端付近の拘束条件による応力集中（特異点）の影響が含まれるためと考えられるが、工学的には十分な精度が得られている。
+また、発生した最大応力 (\SI{30.25}{\MPa}) は材料の降伏強さ (\SI{207}{\MPa}) を大きく下回っており、安全率も最小値で 6.84 であることから、本構造は弾性域内で安全であると判断できる。
+
+\end{document}

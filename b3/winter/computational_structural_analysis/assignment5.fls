@@ -1,7 +1,7 @@
 PWD /home/kokko/LaTeX/b3/winter/computational_structural_analysis
 INPUT /var/lib/texmf/web2c/luahbtex/lualatex.fmt
-INPUT ./assignment3.tex
-OUTPUT assignment3.log
+INPUT ./assignment5.tex
+OUTPUT assignment5.log
 INPUT /usr/share/texlive/texmf-dist/tex/latex/latexconfig/lualatexquotejobname.lua
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ltluatex.lua
 INPUT /usr/share/texlive/texmf-dist/tex/luatex/luaotfload/luaotfload-main.lua
@@ -301,19 +301,6 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
-INPUT /usr/share/texlive/texmf-dist/tex/luatex/luatexja/patches/lltjp-listings.sty
-INPUT /usr/share/texlive/texmf-dist/tex/luatex/luatexbase/luatexbase-cctb.sty
-INPUT /usr/share/texlive/texmf-dist/tex/luatex/luatexbase/luatexbase-cctb.sty
-INPUT /usr/share/texlive/texmf-dist/tex/luatex/luatexbase/luatexbase-cctb.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
-INPUT /usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
@@ -395,9 +382,9 @@ INPUT /home/kokko/.texlive2021/texmf-var/luatex-cache/generic/fonts/otl/texgyret
 INPUT /home/kokko/.texlive2021/texmf-var/luatexja/extra_texgyretermesx-bolditalic.luc
 INPUT /home/kokko/.texlive2021/texmf-var/luatex-cache/generic/fonts/otl/texgyretermesx-boldslanted.luc
 INPUT /home/kokko/.texlive2021/texmf-var/luatexja/extra_texgyretermesx-boldslanted.luc
-INPUT ./assignment3.aux
-INPUT ./assignment3.aux
-OUTPUT assignment3.aux
+INPUT ./assignment5.aux
+INPUT ./assignment5.aux
+OUTPUT assignment5.aux
 INPUT /usr/share/texlive/texmf-dist/tex/latex/newtx/omlntxmi.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/newtx/omlntxmi.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
@@ -431,13 +418,13 @@ INPUT /usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
-INPUT ./assignment3.out
-INPUT ./assignment3.out
-INPUT ./assignment3.out
-INPUT ./assignment3.out
-OUTPUT assignment3.pdf
-INPUT ./assignment3.out
-OUTPUT assignment3.out
+INPUT ./assignment5.out
+INPUT ./assignment5.out
+INPUT ./assignment5.out
+INPUT ./assignment5.out
+OUTPUT assignment5.pdf
+INPUT ./assignment5.out
+OUTPUT assignment5.out
 INPUT /usr/share/texlive/texmf-dist/tex/latex/newtx/ot1ntxtlf.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/newtx/ot1ntxtlf.fd
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-ot1.tfm
@@ -532,8 +519,10 @@ INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/newtx/ntxexa.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newtx/txexas.tfm
 INPUT /home/kokko/.texlive2021/texmf-var/luatex-cache/generic/fonts/otl/lmsans12-regular.luc
 INPUT /home/kokko/.texlive2021/texmf-var/luatexja/extra_lmsans12-regular.luc
-INPUT /home/kokko/.texlive2021/texmf-var/luatex-cache/generic/fonts/otl/lmsans10-regular.luc
-INPUT /home/kokko/.texlive2021/texmf-var/luatexja/extra_lmsans10-regular.luc
+INPUT ./image.png
+INPUT ./image.png
+INPUT ./image.png
+INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newtx/ntx-Regular-tlf-ot1.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/newtx/ntx-Regular-tlf-ot1.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newtx/txmiaX.tfm
@@ -618,12 +607,15 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newtx/txexas.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newtx/ntxexa.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/public/newtx/ntxexa.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/newtx/txexas.tfm
-INPUT /var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map
-INPUT ./assignment3.aux
-INPUT ./assignment3.out
+INPUT ./image (1).png
+INPUT ./image (1).png
+INPUT ./image (1).png
+INPUT /home/kokko/.texlive2021/texmf-var/luatex-cache/generic/fonts/otl/lmsans10-regular.luc
+INPUT /home/kokko/.texlive2021/texmf-var/luatexja/extra_lmsans10-regular.luc
+INPUT ./assignment5.aux
+INPUT ./assignment5.out
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/NewTXMI7.pfb
-INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txexs.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txmiaX.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/txsys.pfb
 INPUT /usr/share/texlive/texmf-dist/fonts/type1/public/newtx/ztmr.pfb
