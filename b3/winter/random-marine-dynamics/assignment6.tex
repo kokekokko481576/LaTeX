@@ -1,0 +1,139 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle} %
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+%----- ページ設定 -----
+\usepackage[
+top=20mm,
+bottom=20mm,
+left=20mm,
+right=20mm
+]{geometry} %
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier}
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt} %
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx} %
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs} %
+\usepackage{float} %
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+basicstyle=\ttfamily\small,
+breaklines=true,
+frame=single,
+commentstyle={\itshape \color[gray]{0.5}},
+keywordstyle={\bfseries \color{blue}},
+stringstyle={\color{red}},
+showstringspaces=false,
+numbers=left,
+numberstyle=\tiny\color[gray]{0.5},
+captionpos=b
+} %
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト} %
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{ランダム海洋現象学 課題6 回答}
+\author{地球総合工学科 \quad 08C23031 \quad 古賀 光一朗} 
+\date{2026年1月26日} %
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\section*{課題1}
+線形応答システムの入力時系列 $x(t)$ と出力時系列 $y(t)$ のフーリエ変換をそれぞれ $X(\omega), Y(\omega)$ とし、周波数応答関数を $H(\omega)$ とするとき、これらの関係は以下の式で表される。
+
+\begin{equation}
+ Y(\omega) = H(\omega) X(\omega)
+\end{equation}
+
+これは、線形システムにおいて、入力の各周波数成分の振幅が $|H(\omega)|$ 倍され、位相が $\arg(H(\omega))$ だけ変化して出力されることを周波数領域で表現したものである。
+
+\section*{課題2}
+周波数応答関数 $H(\omega)$ がインパルス応答関数 $h(\tau)$ のフーリエ変換で表されるとき、
+\begin{equation}
+ H(\omega) = \int_{-\infty}^{\infty} h(\tau) e^{-i\omega\tau} d\tau
+\end{equation}
+である。これと課題1の関係式 $Y(\omega) = H(\omega) X(\omega)$ を用いて、時間領域での出力 $y(t)$ を逆フーリエ変換により求めると、畳み込み積分（コンボリューション）の形式が得られる。
+
+\begin{equation}
+ y(t) = \int_{-\infty}^{\infty} h(\tau) x(t - \tau) d\tau
+\end{equation}
+
+ここで、$h(\tau)$ はインパルス応答関数である。
+
+\section*{課題3}
+因果律（Causality）を満足するインパルス応答関数 $h(\tau)$ の特徴は以下の通りである。
+
+\begin{itemize}
+    \item \textbf{条件:} $\tau < 0$ において $h(\tau) = 0$ である。
+    \item \textbf{理由:} 物理的に実現可能なシステムにおいて、現在の出力 $y(t)$ は未来の入力 $x(t-\tau)$（ここで $\tau < 0$ の場合）には依存しないためである。したがって、積分範囲は $0 \le \tau < \infty$ となる。
+\end{itemize}
+
+\section*{課題4}
+線形応答システムの周波数応答関数が $H(\omega) = \exp(-C\omega)$（または $\exp(-C\omega^n)$ 等の減衰関数）であり、入力スペクトラム $S_{xx}(\omega)$ がPM型であるとする。
+入力スペクトラムは以下で与えられる。
+\begin{equation}
+ S_{xx}(\omega) = A\omega^{-5} \exp(-B\omega^{-4})
+\end{equation}
+
+線形応答理論より、出力のパワースペクトラム $S_{yy}(\omega)$ と入力スペクトラムの関係は次式となる。
+\begin{equation}
+ S_{yy}(\omega) = |H(\omega)|^2 S_{xx}(\omega)
+\end{equation}
+
+出力時系列の分散 $\sigma_y^2$（または $m_0$）はパワースペクトラムの全周波数積分で与えられるため、
+\begin{align}
+ \sigma_y^2 &= \int_{0}^{\infty} S_{yy}(\omega) d\omega \notag \\
+            &= \int_{0}^{\infty} |H(\omega)|^2 A\omega^{-5} \exp(-B\omega^{-4}) d\omega
+\end{align}
+
+ここで、$H(\omega) = \exp(-C\omega)$ と仮定した場合、
+\begin{equation}
+ \sigma_y^2 = \int_{0}^{\infty} A\omega^{-5} \exp(-B\omega^{-4} - 2C\omega) d\omega
+\end{equation}
+となる。
+
+\section*{課題5}
+\textbf{分布:} レーリー分布 (Rayleigh distribution)
+
+\textbf{理由:}
+入力である海洋波（PM型スペクトラム）は、線形かつ狭帯域なガウス過程（正規分布に従う不規則波）と仮定される。線形応答システムを通じた出力時系列もまたガウス過程となり、入力が狭帯域で周波数応答関数も特異でなければ出力も狭帯域性を保持する。
+狭帯域なガウス過程の極大値（ピーク値）の分布は、理論的にレーリー分布に従うことが知られているため。
+
+\end{document}
