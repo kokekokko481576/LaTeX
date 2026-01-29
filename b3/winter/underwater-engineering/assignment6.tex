@@ -1,0 +1,244 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{問題}{問題}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{海中工学 第6回課題}
+\author{地球総合工学科 \quad B3 \quad 08C23031 \quad 古賀 光一朗}
+\date{\today}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\section{水中グライダーの運動方程式}
+
+鉛直面内の線形運動方程式およびY軸まわりの回転運動の関係式は以下の通りである。
+
+$$
+A_{11}\cdot\dot{w}+A_{12}\cdot\dot{q}=B_{11}\cdot w+B_{12}\cdot q-\Delta B
+$$
+
+$$
+A_{21}\cdot\dot{w}+A_{22}\cdot\dot{q}=B_{21}\cdot w+B_{22}\cdot q+B_{23}\cdot\theta-\Delta B\cdot L_{B}
+$$
+
+$$
+\dot{\theta} = q
+$$
+
+これを状態ベクトル $x=[\begin{matrix}w& q& \theta\end{matrix}]^T$、入力 $u(t)=\Delta B$ とし、
+$A\dot{x}=Bx+Cu(t)$ の形式に整理する。
+第3式を $0\cdot\dot{w} + 0\cdot\dot{q} + 1\cdot\dot{\theta} = 0\cdot w + 1\cdot q + 0\cdot \theta$ と見なすと、各行列 $A, B, C$ は以下のように求められる。
+
+$$
+A = \begin{bmatrix}
+A_{11} & A_{12} & 0 \\
+A_{21} & A_{22} & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
+
+$$
+B = \begin{bmatrix}
+B_{11} & B_{12} & 0 \\
+B_{21} & B_{22} & B_{23} \\
+0 & 1 & 0
+\end{bmatrix}
+$$
+
+$$
+C = \begin{bmatrix}
+-1 \\
+-L_{B} \\
+0
+\end{bmatrix}
+$$
+
+\section{音源移動時のドップラー効果}
+
+音源が速度 $v_r$ で動き、受波器が固定されている場合（図参照）のドップラー効果の導出を行う。
+図中の空欄①～⑦に対応する式は以下の通りである。
+
+\begin{itemize}
+    \item[①] 時刻 $t=0$ に発射された第1波が、距離 $D$ を進んで受波器に到達する時刻 $t_1$。
+    $$
+    t_1 = \frac{D}{c} \quad \cdots \text{①}
+    $$
+
+    \item[②] 時刻 $t=T_1$ に第2波を発射する際、音源は速度 $v_r$ で時間 $T_1$ だけ進んでいる。その移動距離は次式となる。
+    $$
+    v_r T_1 \quad \cdots \text{②}
+    $$
+
+    \item[③] このとき、音源と受波器の距離は、初期距離 $D$ から移動距離を引いたものになる。これが第2波の伝搬距離となる。
+    $$
+    D - v_r T_1 \quad \cdots \text{③}
+    $$
+
+    \item[④] 受波器における第1波と第2波の到達時間差、すなわち観測される周期 $\Delta t$ を定義する。
+    $$
+    \Delta t = t_2 - t_1 \quad \cdots \text{④}
+    $$
+
+    \item[⑤] 第2波が受波器に到達する時刻 $t_2$ は、発射時刻 $T_1$ に伝搬時間（距離③ $\div$ 音速 $c$）を加えたものとなる。
+    $$
+    t_2 = T_1 + \frac{D - v_r T_1}{c} \quad \cdots \text{⑤}
+    $$
+
+    \item[⑥] 観測される周期差（時間のずれ）を計算する。
+    $$
+    \begin{aligned}
+    t_2 - t_1 &= \left( T_1 + \frac{D - v_r T_1}{c} \right) - \frac{D}{c} \\
+              &= T_1 + \frac{D}{c} - \frac{v_r T_1}{c} - \frac{D}{c} \\
+              &= T_1 \left( 1 - \frac{v_r}{c} \right) \quad \cdots \text{⑥}
+    \end{aligned}
+    $$
+
+    \item[⑦] 観測される周波数 $f_2$ を求める。周波数は周期の逆数 ($f = 1/T$) であるため、
+    $$
+    f_2 = \frac{1}{t_2 - t_1} = \frac{1}{T_1 (1 - \frac{v_r}{c})} = f_1 \frac{1}{1 - \frac{v_r}{c}}
+    $$
+    分母分子に $c$ を掛けて整理すると、
+    $$
+    f_2 = \frac{c}{c - v_r} f_1
+    $$
+    よって係数は、
+    $$
+    \frac{c}{c - v_r} \quad \cdots \text{⑦}
+    $$
+\end{itemize}
+
+\section{音線理論による水平到達距離の導出}
+
+スネルの法則を用い、成層構造を持つ海中での音波伝搬経路を計算する。
+各層の音速を $C_1, C_2, C_3$、音線と水平面のなす角（俯角）を $\beta_1, \beta_2, \beta_3$ とする。
+
+\subsection{計算条件}
+
+与えられた条件は以下の通りである。
+
+\begin{itemize}
+    \item 音速: $C_1 = \SI{1410}{m/s}, \quad C_2 = \SI{1420}{m/s}, \quad C_3 = \SI{1430}{m/s}$
+    \item 層厚: 各層 $\SI{50}{m}$ （水深 $\SI{150}{m}$）
+    \item 初期角度: $\beta_1 = \SI{45}{deg}$
+    \item 直線伝搬時の水平距離: $x_a = \SI{300}{m}$
+\end{itemize}
+
+\subsection{スネルの法則による角度計算}
+
+スネルの法則 $\frac{\cos\beta}{C} = \text{一定}$ より、定数 $K$ を求める。
+
+$$
+K = \frac{\cos \SI{45}{deg}}{1410} \approx \num{5.0149e-4}
+$$
+
+これより、第2層および第3層での角度 $\beta_2, \beta_3$ を求める。
+
+$$
+\beta_2 = \arccos(K \cdot C_2) = \arccos(\num{5.0149e-4} \times 1420) \approx \SI{44.59}{deg}
+$$
+
+$$
+\beta_3 = \arccos(K \cdot C_3) = \arccos(\num{5.0149e-4} \times 1430) \approx \SI{44.18}{deg}
+$$
+
+\subsection{水平到達距離の算出}
+
+各層における水平移動距離 $x_i$ は、層厚 $h=\SI{50}{m}$ を用いて $x_i = h / \tan\beta_i$ で表される。
+計算結果を\cref{tab:ray-tracing}に示す。
+
+\begin{table}[H]
+    \centering
+    \caption{各層における音線計算結果}
+    \label{tab:ray-tracing}
+    \begin{tabular}{ccccc}
+        \toprule
+        層 & 音速 $C_i$ (\si{m/s}) & 角度 $\beta_i$ (\si{deg}) & $\tan\beta_i$ & 水平距離 $x_i$ (\si{m}) \\
+        \midrule
+        1 & 1410 & 45.00 & 1.0000 & 50.00 \\
+        2 & 1420 & 44.59 & 0.9858 & 50.72 \\
+        3 & 1430 & 44.18 & 0.9718 & 51.45 \\
+        \midrule
+        合計 (片道) & - & - & - & 152.17 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+海面に戻るまでの全水平距離 $x$ は、片道の合計の2倍となる。
+
+$$
+x = 2 \times (50.00 + 50.72 + 51.45) = \SI{304.34}{m}
+$$
+
+直線伝搬時の距離 $x_a = \SI{300}{m}$ との差は以下の通りである。
+
+$$
+\Delta x = x - x_a = 304.34 - 300 = \SI{4.34}{m}
+$$
+
+\end{document}
