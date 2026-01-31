@@ -1,0 +1,219 @@
+%==============================================================================
+% LaTeXの処理に関するおまじない (マジックコメント)
+%==============================================================================
+% !TEX encoding = UTF-8
+%==============================================================================
+% ドキュメントクラス
+%==============================================================================
+\documentclass[11pt]{ltjsarticle}
+
+%==============================================================================
+%【必須級】便利なパッケージたち
+%==============================================================================
+
+%----- ページ設定 -----
+\usepackage[
+    top=20mm,
+    bottom=20mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+%----- フォント設定 -----
+\usepackage[T1]{fontenc}
+\usepackage{newtxtext}
+\usepackage{courier} 
+\usepackage{newtxmath}
+\usepackage{textcomp}
+\usepackage{newtxtt}
+
+%----- 数式関連 -----
+\usepackage{amsmath}
+\usepackage[detect-all]{siunitx}
+
+%----- 図表・画像関連 -----
+\usepackage{graphicx}
+\usepackage{here}
+\usepackage{booktabs}
+\usepackage{float}
+
+%----- ソースコード表示 -----
+\usepackage{listings}
+\lstset{
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    commentstyle={\itshape \color[gray]{0.5}},
+    keywordstyle={\bfseries \color{blue}},
+    stringstyle={\color{red}},
+    showstringspaces=false,
+    numbers=left,
+    numberstyle=\tiny\color[gray]{0.5},
+    captionpos=b
+}
+
+%----- その他便利機能 -----
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{図}{図}
+\crefname{table}{表}{表}
+\crefname{section}{第}{第}
+\crefname{equation}{式}{式}
+\crefname{listing}{リスト}{リスト}
+
+%==============================================================================
+% ドキュメント情報
+%==============================================================================
+\title{ランダム海洋現象学 課題2}
+\author{地球総合工学科 \quad B3 \quad 08C23031 \quad 古賀 光一朗}
+\date{\today}
+
+%==============================================================================
+% 本文開始
+%==============================================================================
+\begin{document}
+
+\maketitle
+
+\section{自己相関関数の概略}
+
+海洋波のような狭帯域の波変位の自己相関関数 $R(\tau)$ の概略を\cref{fig:autocorrelation}に示す。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{jikosokan.png}
+    \caption{狭帯域波浪の自己相関関数の概略}
+    \label{fig:autocorrelation}
+\end{figure}
+
+自己相関関数は図のように周期的な変動をしながら徐々に減衰する。相関関数が周期的であるのは、海洋波の周波数帯が、主たる周波数周辺の狭い範囲にあること（狭帯域の現象であること）を示している。
+また、相関関数が徐々に減衰するのは、波は時間に対して滑らかに変動するが、変動の大きさには不規則性があるためである。このことは、短時間であれば波の予測が可能であることを意味する。
+
+\section{定常ランダム波のパワースペクトラム}
+
+定常ランダム波のパワースペクトラムとは、定常ランダム波を**規則波 (Regular wave)** の線形重ね合わせで表現できると仮定したときに、そのランダム波を構成する素成波（規則波）の **エネルギー (Energy)** の代表量を **周波数 (Frequency)** ごとに示したものである。
+
+\section{余弦関数のパワースペクトラム}
+
+余弦関数 $x(t) = \cos \omega_0 t$ の自己相関関数 $R(\tau)$ は以下の通りである。
+
+$$
+R(\tau) = \lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2} x(t)x(t+\tau) dt
+$$
+$$
+= \lim_{T\to\infty}\frac{1}{T}\int_{-T/2}^{T/2} \cos \omega_0 t \cos \omega_0(t+\tau) dt
+$$
+$$
+= \frac{1}{2}\cos \omega_0 \tau
+$$
+
+このフーリエ変換によりパワースペクトラムを得る。
+
+$$
+S(\omega) = \frac{1}{2\pi}\int_{-\infty}^{\infty} R(\tau)e^{-i\omega\tau} d\tau
+$$
+$$
+= \frac{1}{2\pi}\int_{-\infty}^{\infty} \frac{1}{2}\cos \omega_0 \tau e^{-i\omega\tau} d\tau
+$$
+$$
+= \frac{1}{4\pi}\int_{-\infty}^{\infty} \frac{1}{2}(e^{i\omega_0\tau} + e^{-i\omega_0\tau})e^{-i\omega\tau} d\tau
+$$
+$$
+= \frac{1}{4\pi}\frac{1}{2}2\pi\{\delta(\omega-\omega_0) + \delta(\omega+\omega_0)\}
+$$
+$$
+= \frac{1}{4}\{\delta(\omega-\omega_0) + \delta(\omega+\omega_0)\}
+$$
+
+これを図示したものを\cref{fig:cos_spectrum}に示す。$\pm\omega_0$ の位置にデルタ関数が現れる。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{power.png}
+    \caption{$\cos \omega_0 t$ のパワースペクトラム}
+    \label{fig:cos_spectrum}
+\end{figure}
+
+\section{修正PMスペクトラムの分散}
+
+修正PMスペクトラムは次式で与えられる。
+
+$$
+S_{xx}(\omega) = A\omega^{-5}\exp\{-B\omega^{-4}\}
+$$
+
+波の変位の分散 $m_0$ はパワースペクトラムの0次モーメント（面積）と等しいため、以下のように計算できる。
+
+$$
+m_0 = \int_{0}^{\infty} S_{xx}(\omega) d\omega
+$$
+
+ここで、$t = B\omega^{-4}$ と変数変換を行うと、以下の関係が得られる。
+
+$$
+dt = -4B\omega^{-5} d\omega
+$$
+$$
+\omega: 0 \to \infty \quad \Longrightarrow \quad t: \infty \to 0
+$$
+
+これより、分散 $m_0$ は次のように求められる。
+
+$$
+m_0 = \int_{\infty}^{0} A \omega^{-5} e^{-t} \frac{dt}{-4B\omega^{-5}}
+$$
+$$
+= \int_{\infty}^{0} -\frac{A}{4B} e^{-t} dt
+$$
+$$
+= \frac{A}{4B} [e^{-t}]_{\infty}^{0}
+$$
+$$
+= \frac{A}{4B}
+$$
+
+\section{無次元化スペクトラム}
+
+修正PMスペクトラムの最大値は、角周波数が以下の $\omega_p$ のときに現れる。
+
+$$
+\omega_p = \left(\frac{4}{5}B\right)^{1/4}
+$$
+
+無次元周波数を $\hat{\omega} = \omega/\omega_p$ とすると、スペクトラムの変数変換は次の関係を満たす。
+
+$$
+S_{xx}(\hat{\omega}) = S_{xx}(\omega) \left| \frac{d\omega}{d\hat{\omega}} \right|
+$$
+
+ここで $|d\omega/d\hat{\omega}| = \omega_p$ であるため、これらを代入して整理する。
+
+$$
+S_{xx}(\hat{\omega}) = A(\omega_p \hat{\omega})^{-5} \exp\{-B(\omega_p \hat{\omega})^{-4}\} \cdot \omega_p
+$$
+$$
+= A \omega_p^{-4} \hat{\omega}^{-5} \exp\{-B \omega_p^{-4} \hat{\omega}^{-4}\}
+$$
+
+$\omega_p^{-4} = (\frac{4}{5}B)^{-1} = \frac{5}{4B}$ であることを用いると、
+
+$$
+S_{xx}(\hat{\omega}) = A \left(\frac{5}{4B}\right) \hat{\omega}^{-5} \exp\left\{-B \left(\frac{5}{4B}\right) \hat{\omega}^{-4}\right\}
+$$
+
+両辺に $\frac{4B}{5A}$ を掛けて整理すると、以下の無次元化された式が得られる。
+
+$$
+\frac{4B}{5A}S_{xx}(\hat{\omega}) = \hat{\omega}^{-5} \exp\left(-\frac{5}{4}\hat{\omega}^{-4}\right)
+$$
+
+この関数を図示したものを\cref{fig:nondim_spectrum}に示す。ピークは $\hat{\omega}=1$ 付近に現れ、その最大値は $\exp(-5/4)$ となる。
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\linewidth]{spectrum.png}
+    \caption{無次元化された修正PMスペクトラム}
+    \label{fig:nondim_spectrum}
+\end{figure}
+
+\end{document}
